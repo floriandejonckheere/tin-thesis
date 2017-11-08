@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LaTeX-sjabloon voorstel onderwerp Bachelorproef
 % HoGent Bedrijf en Organisatie, opleiding toegepaste informatica
-% 
+%
 % Gebaseerd op ``Stylish Article'' class
 % Version 2.1 (1/10/15)
 %
@@ -48,7 +48,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
 \RequirePackage{csquotes}
-\RequirePackage[english,dutch]{babel}
+\RequirePackage[english]{babel}
 \usepackage{hyperref}                      % hyperlinks
 \hypersetup{hidelinks,colorlinks,breaklinks=true,urlcolor=black,citecolor=color2,linkcolor=color2,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
@@ -242,6 +242,5 @@ justification=raggedright]{caption}
 %----------------------------------------------------------------------
 
 \RequirePackage[backend=biber,style=apa]{biblatex}
-\DeclareLanguageMapping{dutch}{dutch-apa}
+\DeclareLanguageMapping{english}{english-apa}
 \addbibresource{biblio.bib}
-
