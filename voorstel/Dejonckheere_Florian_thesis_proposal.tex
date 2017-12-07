@@ -114,6 +114,11 @@ The main difference between the previously mentioned studies and this paper is t
 First, a comparison of existing NoSQL database management systems will be presented. In this comparative study, both multiple types and multiple vendors of NoSQL systems will be compared against each other. Criteria for comparison include how the database management system concretely stores its data on disk, the query format and specific programming language bindings. Another important aspect is the distributed nature of many NoSQL databases. Using Brewer's conjecture \autocite{Brewer2002} -- often called the CAP theorem -- the existing types of data storage systems will be examined and summarized. There is also a practical factor present in the research; this includes the license of the project, its active maintainability and future prospects.
 Common types of NoSQL databases include key-value store, column-oriented, document store and graph databases \autocite{NayakPoriyaPoojary2003}. This paper will give a short introduction to these types, before proceeding to examine the best fitting types further in detail.
 
+Second, the data model specific to the Open Webslides project will be examined. We will start from the data model that is already implemented in the current iteration of the platform. At the time of writing, the existing base implementation of the social notification feed only contains one or two types of notifications. This paper will try to extrapolate this concept into a more generalized, abstract system where developers can easily plug in additional notification types.
+The physical properties of the data model will also be taken into account: the data will be written once to the data storage, and read many times later. It is also highly interlinked information, as a notification will always relate to one or more users as a subject, and an object class -- most likely a slide deck or collection of slide decks. These links need to be maintained, and efficiently reconstructed when queried.
+
+Finally, a sample data set will be constructed, and 
+
 % Conceptual: analysis of structural data + write once read many + highly linked
 % Empirical testing: sample data set with users, notifications, etc. tested against multiple NoSQL database queries
 % Comparison of (non-)relational databases
