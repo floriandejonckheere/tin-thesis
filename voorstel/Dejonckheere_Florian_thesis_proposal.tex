@@ -87,9 +87,9 @@
 % motivation, relevance for the research
 % goal and research questions
 
-The Open Webslides project provides a user-friendly platform to collaborate on webslides - slides made with modern web technologies such as HTML, CSS and JavaScript. One of the core features this application provides is \emph{co-creation}. The co-creation aspect manifests itself in several forms within the application; annotations on slides and a change suggesting system resembling GitHub's pull request feature are the main mechanisms. Because of the inherent social nature of co-creation, a basic notifications feed was also implemented. This feed is tailored to the user, and reflects the most recent changes, additions and comments relevant to the slidedecks the user is interested in.
+The Open Webslides project \autocite{OpenWebslides} provides a user-friendly platform to collaborate on webslides - slides made with modern web technologies such as HTML, CSS and JavaScript. One of the core features this application provides is \emph{co-creation}. The co-creation aspect manifests itself in several forms within the application; annotations on slides and a change suggesting system resembling GitHub's pull request feature are the main mechanisms. Because of the inherent social nature of co-creation, a basic notifications feed was also implemented. This feed is tailored to the user, and reflects the most recent changes, additions and comments relevant to the slide decks the user is interested in.
 
-However, the functionality implemented in the system contains only the bare necessities at the moment. The module will be expanded in the future, and doing so requires a structural and conceptual rethinking of how the notifications are generated, stored and queried. This paper has two concrete goals: First, it aims to analyse and summarize the existing frameworks and software packages commonly used in the industry to store structured non-relational graph data.
+However, the functionality implemented in the system contains only the bare necessities at the moment. The module will be expanded in the future, and doing so requires a structural and conceptual rethinking of how the notifications are generated, stored and queried. This paper has two concrete goals: First, it aims to analyze and summarize the existing frameworks and software packages commonly used in the industry to store structured non-relational graph or document data.
 
 Second, the structure and data provided by the Open Webslides' social notification feed will be interpreted in the context of the aforementioned analysis. Finally, a recommendation will be made for a concrete implementation of the described data storage schema.
 
@@ -98,19 +98,14 @@ Second, the structure and data provided by the Open Webslides' social notificati
 \section{State of the art}
 \label{sec:state-of-the-art}
 
-In current literature, there exist already an overabundance of articles and papers describing the relation between traditional relational database systems and NoSQL stores. However, since this paper covers a specific use case no further general comparative studies will be referenced.
+In current literature, many existing studies have already described the relation between traditional relational database systems and NoSQL stores. However, since this paper covers a specific use case no further general comparative studies will be referenced.
 
-The 2015 doctoral thesis (\cite{Zhao2015}) describes the development of a messaging system for astrophysical transient event notifications. Part of this analysis is a comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
+The 2015 doctoral thesis \autocite{Zhao2015} describes the development of a messaging system for astrophysical transient event notifications. Part of this analysis is a comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
 
-% literature study
-% similar papers: conclusions, difference and relevance to this paper
+The main difference between the previously mentioned studies and this paper is the specific use case. This paper tries to present a solution tailored to the specific requirements of the Open Webslides project. This entails a different handling of certain key data-structures within the provided platform, particularly concerning querying the stored data.
 
-% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
-% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
-%   geen onderdeel is van de zin.
-% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
-%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
-%   ...'')
+% \autocite{KEY} => (Author, year)
+% \textcite{KEY} => Author (year)
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodology}
@@ -119,10 +114,11 @@ The 2015 doctoral thesis (\cite{Zhao2015}) describes the development of a messag
 Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor experimenten, vragenlijsten, simulaties? Je beschrijft ook al welke tools je denkt hiervoor te gebruiken of te ontwikkelen.
 
 % Conceptual: comparison of NoSQL dbs, (dis-)advantages
+% Conceptual: analysis of structural data + write once read many + highly linked
 % Empirical testing: sample data set with users, notifications, etc. tested against multiple NoSQL database queries
 % Comparison of (non-)relational databases
 %   - No CAP needed
-% Distributed databases
+% Scalability: horizontal, vertical + expected load (# users)
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Expected results}
