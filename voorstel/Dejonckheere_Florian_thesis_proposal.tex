@@ -23,7 +23,7 @@
 %---------- Titel & auteur ----------------------------------------------------
 
 % TODO: geef werktitel van je eigen voorstel op
-\PaperTitle{Analysis of efficient data storage mechanisms for a structured social notification graph}
+\PaperTitle{Analysis of efficient graph data storage mechanisms for a structured social notification feed}
 \PaperType{Research thesis proposal} % Type document
 
 % TODO: vul je eigen naam in als auteur, geef ook je emailadres mee!
@@ -98,6 +98,10 @@ Second, the structure and data provided by the Open Webslides' social notificati
 \section{State of the art}
 \label{sec:state-of-the-art}
 
+In current literature, there exist already an overabundance of articles and papers describing the relation between traditional relational database systems and NoSQL stores. However, since this paper covers a specific use case no further general comparative studies will be referenced.
+
+The 2015 doctoral thesis (\cite{Zhao2015}) describes the development of a messaging system for astrophysical transient event notifications. Part of this analysis is a comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
+
 % literature study
 % similar papers: conclusions, difference and relevance to this paper
 
@@ -114,6 +118,10 @@ Second, the structure and data provided by the Open Webslides' social notificati
 
 Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor experimenten, vragenlijsten, simulaties? Je beschrijft ook al welke tools je denkt hiervoor te gebruiken of te ontwikkelen.
 
+% Conceptual: comparison of NoSQL dbs, (dis-)advantages
+% Empirical testing: sample data set with users, notifications, etc. tested against multiple NoSQL database queries
+% Comparison of (non-)relational databases
+%   - No CAP needed
 % Distributed databases
 
 %---------- Verwachte resultaten ----------------------------------------------
@@ -121,6 +129,9 @@ Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoeks
 \label{sec:expected_results}
 
 Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de stukken van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet hoe je je data gaat moeten structureren.
+
+% The  NoSQL ecosystem, unlike relational databases, is headed towards specialization, so different solutions are headed in different directions
+%   => we expect to find one or two products that fit our use case better
 
 %---------- Verwachte conclusies ----------------------------------------------
 \section{Expected conclusions}
