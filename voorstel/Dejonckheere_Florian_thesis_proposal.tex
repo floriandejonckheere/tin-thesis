@@ -128,7 +128,11 @@ Using the comparative study of storage engines, data model analysis and the empi
 
 The NoSQL ecosystem, unlike relational databases, is headed towards specialization, so different solutions are headed in different directions \autocite{Maroo2013}. In this paper, we expect to find one type of NoSQL database that is a better fit for the Open Webslides use case, in clear contrast with the other types of storage engines. Due to the inherently highly interlinked nature of the stored data, we suspect a graph-based database management system to provide the most advantages, and generally the most performant experience.
 
+This expectation is amplified by a good availability of Ruby bindings to the most popular graph database management systems.
+
 Since the platform being discussed only caters to a small to medium user base, we do not expect the need to scale horizontally beyond one instance. However, the vertical scalability is still a topic for discussion, and we expect to determine the computational order of magnitude in order to efficiently query the given dataset during this study.
+
+Finally, the implementation plan should describe a concrete roadmap, stretching over a development period with a baseline expectation of one to three months. Roll-out of this mechanism should also be included in this plan.
 
 %------------------------------------------------------------------------------
 % Referentielijst
@@ -137,6 +141,8 @@ Since the platform being discussed only caters to a small to medium user base, w
 % voorkomen. Gebruik JabRef om je bibliografie bij te houden en vergeet niet
 % om compatibiliteit met Biber/BibLaTeX aan te zetten (File > Switch to
 % BibLaTeX mode)
+
+\nocite{KaurRani2013}
 
 \phantomsection
 \printbibliography[heading=bibintoc]
