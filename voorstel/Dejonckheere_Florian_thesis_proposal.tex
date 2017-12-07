@@ -122,18 +122,12 @@ Finally, a sample data set will be constructed using the aforementioned detailed
 Using the comparative study of storage engines, data model analysis and the empirical results an implementation plan will be constructed. This plan will serve as a recommendation for future development.
 
 %---------- Verwachte resultaten ----------------------------------------------
-\section{Expected results}
-\label{sec:expected_results}
-
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de stukken van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet hoe je je data gaat moeten structureren.
+\section{Expected results and conclusions}
+\label{sec:expected_results_and_conclusions}
 
 The NoSQL ecosystem, unlike relational databases, is headed towards specialization, so different solutions are headed in different directions \autocite{Maroo2013}. In this paper, we expect to find one type of NoSQL database that is a better fit for the Open Webslides use case, in clear contrast with the other types of storage engines. Due to the inherently highly interlinked nature of the stored data, we suspect a graph-based database management system to provide the most advantages, and generally the most performant experience.
 
-%---------- Verwachte conclusies ----------------------------------------------
-\section{Expected conclusions}
-\label{sec:expected_conclusions}
-
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+Since the platform being discussed only caters to a small to medium user base, we do not expect the need to scale horizontally beyond one instance. However, the vertical scalability is still a topic for discussion, and we expect to determine the computational order of magnitude in order to efficiently query the given dataset during this study.
 
 %------------------------------------------------------------------------------
 % Referentielijst
