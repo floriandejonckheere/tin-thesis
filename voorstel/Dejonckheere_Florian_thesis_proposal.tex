@@ -44,7 +44,7 @@
 
 	The advent of dynamic Web 2.0 web applications has led to a massive increase in the amount of social web activity. The need for performant storage systems to keep up with this vast deluge of data is directly tied to this. The generated data is characterized by its size and inherently structured nature: most types of social networks can be modeled using a simple graph topology.
 	
-	In this paper, the current state of the industry related to the storage of non-critical notifications in small to medium-size web applications will be summarized. An analysis of the structured and linked data provided by the \textcite{OpenWebslides} project will be made, and an expandable abstraction will be designed in this context. This design will then be matched to a stable, scalable and maintainable storage system. A concrete implementation plan and roadmap for developing and rolling out the mentioned abstraction mechanism will also be presented.
+	In this paper, commonly used techniques in the industry related to the storage of non-critical notifications in small to medium-size web applications will be presented. An analysis of the structured and linked data provided by the \textcite{OpenWebslides} project will be made, and an expandable abstraction will be designed in this context. This design will then be matched to a stable, scalable and maintainable storage system. A concrete implementation plan and roadmap for developing and rolling out the mentioned abstraction mechanism will also be presented.
 }
 
 %---------- Onderzoeksdomein en sleutelwoorden --------------------------------
@@ -96,7 +96,7 @@ This paper has two concrete goals.
 
 First, it aims to analyze and summarize the existing frameworks and software packages currently used in the industry to store structured non-relational graph or document data. In order to achieve this, an introduction into NoSQL and the different types of NoSQL database management systems will be given first, followed by a comparative study between different vendors of NoSQL database management systems.
 
-Secondly, the linked structure and social graph provided by the Open Webslides' notification feed will be evaluated, and a maintainable and expandable abstraction will be designed. This allows any future development to easily add notification types into the system.
+Secondly, the linked structure and social graph provided by the Open Webslides' notification feed will be examined, and a maintainable and expandable abstraction will be designed. This allows any future development to easily add notification types into the system.
 This data schema will then be evaluated in the context of the comparative study. Finally, an implementation plan will be composed for the concrete development of the described data storage schema.
 
 %---------- Stand van zaken ---------------------------------------------------
@@ -104,7 +104,7 @@ This data schema will then be evaluated in the context of the comparative study.
 \section{State-of-the-art}
 \label{sec:state-of-the-art}
 
-In current literature, many existing studies have already analyzed the disparity between traditional relational database systems and NoSQL stores. However, since this paper covers a specific use case, the difference will not be further explained in detail.
+In current literature, many studies including \textcite{Moniruzzaman2013}, \textcite{NayakPoriyaPoojary2003} and \textcite{HammesMederoMitchell2014} have already analyzed the disparity between traditional relational database systems and NoSQL stores. However, since this paper covers a specific use case, the difference will not be further explained in detail.
 
 There are already many existing free and commercial products for the storage of NoSQL data. Finding the right one for this particular use case is one of the hurdles to overcome. \textcite{Zhao2015} describes the development of a messaging system for astrophysical transient event notifications. Part of this paper is a comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
 
