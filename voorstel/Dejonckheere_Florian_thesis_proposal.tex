@@ -92,12 +92,15 @@
 The \textcite{OpenWebslides} project provides a user-friendly platform to collaborate on webslides - slides made with modern web technologies such as HTML, CSS and JavaScript. One of the core features this application provides is \emph{co-creation}. The co-creation aspect manifests itself in several forms within the application; annotations on slides and a change suggesting system resembling GitHub's pull request feature are the main mechanisms. Because of the inherent social nature of co-creation, a basic notifications feed was also implemented. This feed is tailored to the user, and reflects the most recent changes, additions and comments relevant to the slide decks the user is interested in.
 
 However, at the moment the functionality implemented in the system contains only the bare necessities. The module will be expanded in the future, and doing so requires a structural and conceptual rethinking of how the notifications are generated, stored and queried. The size of the dataset is also expected to grow linearly with user activity, therefore scalability is a requirement as well.
-This paper has two concrete goals.
 
-First, it aims to analyze and summarize the existing frameworks and software packages currently used in the industry to store structured non-relational graph or document data. In order to achieve this, an introduction into NoSQL and the different types of NoSQL database management systems will be given first, followed by a comparative study between different vendors of NoSQL database management systems.
+This paper has two research questions.
 
-Secondly, the linked structure and social graph provided by the Open Webslides' notification feed will be examined, and a maintainable and expandable abstraction will be designed. This allows any future development to easily add notification types into the system.
-This data schema will then be evaluated in the context of the comparative study. Finally, an implementation plan will be composed for the concrete development of the described data storage schema.
+\begin{enumerate}
+	\item What frameworks and software packages currently exist in the industry to store structured non-relational graph or document data?
+	\item How is the social graph provided by the Open Webslides' notification feed structured and how is this data consumed?
+\end{enumerate}
+
+Answering these questions is paramount for the final section of the paper, which describes a data storage mechanism that performs well given the functional requirements of the project's data flow.
 
 %---------- Use case ----------------------------------------------------------
 
