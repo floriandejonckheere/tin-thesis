@@ -99,6 +99,18 @@ First, it aims to analyze and summarize the existing frameworks and software pac
 Secondly, the linked structure and social graph provided by the Open Webslides' notification feed will be examined, and a maintainable and expandable abstraction will be designed. This allows any future development to easily add notification types into the system.
 This data schema will then be evaluated in the context of the comparative study. Finally, an implementation plan will be composed for the concrete development of the described data storage schema.
 
+%---------- Use case ----------------------------------------------------------
+
+\section{Use case}
+\label{sec:use-case}
+
+This thesis is a study of NoSQL data storage techniques applied to the \textcite{OpenWebslides} project. The online, interactive platform that the project provides includes a list of notifications in reverse chronological order, tailored to the user. This feature is called the \textit{social feed}. It enumerates the most recent social activity on the platform. For example, if a user updates a slide deck, the user's friends would be able to find a change notification in their respective social feeds.
+
+From the perspective of the application code that generates the social feed, the user, slide deck and notification should be considered separate entities. The notification itself has relations to the other entities: the author (the \textit{subject}), the slide deck (the \textit{object}), along with the \textit{predicate} property that provides information on what operation was performed (for example creating or updating a slide deck).
+
+This data model is also characterized by the \textit{write-once read-many} nature of the information; once the notification has been generated, it does not need to be modified again. It will also only be queried in a very specific way: the application server will always attempt to retrieve the most recent notifications starting from the user entity.
+This principle is an important aspect to take into consideration in the choice of data storage mechanism.
+
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{State-of-the-art}
@@ -107,9 +119,9 @@ This data schema will then be evaluated in the context of the comparative study.
 In current literature, studies such as \textcite{Moniruzzaman2013}, \textcite{NayakPoriyaPoojary2003} and \textcite{HammesMederoMitchell2014} have already analyzed the disparity between traditional relational database systems and NoSQL stores.
 However, the conceptual and technical difference between these data storage models will not be scrutinized any further, since this paper presents a data storage solution applied to the social notification feed of the \textcite{OpenWebslides} project.
 
-There are already many existing free and commercial products for the storage of NoSQL data, such as Redis \autocite{Redis}, CouchDB \autocite{CouchDB}, MongoDB \autocite{MongoDB} and Neo4j \autocite{Neo4j}. Finding the right one for this particular use case is one of the hurdles to overcome. \textcite{Zhao2015} describes the development of a messaging system for astrophysical transient event notifications. Part of this paper is a comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
+There are already many existing free and commercial products for the storage of NoSQL data, such as Redis \autocite{Redis}, CouchDB \autocite{CouchDB}, MongoDB \autocite{MongoDB} and Neo4j \autocite{Neo4j}. Finding the right database model for this particular use case is one of the hurdles this paper intends to handle. \textcite{Zhao2015} describes the development of a messaging system for astrophysical transient event notifications. Part of this paper is a comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
 
-The main difference between the previously mentioned studies and this paper is the specific use case. This paper aims to provide a solution tailored to the specific requirements of the Open Webslides project. This entails a different handling of certain key data-structures within the provided platform, particularly concerning querying the stored data.
+The goal of this paper is to provide a performant, scalable and maintainable data storage schema for the \textcite{OpenWebslides} platform, regarding the linked social graph that powers the \textit{Social Feed} functionality present in the platform.
 
 % \autocite{KEY} => (Author, year)
 % \textcite{KEY} => Author (year)
