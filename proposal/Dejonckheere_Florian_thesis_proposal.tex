@@ -11,7 +11,7 @@
 % 3) biber naam_voornaam_voorstel
 % 4) latexmk -pdf naam_voornaam_voorstel.tex (1 keer)
 
-\documentclass[fleqn,10pt]{voorstel}
+\documentclass[fleqn,10pt]{proposal}
 
 %------------------------------------------------------------------------------
 % Metadata over het artikel
@@ -80,82 +80,7 @@
 % Hoofdtekst
 %------------------------------------------------------------------------------
 
-%---------- Inleiding ---------------------------------------------------------
-
-\section{Introduction} % The \section*{} command stops section numbering
-\label{sec:introduction}
-
-% problem and context
-% motivation, relevance for the research
-% goal and research questions
-
-The \textcite{OpenWebslides} project provides a user-friendly platform to collaborate on webslides - slides made with modern web technologies such as HTML, CSS and JavaScript. One of the core features this application provides is \emph{co-creation}. The co-creation aspect manifests itself in several forms within the application; annotations on slides and a change suggesting system resembling GitHub's pull request feature are the main mechanisms. Because of the inherent social nature of co-creation, a basic notifications feed was also implemented. This feed is tailored to the user, and reflects the most recent changes, additions and comments relevant to the slide decks the user is interested in.
-
-However, at the moment the functionality implemented in the system contains only the bare necessities. The module will be expanded in the future, and doing so requires a structural and conceptual rethinking of how the notifications are generated, stored and queried. The size of the dataset is also expected to grow linearly with user activity, therefore scalability is a requirement as well.
-
-This paper has two research questions.
-
-\begin{enumerate}
-	\item What frameworks and software packages currently exist in the industry to store structured non-relational graph or document data?
-	\item How is the social graph provided by the Open Webslides' notification feed structured and how is this data consumed?
-\end{enumerate}
-
-Answering these questions is paramount for the final section of the paper, which describes a data storage mechanism that performs well given the functional requirements of the project's data flow.
-
-%---------- Use case ----------------------------------------------------------
-
-\section{Use case}
-\label{sec:use-case}
-
-This thesis is a study of NoSQL data storage techniques applied to the \textcite{OpenWebslides} project. The online, interactive platform that the project provides includes a list of notifications in reverse chronological order, tailored to the user. This feature is called the \textit{social feed}. It enumerates the most recent social activity on the platform. For example, if a user updates a slide deck, the user's friends would be able to find a change notification in their respective social feeds.
-
-From the perspective of the application code that generates the social feed, the user, slide deck and notification should be considered separate entities. The notification itself has relations to the other entities: the author (the \textit{subject}), the slide deck (the \textit{object}), along with the \textit{predicate} property that provides information on what operation was performed (for example creating or updating a slide deck).
-
-This data model is also characterized by the \textit{write-once read-many} nature of the information; once the notification has been generated, it does not need to be modified again. It will also only be queried in a very specific way: the application server will always attempt to retrieve the most recent notifications starting from the user entity.
-This principle is an important aspect to take into consideration in the choice of data storage mechanism.
-
-%---------- Stand van zaken ---------------------------------------------------
-
-\section{State-of-the-art}
-\label{sec:state-of-the-art}
-
-In current literature, studies such as \textcite{Moniruzzaman2013}, \textcite{NayakPoriyaPoojary2003} and \textcite{HammesMederoMitchell2014} have already analyzed the disparity between traditional relational database systems and NoSQL stores.
-However, the conceptual and technical difference between these data storage models will not be scrutinized any further, since this paper presents a data storage solution applied to the social notification feed of the \textcite{OpenWebslides} project.
-
-There are already many existing free and commercial products for the storage of NoSQL data, such as Redis \autocite{Redis}, CouchDB \autocite{CouchDB}, MongoDB \autocite{MongoDB} and Neo4j \autocite{Neo4j}. Finding the right database model for this use case (section \ref{sec:use-case}) is one of the hurdles this paper intends to handle. \textcite{Zhao2015} describes the development of a messaging system for astrophysical transient event notifications. Part of this paper is a qualitative comparison between document-based NoSQL storage solutions fit for this particular use case. We expect this paper to provide a solid base of reasoning in order to find a scalable and efficient solution for resolving similar computational challenges.
-
-The goal of this paper is to provide a performant, scalable and maintainable data storage schema for the \textcite{OpenWebslides} platform, regarding the linked social graph that powers the \textit{Social Feed} functionality present in the platform.
-
-% \autocite{KEY} => (Author, year)
-% \textcite{KEY} => Author (year)
-
-%---------- Methodologie ------------------------------------------------------
-\section{Methodology}
-\label{sec:methodology}
-
-First, a range of industry-standard NoSQL database management systems such as MongoDB \autocite{MongoDB}, HBase \autocite{HBase} and Neo4j \autocite{Neo4j} will be qualitatively analyzed. Three of the five types of NoSQL database types \autocite{NayakPoriyaPoojary2003} will be included in the study: column-oriented, document based and graph databases. Criteria for comparison include how the database management system concretely stores its data on disk, the query format and specific programming language bindings. Another important aspect is the distributed nature of many NoSQL databases. Using Brewer's conjecture \autocite{Brewer2002} -- often called the CAP theorem -- the existing types of data storage systems will be examined and summarized. There is also a practical factor present in the research; this includes the license of the project, its active maintainability and future prospects.
-Common types of NoSQL databases include key-value store, column-oriented, document store and graph databases \autocite{NayakPoriyaPoojary2003}. This paper will provide a short introduction to these types, before proceeding with the type that fits our use case the most.
-
-Second, the data model specific to the Open Webslides project will be examined. We will start from the data model that is already implemented in the current iteration of the platform. At the time of writing, the existing base implementation of the social notification feed only contains two types of notifications. This paper will try to extrapolate this concept into a more generalized, abstract system in which developers can easily plug additional notification types.
-The physical properties of the data model will also be taken into account: the data will be written to the data storage only once, but read many times. It is also highly interlinked information, as a notification will always relate to one or more users as a subject, and a target object as well -- most likely a slide deck or collection of slide decks. These links need to be maintained, and efficiently reconstructed when queried.
-
-Finally, a sample dataset will be constructed using the aforementioned detailed analysis. Empirical testing will be conducted against multiple database management systems, and the results will be summarized and interpreted. Various information flows will be tested; however, the most important process remains efficiently querying the stored data.
-
-Using the comparative study of storage engines, data model analysis and the empirical results an implementation plan will be constructed. This plan will serve as a recommendation for future development.
-
-%---------- Verwachte resultaten ----------------------------------------------
-\section{Expected results and conclusions}
-\label{sec:expected_results_and_conclusions}
-
-The NoSQL ecosystem, unlike relational databases, is headed towards specialization, so different solutions are headed in different directions \autocite{Maroo2013}. In this paper, we expect to find one type of NoSQL database that is a better fit for the Open Webslides use case, in clear contrast with the other types of storage engines. Due to the inherently highly interlinked nature of the stored data, we suspect a graph-based database management system to provide most advantages, and generally the most performant experience.
-
-This expectation is amplified by the availability and good community support of Ruby bindings to the most popular graph database management systems.
-
-Since the platform being discussed only caters to a small to medium user base, we do not expect the need to scale horizontally beyond one instance. However, the vertical scalability is still a topic for discussion, and we expect to determine the computational order of magnitude in order to efficiently query the given dataset during this study.
-
-Finally, the implementation plan should describe a concrete roadmap, stretching over a development period with a baseline expectation of one to three months. Roll-out of this mechanism should also be included in this plan.
-
-We also expect that this thesis will provide a good reference to a further stable, scalable and extendable implementation of the \textit{social feed} feature in the \textcite{OpenWebslides} project as outlined in section \ref{sec:use-case}.
+\include{proposal-contents}
 
 %------------------------------------------------------------------------------
 % Referentielijst
