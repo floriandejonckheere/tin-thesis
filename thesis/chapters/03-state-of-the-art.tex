@@ -1,8 +1,23 @@
 \chapter{State of the Art}
 \label{ch:state-of-the-art}
 
+%%
+%% Introduction
+%%
 Ever since the rise of the NoSQL databases in 2009 \autocite{Sadalage2012} it has been a subject for vigorous academic and professional research. The contrast with relational databases, optimal use cases, performance and scalability are only some of the aspects that have been analyzed with great regularity. This chapter will summarize previous publications relevant to this thesis.
 
+%%
+%% Literature study
+%%
+
+% Data Management in Cloud Environments: NoSQL and NewSQL Data Stores
 \textcite{Grolinger2013} present a use-case based approach to comparing different NoSQL and NewSQL data stores. The survey incorporates a feature-based comparison over different aspects such as querying, scalability and security, and analyzes these concepts in the context of a select number of NoSQL data stores.
 
-The proceedings of the 2013 IEEE International Conference on Big data by \textcite{Kaur2013} describe the theoretical modeling and querying of SQL and NoSQL data stores. The paper then proceeds with a case study of a social networking site similar to \autocite{Malda1997}. Starting from an entity-relationship diagram (ERD), the researchers then proceed by modeling the entities in both a document and a graph database. Finally, a set of seven queries related to the use case is then drawn up and compared for the PostgreSQL, MongoDB and Neo4j data stores.
+% NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence
+The proceedings of the 2013 IEEE International Conference on Big data by \textcite{Kaur2013} describe the theoretical modeling and querying of SQL and NoSQL data stores. The paper then proceeds with a case study of a social networking site similar to Slashdot \autocite{Malda1997}. Starting from an entity-relationship diagram (ERD), the researchers then proceed by modeling the entities in both a document and a graph database. Finally, a set of seven queries related to the use case is then drawn up and compared for the PostgreSQL, MongoDB and Neo4j data stores.
+
+%%
+%% Added value of thesis
+%%
+
+This thesis aims to provide a case study of data storage the \textcite{OpenWebslides2017} platform. Several use case based surveys and ... already exist, however they aim at replacing a relational database in an application with a NoSQL database without bringing polyglot persistence into account. In the case of Open Webslides, the NoSQL data store only complements the relational database and does not fulfill a critical function. Therefore, several constraints such as security and availability differ in interpretation from existing studies.
