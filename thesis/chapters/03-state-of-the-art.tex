@@ -31,6 +31,10 @@ Furthermore, performance measurements of MongoDB are also analyzed. Data inserti
 % Performance Investigation of Selected SQL and NoSQL Databases
 The proceedings of the AGILE 2015 conference by \textcite{Schmid2015} present an overview of selected SQL and NoSQL databases, focusing on the geo-functionalities of the systems. It uses performance tests between two document-based NoSQL data stores (MongoDB and CouchBase). The researchers conclude that geospatial calculations in NoSQL database systems are still only supported for basic queries. Relational databases still perform superior to NoSQL databases in small to larger data sets for queries with geo-functions. However the NoSQL response time only increases slightly relative to data set size.
 
+% On Scalability of Two NoSQL Data Stores for Processing Interactive Social Networking Actions
+The technical report by \textcite{Barahmand2015} quantifies the scalability of MongoDB and HBase for processing simple operations using the social networking benchmark BG \autocite{Barahmand2013}. It considers both horizontal and vertical scalability of the data stores using the Social Action Rating (SoAR) introduced by the benchmarking tool.
+In order to perform these benchmarks, two logical data models for the database design are presented. The report concludes that while both data stores scale superlinearly, their speedup is limited by the resources of a few nodes out of many becoming fully utilized.
+
 %%
 %% Difference with related work
 %%
