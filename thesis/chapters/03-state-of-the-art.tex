@@ -10,13 +10,18 @@ Ever since the rise of the NoSQL databases in 2009 \autocite{Sadalage2012} it ha
 %% Literature study
 %%
 
+% NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence
+The book by \textcite{Sadalage2012} provides an excellent entry into the world of NoSQL. It explains the motivation behind the use of NoSQL techniques, and how this differs from relational data storage. Furthermore it introduced the segregation of NoSQL data stores into four main categories: key-value, document, column and graph databases.
+Second, \citeauthor{Sadalage2012} touch the concept of polyglot persistence. This discribes the application's opportunity to use multiple types of data stores to store heterogeneously structured data. This technique is relevant in particular to this thesis, as the describe data schema only relates to one of the database management systems integrated in the Open Webslides platform.
+The second part of the book provides a more practical approach to using polyglot persistence in an enterprise application. The authors have written down many pointers and guides in order to pick the right database for the use case.
+
 % Data Management in Cloud Environments: NoSQL and NewSQL Data Stores
 \textcite{Grolinger2013} present a use-case based approach to comparing different NoSQL and NewSQL data stores. The survey incorporates a feature-based comparison over different aspects such as querying, scalability and security, and analyzes these concepts in the context of a select number of NoSQL data stores.
 
 % NoSQL evaluation: A Use Case Oriented Survey
 \textcite{Hecht2011} provides a feature-based comparison of different NoSQL database types and vendors. The researchers compare the data model, querying access, concurrency, partioning and replication. They use a duality-based approach, where a minus indicates that the feature is not supported by the database system, and a plus if the feature is supported. The paper also presents the problem of a lack of unified querying interface for NoSQL databases. Furthermore, the importance of choosing the right NoSQL database type for the use case is emphasized, however Hecht and Jablonski do not present a specific case study.
 
-% NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence
+% Modeling and Querying Data in NoSQL Databases
 The proceedings of the 2013 IEEE International Conference on Big data by \textcite{Kaur2013} describe the theoretical modeling and querying of SQL and NoSQL data stores. The paper then proceeds with a case study of a social networking site similar to Slashdot \autocite{Malda1997}. Starting from an entity-relationship diagram (ERD), the researchers then proceed by modeling the entities in both a document and a graph database. Finally, a set of seven queries related to the use case is then drawn up and compared for the PostgreSQL, MongoDB and Neo4j data stores.
 
 % Event Based Transient Notification Architecture and NoSQL Solution for Astronomical Data Management
@@ -38,4 +43,4 @@ The main differences between this study and the previous studies are:
 %% Added value of thesis
 %%
 
-This thesis aims to provide a case study of data storage the \textcite{OpenWebslides2017} platform. Several use case based surveys and ... already exist, however they aim at replacing a relational database in an application with a NoSQL database without bringing polyglot persistence into account. In the case of Open Webslides, the NoSQL data store only complements the relational database and does not fulfill a critical function. Therefore, several constraints such as security and availability differ in interpretation from existing studies.
+This thesis aims to provide a case study of data storage the \textcite{OpenWebslides2017} platform. Several use case based surveys and studies already exist, however they aim at replacing a relational database in an application with a NoSQL database without bringing polyglot persistence into account. \textcite{Sadalage2012} is one notable exception in this aspect. In the case of Open Webslides, the NoSQL data store only complements the relational database and does not fulfill a critical function. Therefore, several constraints such as security and availability differ in interpretation from existing studies.
