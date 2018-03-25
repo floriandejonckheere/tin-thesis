@@ -1,21 +1,21 @@
 %%=============================================================================
-%% Inleiding
+%% Introduction
 %%=============================================================================
 
 \chapter*{Introduction}
 \label{ch:introduction}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+%~ De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
 
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
+%~ \begin{itemize}
+  %~ \item context, achtergrond
+  %~ \item afbakenen van het onderwerp
+  %~ \item verantwoording van het onderwerp, methodologie
+  %~ \item probleemstelling
+  %~ \item onderzoeksdoelstelling
+  %~ \item onderzoeksvraag
+  %~ \item \ldots
+%~ \end{itemize}
 
 \section{Context}
 \label{sec:context}
@@ -26,37 +26,31 @@ Technological constraints in current iterations of educational software do not a
 
 By utilizing interactive tools and applications, the teacher can engage the students more directly.
 
-By building on modern, open standards, the Open Webslides project \textcite{OpenWebslides2017} aims to provide a platform that solves these problems. It creates a user-friendly environment where teachers can create courses based on open source technologies and standards, and it allows them to apply the co-creation narrative easily. This also enables users to share their material not just with their immediate environment but with a much broader educational audience.
+By building on modern, open standards, the Open Webslides project \autocite{OpenWebslides2017} aims to provide a platform that solves these problems. It creates a user-friendly environment where teachers can create courses based on open source technologies and standards, and it allows them to apply the co-creation narrative easily. This also enables users to share their material not just with their immediate environment but with a much broader educational audience.
 
 \section{Problem statement}
 \label{sec:problem-statement}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's,'' systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+The Open Webslides platform incorporates several ways to stimulate spontaneous co-creation between teachers and students. One of the most prominent elements is the \textit{Recent Activity} feed. This reverse chronologically ordered list enumerates the most recent user interactions with the platform and with other users. Feed items range from simple actions such as a user having created or modified course content, to more complex social interactions like a discussion being held using annotations or a student's changes being incorporated in a teacher's courses.
 
-\section{Research question}
-\label{sec:research-question}
+The size of the activity feed data set is directly correlated to the size and activity of the userbase. It has the potential to grow explosively, especially in timespans critical to teachers and students such as examination periods. In order for the infrastructure to be able to handle the deluge of the queried information, designing a system that allows for efficient querying and easy scalability is of paramount importance. Further decoupling of this subsystem from the business-critical processes is also important to ensure round the clock availability of course content to the users.
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan
+This research thesis will provide a framework for the Open Webslides project to implement an efficient, scalable data storage system in the context of the Recent Activity feed already incorporated into the platform.
 
-\section{Research goal}
-\label{sec:research-goal}
+\section{Research questions}
+\label{sec:research-questions}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk.
+%~ Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan
 
-\section{Thesis objective}
-\label{sec:thesis-objective}
+\section{Research goal and objectives}
+\label{sec:research-goal-and-objectives}
 
-% Het is gebruikelijk aan het einde van de inleiding een overzicht te
-% geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
-% die je kan aanvullen/aanpassen in functie van je eigen tekst.
+%~ Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk.
 
-De rest van deze bachelorproef is als volgt opgebouwd:
+\clearpage{}
 
-In Hoofdstuk~\ref{ch:state-of-the-art} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
+In the chapter \ref{ch:state-of-the-art} an overview will be presented of current research, applied solutions and other related work in the research domain based on a literature study.
 
-In Hoofdstuk~\ref{ch:methodology} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+The chapter \ref{ch:methodology} will clarify the analytical research approaches used in this thesis to attempt to formulate an answer to the research questions.
 
-% TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
-
-In Hoofdstuk~\ref{ch:conclusion}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
-
+Finally, the \ref{ch:conclusion} chapter will present a conclusion and an applied answer to the research questions.
