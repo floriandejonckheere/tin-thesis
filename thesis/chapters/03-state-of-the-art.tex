@@ -11,14 +11,14 @@ Ever since the rise of the NoSQL databases in 2009 \autocite{Sadalage2012} it ha
 %%
 
 % NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence
-The book by \textcite{Sadalage2012} provides an excellent entry into the world of NoSQL. It explains the motivation behind the use of NoSQL techniques, and how this differs from relational data storage. Furthermore it introduced the segregation of NoSQL data stores into four main categories: key-value, document, column and graph databases.
-Second, \citeauthor{Sadalage2012} touch the concept of polyglot persistence. This discribes the application's opportunity to use multiple types of data stores to store heterogeneously structured data. This technique is relevant in particular to this thesis, as the describe data schema only relates to one of the database management systems integrated in the Open Webslides platform.
-The second part of the book provides a more practical approach to using polyglot persistence in an enterprise application. The authors have written down many pointers and guides in order to pick the right database for the use case.
+The book by \textcite{Sadalage2012} provides an excellent entry into the world of NoSQL. It explains the motivation behind the use of NoSQL techniques, and how this differs from relational data storage. Furthermore it introduces the segregation of NoSQL data stores into four main categories: key-value, document, column and graph databases.
+Second, \citeauthor{Sadalage2012} touch the concept of polyglot persistence. This describes the concept of an application using multiple types of data stores to store heterogeneously structured data. This technique is relevant in particular to this thesis, as the describe data schema only relates to one of the database management systems integrated in the Open Webslides platform.
+The second part of the book provides a more practical approach to using polyglot persistence in an enterprise application. The authors have written down many pointers and guides in order to pick the right database for a particular use case.
 
 % Type of NOSQL Databases and its Comparison with Relational Databases
 % NoSQL Database: New Era of Databases for Big data Analytics - Classification, Characteristics and Comparison
 % Scalable SQL and NoSQL Data Stores
-There have already been numerous studies to differentiate the different types of NoSQL databases and comparative studies between NoSQL database systems. \textcite{Nayak2013} presents a fifth NoSQL category: object-oriented databases together with a comparative study of NoSQL data stores.
+There have already been numerous studies to differentiate the different types of NoSQL databases and comparative studies between NoSQL database systems. \textcite{Nayak2013} present a fifth NoSQL category: object-oriented databases.
 Other studies such as \textcite{Moniruzzaman2013} and \textcite{Maroo2013} provide a feature-based comparison for various NoSQL vendors and database systems.
 Finally, the similarity and resemblance of relational and NoSQL data stores is also a well-researched topic in current literature. Studies and surveys such as \textcite{Mohamed2014} and \textcite{Cattell2010} tackle this subject in great detail.
 
@@ -26,7 +26,7 @@ Finally, the similarity and resemblance of relational and NoSQL data stores is a
 \textcite{Grolinger2013} present a use-case based approach to comparing different NoSQL and NewSQL data stores. The survey incorporates a feature-based comparison over different aspects such as querying, scalability and security, and analyzes these concepts in the context of a select number of NoSQL data stores.
 
 % NoSQL evaluation: A Use Case Oriented Survey
-\textcite{Hecht2011} provides a feature-based comparison of different NoSQL database types and vendors. The researchers compare the data model, querying access, concurrency, partioning and replication. They use a duality-based approach, where a minus indicates that the feature is not supported by the database system, and a plus if the feature is supported. The paper also presents the problem of a lack of unified querying interface for NoSQL databases. Furthermore, the importance of choosing the right NoSQL database type for the use case is emphasized, however Hecht and Jablonski do not present a specific case study.
+\textcite{Hecht2011} provides a feature-based comparison of different NoSQL database types and vendors. The researchers compare the data model, querying access, concurrency, partioning and replication. The paper uses a duality-based approach, where a minus indicates that the feature is not supported by the database system, and a plus if the feature is supported. The paper also presents the problem of a lack of unified querying interface for NoSQL databases. Furthermore, the importance of choosing the right NoSQL database type for the use case is emphasized, however Hecht and Jablonski do not present a specific case study.
 
 % Modeling and Querying Data in NoSQL Databases
 The proceedings of the 2013 IEEE International Conference on Big data by \textcite{Kaur2013} describe the theoretical modeling and querying of SQL and NoSQL data stores. The paper then proceeds with a case study of a social networking site similar to Slashdot \autocite{Malda1997}. Starting from an entity-relationship diagram (ERD), the researchers then proceed by modeling the entities in both a document and a graph database. Finally, a set of seven queries related to the use case is then drawn up and compared for the PostgreSQL, MongoDB and Neo4j data stores.
@@ -59,7 +59,7 @@ Further articles by the same authors \autocite{Bugiotti2014} expand upon this ab
 The main differences between this study and the previous studies are:
 
 \begin{enumerate}
-  \item Many studies have been conducted to understand the motivation between the NoSQL principles and the shift from relational data stores. The division of NoSQL data store types into four categories and elaboration upon this is usually also a topic in these studies. This research paper builds upon that knowledge, providing only a brief introduction in the world of NoSQL and NewSQL concepts.
+  \item Many studies have been conducted to understand the motivation between the NoSQL principles and the shift from relational data stores. The division of NoSQL data store types into four most commonly recognized categories and elaboration upon this is usually also a topic in these studies. This research paper builds upon that knowledge, providing only a brief introduction in the world of NoSQL and NewSQL concepts.
   \item Some of the previously mentioned research papers also discuss a case study applied to a specific use case. This is mostly related to business critical systems that store and process large volumes of data. The use case described in this thesis is very specific in that it's a complementary subsystem that does not affect critical data. Therefor, certain comparative attributes such as security and availability are not considered in this research.
 \end{enumerate}
 
