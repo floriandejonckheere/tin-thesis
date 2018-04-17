@@ -20,37 +20,45 @@
 \section{Context}
 \label{sec:context}
 
-In this age of computers and smartphones, older and deprecated methods of teaching are quickly being replaced by the digital equivalent. Course content has shifted from being printed in full-text on paper, to static slides on an overhead projector, to the digital screen present in every modern classroom. However, there is a lot more potential to gain from the modernization of course content. Education is still too often a one-way street, where students are obligated to process the course content without being provided much challenge or activity. This does not allow for any dialogue to take place between students and teachers concerning feedback and improvement of the course material itself.
+In this age of computers and smartphones, older and deprecated methods of teaching are quickly being replaced by their digital equivalents. Course content has shifted from being printed in full-text on paper, to static slides on an overhead projector, to the digital canvas present in every modern classroom. However, there is a lot more potential to gain from the modernization of educational content. Education is still too often a one-way street, where students are obligated to process the course content without being provided much challenge or activity. This does not allow for any dialogue to take place between students and teachers concerning feedback and improvement of the course material itself.
 
 Technological constraints in current iterations of educational software do not allow this co-creation discourse easily. Material being locked to specific versions of proprietary software is just one of the many problems teachers might encounter when trying to apply this concept in real life.
 
 By utilizing interactive tools and applications, the teacher can engage the students more directly.
 
-By building on modern, open standards, the Open Webslides project \autocite{OpenWebslides2017} aims to provide a platform that solves these problems. It creates a user-friendly environment where teachers can create courses based on open source technologies and standards, and it allows them to apply the co-creation narrative easily. This also enables users to share their material not just with their immediate environment but with a much broader educational audience.
+By building on modern, open standards, the Open Webslides project \autocite{OpenWebslides2017} aims to provide a platform that solves these problems. It creates a user-friendly environment where teachers can create courses based on open source technologies and standards, and it allows teachers and students to apply the co-creation narrative easily. This also enables users to share their material not just with their immediate environment but with a much broader educational audience.
+
+The concrete implementation of the Open Webslides platform is built to cater to higher education institutions. This entails that the traffic on the platform will be relatively high yet predictable, and seasonally bound. One of the consequences of this idiosyncratically shaped traffic is the requirement for the platform and infrastructure to efficiently handle these workload peaks.
 
 \section{Problem statement}
 \label{sec:problem-statement}
 
-The Open Webslides platform incorporates several ways to stimulate spontaneous co-creation between teachers and students. One of the most prominent elements is the \textit{Recent Activity} feed. This reverse chronologically ordered list enumerates the most recent user interactions with the platform and with other users. Feed items range from simple actions such as a user having created or modified course content, to more complex social interactions like a discussion being held using annotations or a student's changes being incorporated in a teacher's courses.
+The Open Webslides platform incorporates several ways to stimulate spontaneous co-creation between teachers and students. One of the most prominent elements is the \textit{Recent Activity} feed. This reverse chronologically ordered list enumerates the most recent user interactions with the platform and with other users. Feed items range from simple actions such as a user having created or modified course content, to more complex social interactions like a discussion facilitated by comments or a student's changes being incorporated in a teacher's courses.
 
-The size of the activity feed data set is directly correlated to the size and activity of the userbase. It has the potential to grow explosively, especially in timespans critical to teachers and students such as examination periods. In order for the infrastructure to be able to handle the deluge of the queried information, designing a system that allows for efficient querying and easy scalability is of paramount importance. Further decoupling of this subsystem from the business-critical processes is also important to ensure that downtime of this subsystem has no impact on round the clock availability of course content to the users.
+The size of the activity feed data set is directly correlated to the size and activity of the users. It has the potential to grow explosively, especially in timespans critical to teachers and students such as examination periods. In order for the infrastructure to be able to handle the deluge of the queried information, designing a system that allows for efficient querying and easy scalability is of paramount importance. Further decoupling of this subsystem from the business-critical processes is also important to ensure that downtime of this subsystem has no impact on round the clock availability of course content to the users.
 
-This research thesis will provide a comparative and analytical study of existing NoSQL database solutions for the Open Webslides project to implement an efficient, scalable data storage system in the context of the Recent Activity feed already incorporated into the platform.
+This research thesis will provide a comparative and analytical study of existing NoSQL database solutions for the Open Webslides project to implement an efficient, scalable data storage system in the context of the \textit{Recent Activity} feed. A basic solution is already implemented within the platform, however the proposed data model allows for more flexibility and accommodates any future functionality expansion.
 
 \section{Research questions}
 \label{sec:research-questions}
 
-% Research question 1: What frameworks and software packages currently exist in the industry to store structured non-relational graph or document data?
-% Research question 2: How is the social graph provided by the Open Webslides’ recent activity feed structured and how is this data consumed?
-% Research question 3: What NoSQL database is most fit for storing this social graph?
+This thesis has three main research questions.
 
+\begin{enumerate}
+  \item What frameworks and software packages currently exist in the industry to store structured non-relational graph or document data?
+  \item How is the social graph as introduced by the Open Webslides' Recent Activity feed conceptually and logically structured and how is this data consumed?
+  \item What NoSQL data store is the most appropriate and efficient data store to store this social graph?
+\end{enumerate}
+
+Answering the first two research questions will allow us to formulate an answer on the third research question, which concludes the research and provides a practical approach for the Open Webslides development team to take this research into account when developing the platform in the future.
+                                                                                                            
 \section{Research goal and objectives}
 \label{sec:research-goal-and-objectives}
 
-% Research goal 1: Providing overview of non-relational data stores
-% Research goal 2: Providing suggestion of data store for Open Webslides project
+Since this research contains both a general, more theoretical and a practical, use-case oriented panel, the goal of this thesis is dual. First, a comparative study of the NoSQL horizon, its applications and vendors, which might be of interest for a broader audience. Second, a concrete recommendation of a NoSQL data store for the Open Webslides project.
 
 \section{Expected results and conclusions}
+\label{sec:expected-results-and-conclusions}
 
 % Expected result 1: Graph DB is most fitting data model: mimics social network, nodes always logically close to user entrypoint
 % Expected result 2: RDF stores may be an interesting solution instead of property graph stores
