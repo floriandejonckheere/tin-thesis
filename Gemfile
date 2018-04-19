@@ -7,6 +7,8 @@ ruby '2.5.0'
 
 # Mongoid for MongoDB
 gem 'mongoid'
+# Neo4j
+gem 'neo4j', :git => 'git@github.com:neo4jrb/neo4j.git', :branch => '9.2.x-rails-5.2'
 
 # RuboCop styling
 gem 'rubocop'

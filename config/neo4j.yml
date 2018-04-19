@@ -1,0 +1,12 @@
+default: &default
+  type: http
+  url: http://localhost:7474
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
