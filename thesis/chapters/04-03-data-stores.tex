@@ -1,0 +1,41 @@
+\section{Data stores}
+\label{sec:data-stores}
+
+\subsection{Selected data stores}
+\label{sec:selected-data-stores}
+
+Due to the large number of NoSQL data stores it is not possible to consider all of them for this research. In every applicable data store category the most popular data stores are selected, based on certain parameters. \textcite{DBEngine2018} maintains a list of database systems ranked by popularity, based on parameters such as number of mentions on websites, Google Trends and availability of relevant jobs. The list includes not only NoSQL databases but also relational database systems. This ranking, named DB-Engine Ranking, is used primarily to determine which data stores are the most interesting to consider in this research.
+
+Due to financial and technological constraints, database systems that do not fall under a free license as classified by the \textcite{FreeSoftwareFoundation1985} will not be considered.
+
+Certain categories of NoSQL data stores will not be considered. Key/value stores will not be accounted for due to the relative simplicity of this type of data store. The main use case of key/value stores is not storing more complex information, rather the emphasis lies more on scalability and consistency. Implementing the proposed data model and queries is an order of magnitude more difficult in this type of data stores.
+
+Furthermore, NewSQL data stores will not be included in the research either. As described in \cref{sec:overview}, NewSQL aims to provide scalable performance similar to that of NoSQL while still guaranteeing ACID properties. Since ACID is not a major concern for this use case, NewSQL does not provide significant advantage over NoSQL, and will therefore be omitted from the comparison.
+
+Similarly, object-oriented and multi-model database such as OrientDB \autocite{OrientDB2010} are not within scope of this research. The comparison will thus aim at document, column and graph data stores.
+
+The most popular document database systems according to the DB-Engine Ranking are MongoDB \autocite{MongoDB2009}, CouchDB \autocite{CouchDB2005} and Couchbase \autocite{Couchbase2010}. While Couchbase is technically a multi-model data store, it is being ranked as a document database. However, Couchbase is a conceptual merge between CouchDB and Membase, and mainly adds improved scalability, clustering and auto-sharding. Couchbase will not be investigated upon in a practical capacity, however it is considered as an option to increase multi-host scalability. This leads to MongoDB and CouchDB being the contestants in the document database system category.
+
+As (wide) column data stores, Cassandra \autocite{Cassandra2008} and HBase \autocite{HBase2005} are among the highest ranked databases. These two database systems will be selected as candidates for the second NoSQL category.
+
+Finally, as sole graph database the Neo4j system \autocite{Neo4j2007} stands out greatly over competitors in the ranking. This database system will be analyzed as only graph database in this research.
+
+In conclusion, the data stores included in the study will be MongoDB and CouchDB as document databases, Cassandra and HBase as column databases and Neo4j as graph databases.
+
+\subsection{Comparative study}
+\label{sec:comparative study}
+
+% Comparison of data stores
+
+% NoSQL data store category
+% Queries
+%   K/V: not efficient when complex queries (see use case oriented survey)
+%   Document: common query language available, MapReduce
+%   Column: simple querying language, MapReduce
+%   Graph: pattern matching, traversal, SPARQL, Gremlin
+% Scalability (horizontal and vertical)
+% CAP
+% Language bindings
+% License
+% Performance benchmarks
+%   http://www.bgbenchmark.org/BG/
