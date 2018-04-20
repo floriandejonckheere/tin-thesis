@@ -40,11 +40,18 @@ Some examples of these triples are:
 \subsubsection{Document-oriented data model}
 \label{sec:document-data-model}
 
+A document-oriented data store is used to store and query semi-structured data. Data is stored as documents, an unstructured and extensible data format. CouchDB stores its documents as JSON, whereas MongoDB utilizes Binary JSON (BSON) as primary data format. The advantage of storing data in JSON or BSON is that objects and structures of many programming languages can be deduced directly into this format, rather than using a mapping or translation layer.
+
 \subsubsection{Column-oriented data model}
 \label{sec:column-data-model}
 
+Column-oriented databases store their data using columns.
+
 \subsubsection{Graph-oriented data model}
 \label{sec:graph-data-model}
+
+Graph-oriented databases such as Neo4j have their data stored in a graph structure. Logical entities are mapped to graph nodes, and relations to edges between the graph nodes. An edge can be uni- or bidirectional: the nodes will indicate this as incoming, outgoing or both.
+On the first sight, this structure lends itself excellently for modeling social interactions. Every graph node can have many incoming and outgoing edges.
 
 \subsection{Reference queries}
 \label{sec:reference-queries}
