@@ -4,6 +4,36 @@
 \subsection{Logical data model}
 \label{sec:logical-data-model}
 
+In this section, a data model is explained in detail and represented in an Entity Relationship (ER) diagram. The data model closely follows the already existing data model of the Open Webslides project, however certain irrelevant attributes are omitted from the schema to improve readability and simplify abstraction.
+
+The entity that will most likely be the entrypoint for the reference queries is \texttt{User}. This entity contains information pertaining to the user, such as email address, first name and last name.
+
+On the platform, a user can create and modify course content in an online editor. This course content is abstracted in the database as the \texttt{Topic} entity. The \texttt{Topic} entity does not contain all data regarding the course content, rather it holds the metadata and a logical pointer to the actual course content data, which is stored on the filesystem in a git repository. Per illustration, the \texttt{title} and \texttt{description} attributes are included in the described data model, because these two attributes are the only metadata relevant to the \textit{Recent Activity} feed.
+
+The user has three distinct possibilities for (co-)creation on course content. This is only from a technical perspective, we will not go further into the conceptual implications of co-creation.
+First, the user can directly modify the course content on the \texttt{Topic} entity. To simplify the data model, only authors can modify \texttt{Topic}, which covers the one-to-many relationship between \texttt{User} and \texttt{Topic}.
+The second option is creating annotations on the topic. This allows the user to attach notes to specific content on the document. The \texttt{Annotation} entity contains a logical pointer to the annotated content, which is omitted from the schema.
+The final possibility to integrate user content into a topic is by adding comments. In contrast to annotations, comments can also point to other comments, which allows interaction and conversation between multiple users, and effectively enables dialogue between students and teachers.
+
+\subsubsection{Recent Activity feed}
+\label{sec:recent-activity-feed}
+
+In the previous section a basic data model was described. This model does not include the entity or entities necessary to enable the \textit{Recent Activity} feed functionality. Since the research questions of this thesis revolve around storing this information in a NoSQL database, a clear separation of relational data and non-relational data is desirable.
+
+Every item in the \textit{Recent Activity} feed is represented by one entity, \texttt{FeedItem}. This entity has three attributes, as inspired by the Resource Description Framework (RDF) triple: \texttt{subject}, \texttt{predicate} and \texttt{object}. The subject refers to the user which is executing the action. The object points to the entity the user is manipulating, be it a topic, comment or annotation. These first two attributes are actually pointers to other entities within the database. The predicate describes the action being executed, and is a value of a predetermined enumeration.
+
+Predicates can range from simple values such as \texttt{CREATED} or \texttt{UPDATED} to more conceptually complex values such as \texttt{REACTED\_TO\_ANNOTATION}. The predicate enumeration is chosen so that future extension with additional predicate types is simple. Concretely this means that the value is stored as a \texttt{string}, while higher level abstractions like ORMs and database mappers will enforce data type consistency.
+
+Some examples of these triples are:
+
+\begin{itemize}
+  \item \texttt{User X created Topic Y}
+  \item \texttt{User X updated Topic Y}
+  \item \texttt{User X commented on Topic Y}
+  \item \texttt{User X responded to User Y's comment on Topic Z}
+  \item \texttt{User X created an annotation Topic Y}
+\end{itemize}
+
 \subsection{Physical data model}
 \label{sec:physical-data-model}
 
