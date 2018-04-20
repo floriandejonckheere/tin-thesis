@@ -50,8 +50,11 @@ Column-oriented databases store their data using columns.
 \subsubsection{Graph-oriented data model}
 \label{sec:graph-data-model}
 
-Graph-oriented databases such as Neo4j have their data stored in a graph structure. Logical entities are mapped to graph nodes, and relations to edges between the graph nodes. An edge can be uni- or bidirectional: the nodes will indicate this as incoming, outgoing or both.
-On the first sight, this structure lends itself excellently for modeling social interactions. Every graph node can have many incoming and outgoing edges.
+Graph-oriented databases such as Neo4j have their data stored in a network structure. Logical entities are mapped to graph nodes, and relations to edges between the graph nodes. An edge can be uni- or bidirectional: the nodes will indicate this as incoming, outgoing or both. Graph nodes also contain properties, akin to the entity attributes on the ER diagram.
+On the first sight, this structure lends itself excellently for modeling social interactions. Every graph node can have many incoming and outgoing edges, and the structure of the network is not predetermined.
+Due to trees being a subset of graphs, graph data stores are also very good in representing hierarchical data. Therefore, if the data is structured similar to a tree or a graph, it can best be stored in a graph database rather than tabular or document data in order to reduce the object-relational impedance mismatch.
+
+An additional advantage of graph databases is that the relationship between two entities can also contain properties. This enables the developer to easily add metadata to any object in the database, whether it is a vertex or an edge.
 
 \subsection{Reference queries}
 \label{sec:reference-queries}
