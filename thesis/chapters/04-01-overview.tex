@@ -1,6 +1,19 @@
 \section{Overview}
 \label{sec:overview}
 
+Relational database management systems (RDBMS) have been the de facto standard for over two decades to efficiently store and query information in a wide variety of native and web applications. These data stores are based on the relational model devised by Edgar Codd. The data in the system is presented as relations: a collection of data consisting of rows and columns. The user of the database can query and manipulate the data using relational operators.
+
+Codd presented thirteen rules for a database in order for it to be considered a \textit{relational database}. However, many of the modern database systems do not adhere strictly to all of these rules. More commonly, a relational database is defined as a database that exposes its information using a collection of rows and columns.
+
+Relational database management systems provide certain guarantees during database transactions. Reuter and Härder introduced the concept of ACID: an acronym referring to a set of transactional properties.
+
+\begin{enumerate}
+  \item \textbf{Atomicity} \\ Each transaction is "all or nothing", either the transaction completes successfully and the data is mutated in an atomic way, or the transaction fails entirely and none of the data in the database is modified.
+  \item \textbf{Consistency} \\ Each transaction, when successful, only commits legal results. This entails that the database is always in a consistent state.
+  \item \textbf{Isolation} \\ Actions within a single transaction are not visible to other, concurrently running transactions.
+  \item \textbf{Durability} \\ Once a transaction has completed successfully and been committed to the database, the system must guarantee that these results survive any subsequent malfunction.
+\end{enumerate}
+
 % Introduction to RDBMS
 % Shift to Big Data NoSQL
 
