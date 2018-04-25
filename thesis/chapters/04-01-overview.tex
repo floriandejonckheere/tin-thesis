@@ -20,7 +20,9 @@ Relational database management systems provide certain guarantees during databas
 \subsection{NoSQL data stores}
 \label{sec:nosql-data-stores}
 
-In the early 2000s, a totally different concept of data storage was popularized. NoSQL data stores provide a system of storage that is ``non SQL'' or ``non relational''. More recently, the NoSQL denomination has also been explained as ``not only SQL'', pointing on the fact that some data stores provide a different interface besides SQL.
+In the early 2000s, a totally different concept of data storage was popularized. NoSQL data stores provide a system of storage that is ``non SQL'' or ``non relational''. More recently, the NoSQL denomination has also been explained as ``not only SQL'', pointing on the fact that some data stores provide a different interface besides SQL. Many databases expose a REST API as primary execution interface. Other data stores have devised their own binary communication protocol, such as the Bolt protocol \autocite{Bolt2015} for the Neo4j graph data store.
+
+% MapReduce?
 
 The use of non-relational data stores was motivated by the needs of Web 2.0 companies such as Facebook and Google. NoSQL provides a way to store massive amounts of data in a flexible way. The architecture of such systems is usually more simple, and focuses more on horizontal as opposed to vertical scalability. Data is not stored in rows and columns as is the case in the relational model, but rather in a different data structure. \textcite{Nayak2013} divides the data models used by NoSQL data stores into five categories.
 
@@ -49,15 +51,22 @@ As the name suggests, graph data stores keep their data in the form of a graph. 
 
 Object-oriented data stores represent the data as an object, closely resembling the concept of an object in object-oriented programming languages. This puts object-oriented data stores much closer to the programming environment than other database systems. It provides all features inherent to object-oriented languages, such as data encapsulation, inheritance and polymorphism. The concepts of class, class attributes and an object can be mapped onto the relational concepts of a table, columns and a tuple. This concept of data storage makes software development more flexible.
 
-% BASE
-% CAP, ACID vs BASE
-% NewSQL
+% Triple store?
 
-% Introduction to NoSQL
-%   Data models
-%   ACID vs BASE
-%   Document, Column, Key-Value, Graph, Object Oriented, NewSQL
-%   Multi-model: OrientDB
-%   Querying: REST/SQL, MapReduce
-%   Scaling
-%   Security
+\subsubsection{Multi-model}
+\label{sec:multi-model}
+Data stores are generally built and optimized around one data model. However, there exist multi-model data stores as well. These database systems allow storing data using any of the different data models mentioned before, while integrating these into the same server package. One example of such a data store is OrientDB \autocite{OrientDB2010}. Multi-model data stores support and stimulate the principle of polyglot persistence, where an application utilizes more than one type of data store, while reducing its operation complexity.\\
+
+Most NoSQL data stores are built around the concept of \textit{eventual consistency}. This is a consistency model that dictates that all accesses to a particular piece of data will eventually return the last updated value. This principle is broadly implemented in distributed computing systems. Systems providing this property are also classified as BASE: Basically Available, Soft state, Eventual consistency. In contrast to the ACID properties, systems built around the BASE principles prefer availability over consistency.
+
+In 2000, Eric Brewer presented a conjecture known as the CAP theorem \autocite{Brewer2000}. This conjecture, later formally proven \autocite{GilbertLynch2002}, asserts that it is impossible for a distributed data store to exhibit more than two out of three of the following properties:
+
+\begin{enumerate}
+  \item \textbf{Consistency}: Every read operation receives the most recent write result
+  \item \textbf{Availability}: Every request receives a non-error result
+  \item \textbf{Partition tolerance}: The system continues to work despite failure to communicate between nodes
+\end{enumerate}
+
+The CAP theorem states that when a network partition is present, the database developer has to choose between providing consistency or availability. Note that \textit{consistency} as defined by the CAP theorem is not the same concept as consistency as described by the ACID properties. Database systems respecting the ACID guarantees choose consistency over availability, while database systems built on the BASE principle generally choose availability over consistency.
+
+NewSQL is a type of relational database management system providing scalability similar to NoSQL data stores, while still maintaining the ACID guarantees. Since this a blanket term, many different architectures exist in NewSQL databases. However, one common feature is their relational model inheritance and their ability to utilize SQL as query interface.
