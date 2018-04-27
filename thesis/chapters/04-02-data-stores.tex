@@ -4,11 +4,9 @@
 \subsection{Selected data stores}
 \label{sec:selected-data-stores}
 
-Due to the large number of NoSQL data stores it is not possible to consider all of them for this research. In every applicable data store category the most popular data stores are selected, based on certain parameters. \textcite{DBEngine2018} maintains a list of database systems ranked by popularity, based on parameters such as number of mentions on websites, Google Trends and availability of relevant jobs. The list includes not only NoSQL databases but also relational database systems. This ranking, named DB-Engine Ranking, is used primarily to determine which data stores are the most interesting to consider in this research.
+Due to the large number of NoSQL data stores it is not possible to consider all of them for this research. In every applicable NoSQL category the most popular data stores are selected, where popularity is based on certain predetermined parameters. \textcite{DBEngine2018} maintains a list of database systems ranked by popularity, based on parameters such as number of mentions on websites, Google Trends and availability of relevant jobs. The list includes not only NoSQL databases but also other types of data storage systems such as relational database systems. This ranking, named DB-Engine Ranking, is used primarily to determine which data stores are the most interesting to consider in this research. Due to licensing concerns regarding the Open Webslides project, database systems that do not fall under a free license as classified by the \textcite{FreeSoftwareFoundation1985} will not be considered.
 
-Due to financial and technological constraints, database systems that do not fall under a free license as classified by the \textcite{FreeSoftwareFoundation1985} will not be considered.
-
-Certain categories of NoSQL data stores will not be considered. Key/value stores will not be accounted for due to the relative simplicity of this type of data store. The main use case of key/value stores is not storing more complex information, rather the emphasis lies more on scalability and consistency. Implementing the proposed data model and queries is an order of magnitude more difficult in this type of data stores.
+Certain categories of NoSQL data stores will not be considered. Key-value stores will not be accounted for due to the relative simplicity of this type of data store. The main use case of key/value stores is not storing more complex information, rather the emphasis lies more on scalability and consistency. Processing complex queries that consist of the NoSQL equivalent of relational joins is not efficient in key-value data stores. Implementing the proposed data model and queries in such a system is a more ambitious task that does not lie within the scope of the research.
 
 Furthermore, NewSQL data stores will not be included in the research either. As described in \cref{sec:overview}, NewSQL aims to provide scalable performance similar to that of NoSQL while still guaranteeing ACID properties. Since ACID is not a major concern for this use case, NewSQL does not provide significant advantage over NoSQL, and will therefore be omitted from the comparison.
 
@@ -25,17 +23,25 @@ In conclusion, the data stores included in the study will be MongoDB and CouchDB
 \subsection{Comparative study}
 \label{sec:comparative study}
 
-% Comparison of data stores
+Data stores and databases can be compared and analyzed using many quantitative and qualitative aspects. In this thesis we propose a selection of criteria based on the usefulness applied to the studied use case. Since the landscape and feature-set of NoSQL data stores is changing on a weekly base, the impact of these technologies must be carefully considered in order to reach a durable conclusion in this research.
 
-% NoSQL data store category
-% Queries
-%   K/V: not efficient when complex queries (see use case oriented survey)
-%   Document: common query language available, MapReduce
-%   Column: simple querying language, MapReduce
-%   Graph: pattern matching, traversal, SPARQL, Gremlin
-% Scalability (horizontal and vertical)
-% CAP
-% Language bindings
-% License
-% Performance benchmarks
-%   http://www.bgbenchmark.org/BG/
+% Qualitative criteria
+  % Querying possibilities
+    % REST
+    % SQL
+    % MapReduce
+  % Language bindings
+  % Scalability
+    % Partitioning
+    % Replication
+    % Consistency
+    % Concurrency control
+  % License
+  % Security
+  
+% Quantitative criteria
+  % Performance benchmarks
+    % Netflix benchmark
+    % http://www.bgbenchmark.org/BG/
+    % Yahoo! Cloud Serving Benchmark (YCSB)
+  % Queries benchmarked
