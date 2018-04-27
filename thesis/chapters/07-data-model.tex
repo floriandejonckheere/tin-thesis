@@ -1,7 +1,7 @@
-\section{Data model}
-\label{sec:data-model}
+\chapter{Data model}
+\label{ch:data-model}
 
-\subsection{Logical data model}
+\section{Logical data model}
 \label{sec:logical-data-model}
 
 In this section, a data model is explained in detail and represented in an Entity Relationship (ER) diagram. The data model closely follows the already existing data model of the Open Webslides project, however certain irrelevant attributes are omitted from the schema to improve readability and simplify abstraction.
@@ -15,7 +15,7 @@ First, the user can directly modify the course content on the \texttt{Topic} ent
 The second option is creating annotations on the topic. This allows the user to attach notes to specific content on the document. The \texttt{Annotation} entity contains a logical pointer to the annotated content, which is omitted from the schema.
 The final possibility to integrate user content into a topic is by adding comments. In contrast to annotations, comments can also point to other comments, which allows interaction and conversation between multiple users, and effectively enables dialogue between students and teachers.
 
-\subsubsection{Recent Activity feed}
+\subsection{Recent Activity feed}
 \label{sec:recent-activity-feed}
 
 In the previous section a basic data model was described. This model does not include the entity or entities necessary to enable the \textit{Recent Activity} feed functionality. Since the research questions of this thesis revolve around storing this information in a NoSQL database, a clear separation of relational data and non-relational data is desirable.
@@ -34,20 +34,20 @@ Some examples of these triples are:
   \item \texttt{User X created an annotation Topic Y}
 \end{itemize}
 
-\subsection{Physical data model}
+\section{Physical data model}
 \label{sec:physical-data-model}
 
-\subsubsection{Document-oriented data model}
+\subsection{Document-oriented data model}
 \label{sec:document-data-model}
 
 A document-oriented data store is used to store and query semi-structured data. Data is stored as documents, an unstructured and extensible data format. CouchDB stores its documents as JSON, whereas MongoDB utilizes Binary JSON (BSON) as primary data format. The advantage of storing data in JSON or BSON is that objects and structures of many programming languages can be deduced directly into this format, rather than using a mapping or translation layer.
 
-\subsubsection{Column-oriented data model}
+\subsection{Column-oriented data model}
 \label{sec:column-data-model}
 
 Column-oriented databases store their data using columns.
 
-\subsubsection{Graph-oriented data model}
+\subsection{Graph-oriented data model}
 \label{sec:graph-data-model}
 
 Graph-oriented databases such as Neo4j have their data stored in a network structure. Logical entities are mapped to graph nodes, and relations to edges between the graph nodes. An edge can be uni- or bidirectional: the nodes will indicate this as incoming, outgoing or both. Graph nodes also contain properties, akin to the entity attributes on the ER diagram.
@@ -56,7 +56,7 @@ Due to trees being a subset of graphs, graph data stores are also very good in r
 
 An additional advantage of graph databases is that the relationship between two entities can also contain properties. This enables the developer to easily add metadata to any object in the database, whether it is a vertex or an edge.
 
-\subsection{Reference queries}
+\section{Reference queries}
 \label{sec:reference-queries}
 
 % Example queries on the data model
