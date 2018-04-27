@@ -58,6 +58,7 @@
 \usepackage{lipsum}          % Voor vultekst (lorem ipsum)
 
 \usepackage{cleveref}        % Reference labels by name
+\usepackage[acronym]{glossaries}
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -178,6 +179,12 @@
 {}
 {\ \titlerule*[.5pc]{.}\;\thecontentspage} % Page number
 []
+
+% Glossary and list of abbreviations
+\input{glossary.tex}
+\input{abbreviations.tex}
+
+\makeglossaries
 
 % List of figures
 \titlecontents{figure}[0em]
