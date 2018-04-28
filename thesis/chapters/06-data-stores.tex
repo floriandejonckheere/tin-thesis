@@ -8,7 +8,7 @@ Due to the large number of NoSQL data stores it is not possible to consider all 
 
 Certain categories of NoSQL data stores will not be considered. Key-value stores will not be accounted for due to the relative simplicity of this type of data store. The main use case of key/value stores is not storing more complex information, rather the emphasis lies more on scalability and consistency. Processing complex queries that consist of the NoSQL equivalent of relational joins is not efficient in key-value data stores. Implementing the proposed data model and queries in such a system is a more ambitious task that does not lie within the scope of the research.
 
-Furthermore, NewSQL data stores will not be included in the research either. As described in \cref{sec:overview}, NewSQL aims to provide scalable performance similar to that of NoSQL while still guaranteeing ACID properties. Since ACID is not a major concern for this use case, NewSQL does not provide significant advantage over NoSQL, and will therefore be omitted from the comparison.
+Furthermore, NewSQL data stores will not be included in the research either. As described in \cref{ch:overview}, NewSQL aims to provide scalable performance similar to that of NoSQL while still guaranteeing ACID properties. Since ACID is not a major concern for this use case, NewSQL does not provide significant advantage over NoSQL, and will therefore be omitted from the comparison.
 
 Similarly, object-oriented and multi-model database such as OrientDB \autocite{OrientDB2010} are not within scope of this research. The comparison will thus aim at document, column and graph data stores.
 
@@ -38,10 +38,3 @@ Data stores and databases can be compared and analyzed using many quantitative a
     % Concurrency control
   % License
   % Security
-  
-% Quantitative criteria
-  % Performance benchmarks
-    % Netflix benchmark
-    % http://www.bgbenchmark.org/BG/
-    % Yahoo! Cloud Serving Benchmark (YCSB)
-  % Queries benchmarked
