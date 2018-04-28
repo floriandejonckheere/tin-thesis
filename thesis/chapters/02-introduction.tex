@@ -20,24 +20,40 @@
 \section{Context}
 \label{sec:context}
 
-In this age of computers and smartphones, older and deprecated methods of teaching are quickly being replaced by their digital equivalents. Course content has shifted from being printed in full-text on paper, to static slides on an overhead projector, to the digital canvas present in every modern classroom. However, there is a lot more potential to gain from the modernization of educational content. Education is still too often a one-way street, where students are obligated to process the course content without being provided much challenge or activity. This does not allow for any dialogue to take place between students and teachers concerning feedback and improvement of the course material itself.
+In this age of computers and smartphones, older and deprecated methods of teaching are quickly being replaced by their digital equivalents.
+Course content has shifted from being printed in full-text on paper, to static slides on an overhead projector, to the digital canvas present in every modern classroom.
+However, there is a lot more potential to gain from the modernization of educational content.
+Education is still too often a one-way street, where students are obligated to process the course content without being provided much challenge or activity.
+This does not allow for any dialogue to take place between students and teachers concerning feedback and improvement of the course material itself.
 
-Technological constraints in current iterations of educational software do not allow this co-creation discourse easily. Material being locked to specific versions of proprietary software is just one of the many problems teachers might encounter when trying to apply this concept in real life.
+Technological constraints in current iterations of educational software do not allow this co-creation discourse easily.
+Material being locked to specific versions of proprietary software is just one of the many problems teachers might encounter when trying to apply this concept in real life.
 
 By utilizing interactive tools and applications, the teacher can engage the students more directly.
 
-By building on modern, open standards, the Open Webslides project \autocite{OpenWebslides2017} aims to provide a platform that solves these problems. It creates a user-friendly environment where teachers can create courses based on open source technologies and standards, and it allows teachers and students to apply the co-creation narrative easily. This also enables users to share their material not just with their immediate environment but with a much broader educational audience.
+By building on modern, open standards, the Open Webslides project \autocite{OpenWebslides2017} aims to provide a platform that solves these problems.
+It creates a user-friendly environment where teachers can create courses based on open source technologies and standards, and it allows teachers and students to apply the co-creation narrative easily.
+This also enables users to share their material not just with their immediate environment but with a much broader educational audience.
 
-The concrete implementation of the Open Webslides platform is built to cater to higher education institutions. This entails that the traffic on the platform will be relatively high yet predictable, and seasonally bound. One of the consequences of this idiosyncratically shaped traffic is the requirement for the platform and infrastructure to efficiently handle these workload peaks.
+The concrete implementation of the Open Webslides platform is built to cater to higher education institutions.
+This entails that the traffic on the platform will be relatively high yet predictable, and seasonally bound.
+One of the consequences of this idiosyncratically shaped traffic is the requirement for the platform and infrastructure to efficiently handle these workload peaks.
 
 \section{Problem statement}
 \label{sec:problem-statement}
 
-The Open Webslides platform incorporates several ways to stimulate spontaneous co-creation between teachers and students. One of the most prominent elements is the \textit{Recent Activity} feed. This reverse chronologically ordered list enumerates the most recent user interactions with the platform and with other users. Feed items range from simple actions such as a user having created or modified course content, to more complex social interactions like a discussion facilitated by comments or a student's changes being incorporated in a teacher's courses.
+The Open Webslides platform incorporates several ways to stimulate spontaneous co-creation between teachers and students.
+One of the most prominent elements is the \textit{Recent Activity} feed.
+This reverse chronologically ordered list enumerates the most recent user interactions with the platform and with other users.
+Feed items range from simple actions such as a user having created or modified course content, to more complex social interactions like a discussion facilitated by comments or a student's changes being incorporated in a teacher's courses.
 
-The size of the activity feed data set is directly correlated to the size and activity of the users. It has the potential to grow explosively, especially in timespans critical to teachers and students such as examination periods. In order for the infrastructure to be able to handle the deluge of the queried information, designing a system that allows for efficient querying and easy scalability is of paramount importance. Further decoupling of this subsystem from the business-critical processes is also important to ensure that downtime of this subsystem has no impact on round the clock availability of course content to the users.
+The size of the activity feed data set is directly correlated to the size and activity of the users.
+It has the potential to grow explosively, especially in timespans critical to teachers and students such as examination periods.
+In order for the infrastructure to be able to handle the deluge of the queried information, designing a system that allows for efficient querying and easy scalability is of paramount importance.
+Further decoupling of this subsystem from the business-critical processes is also important to ensure that downtime of this subsystem has no impact on round the clock availability of course content to the users.
 
-This research thesis will provide a comparative and analytical study of existing NoSQL database solutions for the Open Webslides project to implement an efficient, scalable data storage system in the context of the \textit{Recent Activity} feed. A basic solution is already implemented within the platform, however the proposed data model allows for more flexibility and accommodates any future functionality expansion.
+This research thesis will provide a comparative and analytical study of existing NoSQL database solutions for the Open Webslides project to implement an efficient, scalable data storage system in the context of the \textit{Recent Activity} feed.
+A basic solution is already implemented within the platform, however the proposed data model allows for more flexibility and accommodates any future functionality expansion.
 
 \section{Research questions}
 \label{sec:research-questions}
@@ -50,12 +66,17 @@ The research in this thesis is focused on finding an answer to three main resear
   \item What NoSQL data store is the most appropriate and efficient data store to store this social graph?
 \end{enumerate}
 
-Determining and exploring the NoSQL database landscape will provide us with a general idea of the current state of affairs. This knowledge will then be utilized to answer the second research question in form of concrete data models and queries. Finally, The first two questions will then lead into an analysis to answer the last research question. It will also provide a practical approach for the Open Webslides development team to take into account this research paper when developing the platform in the future.
-                                                                                                            
+Determining and exploring the NoSQL database landscape will provide us with a general idea of the current state of affairs.
+This knowledge will then be utilized to answer the second research question in form of concrete data models and queries.
+Finally, The first two questions will then lead into an analysis to answer the last research question.
+It will also provide a practical approach for the Open Webslides development team to take into account this research paper when developing the platform in the future.
+
 \section{Research goal and objectives}
 \label{sec:research-goal-and-objectives}
 
-Since this research contains both a general, more theoretical and a practical, use-case oriented panel, the goal of this thesis is dual. First, a comparative study of the NoSQL horizon, its applications and vendors, which might be of interest for a broader audience. Second, a concrete recommendation of a NoSQL data store for the Open Webslides project.
+Since this research contains both a general, more theoretical and a practical, use-case oriented panel, the goal of this thesis is dual.
+First, a comparative study of the NoSQL horizon, its applications and vendors, which might be of interest for a broader audience.
+Second, a concrete recommendation of a NoSQL data store for the Open Webslides project.
 
 \section{Expected results and conclusions}
 \label{sec:expected-results-and-conclusions}
@@ -66,9 +87,13 @@ Since this research contains both a general, more theoretical and a practical, u
 
 Expected results and conclusions\\
 
-In \cref{ch:state-of-the-art} an overview will be presented of current research, applied solutions and other related work in the research domain based on a literature study. This literary review will then be used to give a broad and global overview of the research domain, introducing various relational and NoSQL concepts and explaining the motivation behind NoSQL and big data in \cref{ch:overview}.
+In \cref{ch:state-of-the-art} an overview will be presented of current research, applied solutions and other related work in the research domain based on a literature study.
+This literary review will then be used to give a broad and global overview of the research domain, introducing various relational and NoSQL concepts and explaining the motivation behind NoSQL and big data in \cref{ch:overview}.
 
-\Cref{ch:methodology} will clarify the analytical research approaches used in this thesis to attempt to formulate an answer to the research questions. The research is split into three distinct parts. The first part, \Cref{ch:data-stores} will evaluate existing NoSQL data stores, and select the data stores used for comparison in this thesis. The second part in \cref{ch:data-model} proposes the conceptual and logical data model that may be used in the Open Webslides project, and presents examples of queries that may be frequently executed on the data set.
+\Cref{ch:methodology} will clarify the analytical research approaches used in this thesis to attempt to formulate an answer to the research questions.
+The research is split into three distinct parts.
+The first part, \Cref{ch:data-stores} will evaluate existing NoSQL data stores, and select the data stores used for comparison in this thesis.
+The second part in \cref{ch:data-model} proposes the conceptual and logical data model that may be used in the Open Webslides project, and presents examples of queries that may be frequently executed on the data set.
 \Cref{ch:comparative-study} combines the proposed data models and reference queries in order to perform and discuss performance benchmarks on the data stores selected in \cref{ch:data-stores}.
 
 Finally, \cref{ch:conclusion} will present a general conclusion and summarize the research, answering the research questions.

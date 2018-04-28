@@ -4,52 +4,86 @@
 %%
 %% Introduction
 %%
-Ever since the rise of the NoSQL databases in 2009 \autocite{Sadalage2012} it has been a subject for vigorous academic and professional research. The contrast with relational databases, optimal use cases, performance and scalability are only some of the aspects that have been analyzed with great regularity. This chapter will summarize previous publications relevant to this thesis.
+Ever since the rise of the NoSQL databases in 2009 \autocite{Sadalage2012} it has been a subject for vigorous academic and professional research.
+The contrast with relational databases, optimal use cases, performance and scalability are only some of the aspects that have been analyzed with great regularity.
+This chapter will summarize previous publications relevant to this thesis.
 
 %%
 %% Literature study
 %%
 
 % NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence
-The book by \textcite{Sadalage2012} provides an excellent entry into the world of NoSQL. It explains the motivation behind the use of NoSQL techniques, and how this differs from relational data storage. Furthermore it introduces the segregation of NoSQL data stores into four main categories: key-value, document, column and graph databases.
-Second, \citeauthor{Sadalage2012} touch the concept of polyglot persistence. This describes the concept of an application using multiple types of data stores to store heterogeneously structured data. This technique is relevant in particular to this thesis, as the describe data schema only relates to one of the database management systems integrated in the Open Webslides platform.
-The second part of the book provides a more practical approach to using polyglot persistence in an enterprise application. The authors have written down many pointers and guides in order to pick the right database for a particular use case.
+The book by \textcite{Sadalage2012} provides an excellent entry into the world of NoSQL.
+It explains the motivation behind the use of NoSQL techniques, and how this differs from relational data storage.
+Furthermore it introduces the segregation of NoSQL data stores into four main categories: key-value, document, column and graph databases.
+Second, \citeauthor{Sadalage2012} touch the concept of polyglot persistence.
+This describes the concept of an application using multiple types of data stores to store heterogeneously structured data.
+This technique is relevant in particular to this thesis, as the describe data schema only relates to one of the database management systems integrated in the Open Webslides platform.
+The second part of the book provides a more practical approach to using polyglot persistence in an enterprise application.
+The authors have written down many pointers and guides in order to pick the right database for a particular use case.
 
 % Type of NOSQL Databases and its Comparison with Relational Databases
 % NoSQL Database: New Era of Databases for Big data Analytics - Classification, Characteristics and Comparison
 % Scalable SQL and NoSQL Data Stores
-There have already been numerous studies to differentiate the different types of NoSQL databases and comparative studies between NoSQL database systems. \textcite{Nayak2013} present a fifth NoSQL category: object-oriented databases.
+There have already been numerous studies to differentiate the different types of NoSQL databases and comparative studies between NoSQL database systems.
+\textcite{Nayak2013} present a fifth NoSQL category: object-oriented databases.
 Other studies such as \textcite{Moniruzzaman2013} and \textcite{Maroo2013} provide a feature-based comparison for various NoSQL vendors and database systems.
-Finally, the similarity and resemblance of relational and NoSQL data stores is also a well-researched topic in current literature. Studies and surveys such as \textcite{Mohamed2014} and \textcite{Cattell2010} tackle this subject in great detail.
+Finally, the similarity and resemblance of relational and NoSQL data stores is also a well-researched topic in current literature.
+Studies and surveys such as \textcite{Mohamed2014} and \textcite{Cattell2010} tackle this subject in great detail.
 
 % Data Management in Cloud Environments: NoSQL and NewSQL Data Stores
-\textcite{Grolinger2013} present a use-case based approach to comparing different NoSQL and NewSQL data stores. The survey incorporates a feature-based comparison over different aspects such as querying, scalability and security, and analyzes these concepts in the context of a select number of NoSQL data stores.
+\textcite{Grolinger2013} present a use-case based approach to comparing different NoSQL and NewSQL data stores.
+The survey incorporates a feature-based comparison over different aspects such as querying, scalability and security, and analyzes these concepts in the context of a select number of NoSQL data stores.
 
 % NoSQL evaluation: A Use Case Oriented Survey
-\textcite{Hecht2011} provides a feature-based comparison of different NoSQL database types and vendors. The researchers compare the data model, querying access, concurrency, partioning and replication. The paper uses a duality-based approach, where a minus indicates that the feature is not supported by the database system, and a plus if the feature is supported. The paper also presents the problem of a lack of unified querying interface for NoSQL databases. Furthermore, the importance of choosing the right NoSQL database type for the use case is emphasized, however Hecht and Jablonski do not present a specific case study.
+\textcite{Hecht2011} provides a feature-based comparison of different NoSQL database types and vendors.
+The researchers compare the data model, querying access, concurrency, partioning and replication.
+The paper uses a duality-based approach, where a minus indicates that the feature is not supported by the database system, and a plus if the feature is supported.
+The paper also presents the problem of a lack of unified querying interface for NoSQL databases.
+Furthermore, the importance of choosing the right NoSQL database type for the use case is emphasized, however Hecht and Jablonski do not present a specific case study.
 
 % Modeling and Querying Data in NoSQL Databases
-The proceedings of the 2013 IEEE International Conference on Big data by \textcite{Kaur2013} describe the theoretical modeling and querying of SQL and NoSQL data stores. The paper then proceeds with a case study of a social networking site similar to Slashdot \autocite{Malda1997}. Starting from an entity-relationship diagram (ERD), the researchers then proceed by modeling the entities in both a document and a graph database. Finally, a set of seven queries related to the use case is then drawn up and compared for the PostgreSQL, MongoDB and Neo4j data stores.
+The proceedings of the 2013 IEEE International Conference on Big data by \textcite{Kaur2013} describe the theoretical modeling and querying of SQL and NoSQL data
+\stores.
+The paper then proceeds with a case study of a social networking site similar to Slashdot \autocite{Malda1997}.
+Starting from an entity-relationship diagram (ERD), the researchers then proceed by modeling the entities in both a document and a graph database.
+Finally, a set of seven queries related to the use case is then drawn up and compared for the PostgreSQL, MongoDB and Neo4j data stores.
 
 % Event Based Transient Notification Architecture and NoSQL Solution for Astronomical Data Management
-\textcite{Zhao2015} explores the use of NoSQL data stores to store huge amounts of observational data generated by astronomical research. It briefly discusses using filesystems and relational data stores, before comparing NoSQL alternatives. A concrete data model to store the astronomical data in a MongoDB data store is then presented, together with eight scenarios and queries that may be used in a production system.
-Furthermore, performance measurements of MongoDB are also analyzed. Data insertion, querying and deletion using the aforementioned data scheme and real observational data are used in this section.
+\textcite{Zhao2015} explores the use of NoSQL data stores to store huge amounts of observational data generated by astronomical research.
+It briefly discusses using filesystems and relational data stores, before comparing NoSQL alternatives.
+A concrete data model to store the astronomical data in a MongoDB data store is then presented, together with eight scenarios and queries that may be used in a production system.
+Furthermore, performance measurements of MongoDB are also analyzed.
+Data insertion, querying and deletion using the aforementioned data scheme and real observational data are used in this section.
 
 % Performance Investigation of Selected SQL and NoSQL Databases
-The proceedings of the AGILE 2015 conference by \textcite{Schmid2015} present an overview of selected SQL and NoSQL databases, focusing on the geo-functionalities of the systems. It uses performance tests between two document-based NoSQL data stores (MongoDB and CouchBase). The researchers conclude that geospatial calculations in NoSQL database systems are still only supported for basic queries. Relational databases still perform superior to NoSQL databases in small to larger data sets for queries with geo-functions. However the NoSQL response time only increases slightly relative to data set size.
+The proceedings of the AGILE 2015 conference by \textcite{Schmid2015} present an overview of selected SQL and NoSQL databases, focusing on the geo-functionalities of the systems.
+It uses performance tests between two document-based NoSQL data stores (MongoDB and CouchBase).
+The researchers conclude that geospatial calculations in NoSQL database systems are still only supported for basic queries.
+Relational databases still perform superior to NoSQL databases in small to larger data sets for queries with geo-functions.
+However the NoSQL response time only increases slightly relative to data set size.
 
 % On Scalability of Two NoSQL Data Stores for Processing Interactive Social Networking Actions
-The technical report by \textcite{Barahmand2015} quantifies the scalability of MongoDB and HBase for processing simple operations using the social networking benchmark BG \autocite{Barahmand2013}. It considers both horizontal and vertical scalability of the data stores using the Social Action Rating (SoAR) introduced by the benchmarking tool.
-In order to perform these benchmarks, two logical data models for the database design are presented. The report concludes that while both data stores scale superlinearly, their speedup is limited by the resources of a few nodes out of many becoming fully utilized.
+The technical report by \textcite{Barahmand2015} quantifies the scalability of MongoDB and HBase for processing simple operations using the social networking benchmark BG \autocite{Barahmand2013}.
+It considers both horizontal and vertical scalability of the data stores using the Social Action Rating (SoAR) introduced by the benchmarking tool.
+In order to perform these benchmarks, two logical data models for the database design are presented.
+The report concludes that while both data stores scale superlinearly, their speedup is limited by the resources of a few nodes out of many becoming fully utilized.
 
 % Which NoSQL Database? A Performance Overview
-Another performance-based study written by \textcite{Abramova2014} compares five popular NoSQL databases (Cassandra, HBase, MongoDB, OrientDB and Redis) using the Yahoo! Cloud Serving Benchmark \autocite{Yahoo2010}. The study compares read and write query performance. It concludes that over the five compared data stores, MongoDB, Redis and OrientDB are more read-optimized, and Cassandra and HBase are more update-optimized.
+Another performance-based study written by \textcite{Abramova2014} compares five popular NoSQL databases (Cassandra, HBase, MongoDB, OrientDB and Redis) using the Yahoo! Cloud Serving Benchmark \autocite{Yahoo2010}.
+The study compares read and write query performance.
+It concludes that over the five compared data stores, MongoDB, Redis and OrientDB are more read-optimized, and Cassandra and HBase are more update-optimized.
 
 % A Survey of Data Management System for Cloud Computing: Models and Searching Methods
-A more query-oriented study was performed by \textcite{Zhou2013}. The paper considers both the academic and the industry definition and description of data models and system architectures. The researchers identify two kinds of searching approaches: the MapReduce-oriented and the SQL-like querying.
+A more query-oriented study was performed by \textcite{Zhou2013}.
+The paper considers both the academic and the industry definition and description of data models and system architectures.
+The researchers identify two kinds of searching approaches: the MapReduce-oriented and the SQL-like querying.
 
 % Data Modeling in the NoSQL World
-The work of \textcite{Atzeni2016} dives deeper into the world of non-relational data modeling. The paper investigates how traditional data modeling can be used in the context of schemaless and heterogeneous data stores. \citeauthor{Atzeni2016} propose NoAM (NoSQL Abstract Modeling), an abstract data model to describe NoSQL databases based on the common surfaces of the various data store types. This technique can be used to describe system-independent application data and later to implement this in the specific data stores, taking advantage of the various target system idiosyncrasies.
+The work of \textcite{Atzeni2016} dives deeper into the world of non-relational data modeling.
+The paper investigates how traditional data modeling can be used in the context of schemaless and heterogeneous data stores.
+\citeauthor{Atzeni2016} propose NoAM (NoSQL Abstract Modeling), an abstract data model to describe NoSQL databases based on the common surfaces of the various data store types.
+This technique can be used to describe system-independent application data and later to implement this in the specific data stores, taking advantage of the various target system idiosyncrasies.
 Further articles by the same authors \autocite{Bugiotti2014} expand upon this abstract data model to present a database design methodology for NoSQL systems.
 
 %%
@@ -59,12 +93,21 @@ Further articles by the same authors \autocite{Bugiotti2014} expand upon this ab
 The main differences between this study and the previous studies are:
 
 \begin{enumerate}
-  \item Many studies have been conducted to understand the motivation between the NoSQL principles and the shift from relational data stores. The division of NoSQL data store types into four most commonly recognized categories and elaboration upon this is usually also a topic in these studies. This research paper builds upon that knowledge, providing only a brief introduction in the world of NoSQL and NewSQL concepts.
-  \item Some of the previously mentioned research papers also discuss a case study applied to a specific use case. This is mostly related to business critical systems that store and process large volumes of data. The use case described in this thesis is very specific in that it's a complementary subsystem that does not affect critical data. Therefor, certain comparative attributes such as security and availability are not considered in this research.
+  \item Many studies have been conducted to understand the motivation between the NoSQL principles and the shift from relational data stores.
+        The division of NoSQL data store types into four most commonly recognized categories and elaboration upon this is usually also a topic in these studies.
+        This research paper builds upon that knowledge, providing only a brief introduction in the world of NoSQL and NewSQL concepts.
+  \item Some of the previously mentioned research papers also discuss a case study applied to a specific use case.
+        This is mostly related to business critical systems that store and process large volumes of data.
+        The use case described in this thesis is very specific in that it's a complementary subsystem that does not affect critical data.
+        Consequently, certain comparative attributes such as security and availability are not considered in this research.
 \end{enumerate}
 
 %%
 %% Added value of thesis
 %%
 
-This thesis aims to provide a case study of data storage the \textcite{OpenWebslides2017} platform. Several use case based surveys and studies already exist, however they aim at replacing a relational database in an application with a NoSQL database without bringing polyglot persistence into account. \textcite{Sadalage2012} is one notable exception in this aspect. In the case of Open Webslides, the NoSQL data store only complements the relational database and does not fulfill a critical function. Therefore, several constraints such as security and availability differ in interpretation from existing studies.
+This thesis aims to provide a case study of data storage the \textcite{OpenWebslides2017} platform.
+Several use case based surveys and studies already exist, however they aim at replacing a relational database in an application with a NoSQL database without bringing polyglot persistence into account.
+\textcite{Sadalage2012} is one notable exception in this aspect.
+In the case of Open Webslides, the NoSQL data store only complements the relational database and does not fulfill a critical function.
+Therefore, several constraints such as security and availability differ in interpretation from existing studies.
