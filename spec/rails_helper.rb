@@ -2,6 +2,8 @@
 
 require 'support/factory_bot'
 require 'faker'
+require 'rspec-benchmark'
+require 'database_cleaner'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'

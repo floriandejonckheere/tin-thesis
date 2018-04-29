@@ -21,6 +21,7 @@ gem 'factory_bot_rails'
 # Testing suite
 gem 'rspec'
 gem 'rspec-rails'
+gem 'rspec-benchmark'
 
 # RuboCop styling
 gem 'rubocop'
