@@ -13,12 +13,12 @@ module Neo4j
     #
     has_one :out,
             :user,
-            :type => :user,
+            :type => :by,
             :model_class => 'Neo4j::User'
 
     has_one :out,
             :topic,
-            :type => :topic,
+            :type => :on,
             :model_class => 'Neo4j::Topic'
 
     ##
