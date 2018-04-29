@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Annotation < Neo4j::Object
+  class Annotation < Item
     ##
     # Properties
     #

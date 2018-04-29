@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Topic < Object
+  class Topic < Item
     ##
     # Properties
     #

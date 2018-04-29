@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Object < ApplicationRecord
+  class Item < ApplicationRecord
     ##
     # Properties
     #
