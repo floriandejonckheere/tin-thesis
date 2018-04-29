@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'support/factory_bot'
+require 'faker'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
