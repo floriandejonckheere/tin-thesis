@@ -17,9 +17,9 @@ module Neo4j
             :model_class => 'Neo4j::User'
 
     has_one :out,
-            :topic,
+            :item,
             :type => :on,
-            :model_class => 'Neo4j::Topic'
+            :model_class => %i[Neo4j::Topic Neo4j::Comment]
 
     ##
     # Validations
@@ -30,7 +30,7 @@ module Neo4j
     validates :user,
               :presence => true
 
-    validates :topic,
+    validates :item,
               :presence => true
   end
 end
