@@ -12,10 +12,12 @@
 
 ---
 :constraints:
-- CONSTRAINT ON ( `neo4j::applicationrecord`:`Neo4j::ApplicationRecord` ) ASSERT `neo4j::applicationrecord`.uuid
-  IS UNIQUE
 - CONSTRAINT ON ( `neo4j::migrations::schemamigration`:`Neo4j::Migrations::SchemaMigration`
   ) ASSERT `neo4j::migrations::schemamigration`.migration_id IS UNIQUE
+- CONSTRAINT ON ( applicationrecord:ApplicationRecord ) ASSERT applicationrecord.uuid
+  IS UNIQUE
+- CONSTRAINT ON ( schemamigration:SchemaMigration ) ASSERT schemamigration.migration_id
+  IS UNIQUE
 :indexes: []
 :versions:
 - '20180429121306'
