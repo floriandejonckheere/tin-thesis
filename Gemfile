@@ -18,6 +18,10 @@ gem 'faker'
 gem 'factory_bot'
 gem 'factory_bot_rails'
 
+# Testing suite
+gem 'rspec'
+gem 'rspec-rails'
+
 # RuboCop styling
 gem 'rubocop'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
