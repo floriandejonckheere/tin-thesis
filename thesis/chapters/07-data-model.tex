@@ -1,90 +1,71 @@
 \chapter{Data model}
 \label{ch:data-model}
 
-\section{Logical data model}
-\label{sec:logical-data-model}
+In this section we describe the conceptual domain of this research, and provide a logical data model that fits the domain.
+For every NoSQL data model selected, we also propose a physical data model.
+This data model will then be implemented in a Ruby on Rails application using the available language bindings.
+Finally, a set of reference queries will be proposed, queries that may typically be used in the context of the Recent Activity feed.
 
-In this section, a data model is explained in detail and represented in an Entity Relationship (ER) diagram.
-The data model closely follows the already existing data model of the Open Webslides project, however certain irrelevant attributes are omitted from the schema to improve readability and simplify abstraction.
+\section{Domain description}
+\label{sec:domain-description}
 
-The entity that will most likely be the entrypoint for the reference queries is \texttt{User}.
+On the Open Webslides platform, there is technically no distinction between a teacher's and a student's account.
+Both of them are represented by the \texttt{User} entity in the database.
 This entity contains information pertaining to the user, such as email address, first name and last name.
+The data models described in the next sections will closely follow the existing data model of the platform.
+However, certain irrelevant attributes are omitted from the model in order to improve readability and simplify abstraction.
 
-On the platform, a user can create and modify course content in an online editor.
-This course content is abstracted in the database as the \texttt{Topic} entity.
-The \texttt{Topic} entity does not contain all data regarding the course content, rather it holds the metadata and a logical pointer to the actual course content data, which is stored on the filesystem in a git repository.
-Per illustration, the \texttt{title} and \texttt{description} attributes are included in the described data model, because these two attributes are the only metadata relevant to the \textit{Recent Activity} feed.
+A user can create or modify course content in an interactive online editor.
+The actual course content, formally called a topic, is stored inside a git repository on the filesystem.
+However, the platform also maintains a record of topic metadata in the relational database.
+This metadata includes title and description, but also permissions and contributors on the course content.
+Per illustration, the \texttt{title} and \texttt{description} attributes are included in the data models.
 
-The user has three distinct possibilities for (co-)creation on course content.
-This is only from a technical perspective, we will not go further into the conceptual implications of co-creation.
-First, the user can directly modify the course content on the \texttt{Topic} entity.
-To simplify the data model, only authors can modify \texttt{Topic}, which covers the one-to-many relationship between \texttt{User} and \texttt{Topic}.
+From a technological perspective, the user has three distinct paths of action for (co-)creation on course content.
+Since the permission model in the platform is not relevant to this research, we will not go into detail on it.
+First, the user can directly modify the course content if the user has permission to do so.
 The second option is creating annotations on the topic.
-This allows the user to attach notes to specific content on the document.
-The \texttt{Annotation} entity contains a logical pointer to the annotated content, which is omitted from the schema.
+This allows the user to attach private or public notes to specific content on the topic.
+Annotations are stored in the relational database, mapped to the \texttt{Annotation} entity.
+The entity contains a logical pointer to the annotated content, which is omitted from the data models.
 The final possibility to integrate user content into a topic is by adding comments.
-In contrast to annotations, comments can also point to other comments, which allows interaction and conversation between multiple users, and effectively enables dialogue between students and teachers.
+In contrast to annotations, comments have a typical structure.
+They can take the form of questions, notes, suggestions, and can also be nested - which allows simple interaction and conversation between multiple users, and effectively enables dialogue between students and teachers.
 
-\subsection{Recent Activity feed}
-\label{sec:recent-activity-feed}
+Consider the following domain description structured as Recent Activity events.
 
-In the previous section a basic data model was described.
-This model does not include the entity or entities necessary to enable the \textit{Recent Activity} feed functionality.
-Since the research questions of this thesis revolve around storing this information in a NoSQL database, a clear separation of relational data and non-relational data is desirable.
+``
+\textbf{John} created \textbf{Topic A}.
+''
 
-Every item in the \textit{Recent Activity} feed is represented by one entity, \texttt{FeedItem}.
-This entity has three attributes, as inspired by the Resource Description Framework (RDF) triple: \texttt{subject}, \texttt{predicate} and \texttt{object}.
-The subject refers to the user which is executing the action.
-The object points to the entity the user is manipulating, be it a topic, comment or annotation.
-These first two attributes are actually pointers to other entities within the database.
-The predicate describes the action being executed, and is a value of a predetermined enumeration.
+``
+\textbf{Jane} commented on \textbf{Topic B}:
+\textit{This is not a good example. Try and find a better one.}
+''
 
-Predicates can range from simple values such as \texttt{CREATED} or \texttt{UPDATED} to more conceptually complex values such as \texttt{REACTED\_TO\_ANNOTATION}.
-The predicate enumeration is chosen so that future extension with additional predicate types is simple.
-Concretely this means that the value is stored as a \texttt{string}, while higher level abstractions like ORMs and database mappers will enforce data type consistency.
+``
+\textbf{John} commented on \textbf{Jane}'s comment on \textbf{Topic B}:
+\textit{I agree.}
+''
 
-Some examples of these triples are:
+``
+\textbf{Jane} annotated \textbf{Topic A}.
+''
 
-\begin{itemize}
-  \item \texttt{User X created Topic Y}
-  \item \texttt{User X updated Topic Y}
-  \item \texttt{User X commented on Topic Y}
-  \item \texttt{User X responded to User Y's comment on Topic Z}
-  \item \texttt{User X created an annotation Topic Y}
-\end{itemize}
+``
+\textbf{Bob} reacted to \textbf{John}'s comment on \textbf{Topic B}.
+''
+
+Using this description of the domain, we can start to derive logical and physical data models for the selected NoSQL data stores.
 
 \section{Physical data model}
 \label{sec:physical-data-model}
 
 \subsection{Document-oriented data model}
-\label{sec:document-data-model}
-
-A document-oriented data store is used to store and query semi-structured data.
-Data is stored as documents, an unstructured and extensible data format.
-CouchDB stores its documents as JSON, whereas MongoDB utilizes Binary JSON (BSON) as primary data format.
-The advantage of storing data in JSON or BSON is that objects and structures of many programming languages can be deduced directly into this format, rather than using a mapping or translation layer.
+\label{subsec:document-data-model}
 
 \subsection{Column-oriented data model}
-\label{sec:column-data-model}
-
-Column-oriented databases store their data using columns.
+\label{subsec:column-data-model}
 
 \subsection{Graph-oriented data model}
-\label{sec:graph-data-model}
-
-Graph-oriented databases such as Neo4j have their data stored in a network structure.
-Logical entities are mapped to graph nodes, and relations to edges between the graph nodes.
-An edge can be uni- or bidirectional: the nodes will indicate this as incoming, outgoing or both.
-Graph nodes also contain properties, akin to the entity attributes on the ER diagram.
-On the first sight, this structure lends itself excellently for modeling social interactions.
-Every graph node can have many incoming and outgoing edges, and the structure of the network is not predetermined.
-Due to trees being a subset of graphs, graph data stores are also very good in representing hierarchical data.
-Therefore, if the data is structured similar to a tree or a graph, it can best be stored in a graph database rather than tabular or document data in order to reduce the object-relational impedance mismatch.
-
-An additional advantage of graph databases is that the relationship between two entities can also contain properties.
-This enables the developer to easily add metadata to any object in the database, whether it is a vertex or an edge.
-
-\section{Reference queries}
-\label{sec:reference-queries}
-
-% Example queries on the data model
+\label{subsec:graph-data-model}
