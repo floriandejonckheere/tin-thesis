@@ -95,3 +95,27 @@ Aspects omitted from the study are:
   \item Geospatial functionality
   \item Cloud hosting
 \end{itemize}
+
+% Security: auditing, authentication, authorization
+The specific use case described in this thesis does not focus on security, since the data store is not public facing and clients do not interact directly with it.
+Security measures include but are not limited to authentication, authorization, encryption and auditing.
+None of these are features that are required or useful for the comparison.
+Authentication and authorization is functionality that is present in all databases.
+It introduces the concept of multiple clients or roles connecting to a database, and assigning permissions to these clients in order to enforce permissions-based access.
+However since there will only be one client connecting to the database - the platform itself - deeper integration with LDAP, ActiveDirectory or similar is superfluous and omitted from the comparison.
+
+Encryption refers to the mechanism where data is encrypted and unreadable for unauthorized third parties.
+Encryption in databases is threefold: encryption of data at rest, client-to-server communication and server-to-server communication \autocite{Grolinger2013}.
+However, since data protection is a comprehensive topic, it does not fall within the scope of this research.
+Consequently, encryption functionality is not considered in the comparative study.
+
+Database auditing is a facility offered by the database management system that keeps track of the usage of database resources and authorization.
+Operations on the database leave a trail of events, called an \textit{audit log}.
+Similarly to authentication, the usefulness of this functionality is somewhat lost when there is only one client operating on the database.
+However, many security standards such as PCI-DSS and HIPAA require the existance of an audit log.
+
+Compression of data in the database is not included in the comparison.
+Builtin compression may provide additional storage space but as it is a disk space-CPU usage tradeoff we have chosen to only consider CPU usage.
+Akin to compression, we leave the choice of cloud hosting up to the database administrator.
+
+Full-text search and geospatial functions are provided by certain data stores, however these features are not used by the platform.
