@@ -32,7 +32,11 @@ The final possibility to integrate user content into a topic is by adding commen
 In contrast to annotations, comments have a typical structure.
 They can take the form of questions, notes, suggestions, and can also be nested - which allows simple interaction and conversation between multiple users, and effectively enables dialogue between students and teachers.
 
-Consider the following domain description structured as Recent Activity events.
+The intention of this thesis is to use the NoSQL data storage as storage mechanism for the Recent Activity feed.
+This entails that the authoritative information will not be stored in that data store, but rather be extracted from the relational database whenever an activity event is generated.
+Accordingly, some information may be omitted from this data store, while other information is copied.
+
+Consider the following domain description structured as activity events in the Recent Activity feed.
 
 ``
 \textbf{John} created \textbf{Topic A}.
@@ -58,14 +62,98 @@ Consider the following domain description structured as Recent Activity events.
 
 Using this description of the domain, we can start to derive logical and physical data models for the selected NoSQL data stores.
 
+% Typical usage of data is important: write once, no update, read many queried reverse chronologically
+
 \section{Physical data model}
 \label{sec:physical-data-model}
 
 \subsection{Document-oriented data model}
 \label{subsec:document-data-model}
 
+% References (normalized) vs embedded collections (denormalized)
+  % Normalized: when read performance outweighs data duplication, hierarchical data sets
+  % Denormalized: "contains" relationship, one-to-many
+% Document growth: small documents
+% Atomicity on write document level: atomic dependencies stored in same document
+% Sharding: on date?
+% Indexes: inexpensive because write once
+% Data expiration/TTL: can't use
+
+% Capped collections
+
 \subsection{Column-oriented data model}
 \label{subsec:column-data-model}
 
 \subsection{Graph-oriented data model}
 \label{subsec:graph-data-model}
+
+Using the examples of activity events in \cref{sec:domain-description}, we can identify the components used in database graph model.
+The first entity that is identified are the \textit{nodes}
+
+%% Nodes
+
+% User, Annotation, Topic, Comment
+
+%% Labels
+
+% Subject, Object
+
+%% Relations
+
+% Event
+% Comment->User, Comment->Topic due to the nodes inherent referent nature
+
+
+From the domain description, we can derive the labels, nodes and relationships to build the graph data model.
+The first entities that are identified are the nodes.
+In the domain, we have four main entities.
+
+\begin{itemize}
+  \item \texttt{User}
+  \item \texttt{Topic}
+  \item \texttt{Comment}
+  \item \texttt{Annotation}
+\end{itemize}
+
+In order for the Recent Activity feed to string all this together, there is also an entity to represent an activity event called \texttt{Event}.
+\texttt{Event}s have relationships to all other entities according to the (subject, predicate, object)-triple explained in \cref{sec:logical-data-model}.
+
+% Labels
+Neoj data modeling supports something called \textit{Labels}, a graph construct that groups nodes into sets.
+A set contains nodes with the same label.
+A node can have any number of labels.
+
+In the domain model, we can distinguish one case where labels are very useful.
+The \textit{object} of the event triple can be one of multiple entities, in this thesis the scope is restricted to \texttt{Topic}, \texttt{Comment} and \texttt{Annotation}.
+Using this label abstraction allows future expansion with more object entity types.
+Consequently, we propose the label \texttt{Object} which aggregates nodes of these types.
+To keep the naming in the data model consistent, the lable \texttt{Subject} will also be applied to nodes of the type \texttt{User}.
+
+% Relationships
+We can identify the following interactions between the entities:
+
+\begin{itemize}
+  \item A \texttt{User} is the author of many \texttt{Topic}s
+  \item A \texttt{Topic} has many \texttt{Comment}s attached to it
+  \item A \texttt{Topic} has many \texttt{Annotation}s attached to it
+  \item Both \texttt{Comment}s and \texttt{Annotation}s are created by a \texttt{User}
+  \item A \texttt{Comment} optionally has many children comments
+\end{itemize}
+
+Additionally, the \texttt{Event} entity introduces the following interactions:
+
+\begin{itemize}
+  \item An \texttt{Event} relates to a \texttt{User} (the subject)
+  \item An \texttt{Event} relates to an object
+\end{itemize}
+
+This leads us to the graph model in figure \ref{fig:graph-model}.
+
+\section{Reference queries}
+\label{sec:reference-queries}
+
+% Example queries on the data model
+
+% Select the N most recent events, ordered reverse chronologically
+% Insert event "User X created Topic Y"
+% Insert event "User X reacted to User Y's comment on Topic Z"
