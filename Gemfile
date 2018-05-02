@@ -9,9 +9,6 @@ ruby '2.5.0'
 gem 'mongoid'
 # Neo4j
 gem 'neo4j'
-# Cequel for Cassandra
-gem 'cequel'
-gem 'activemodel-serializers-xml'
 
 # Fake data
 gem 'faker'
