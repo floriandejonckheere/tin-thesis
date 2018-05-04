@@ -1,0 +1,51 @@
+% TODO: references
+\begin{table}
+  \sffamily
+  \begin{tabular}{l l l l l l l l l}
+    \toprule
+    &
+    &
+    \multicolumn{4}{l}{\textbf{Integrity}}\\
+
+    \cline{3-6}
+
+    &
+    &
+    \textbf{Model} &
+    \textbf{Atomicity} &
+    \textbf{Revision control} &
+    \textbf{Consistency}\\
+
+    \cline{3-6}
+
+    \multirow{2}{*}{\makecell[l]{\textbf{Document}\\\textbf{stores}}} &
+    \textbf{MongoDB} &
+    BASE &
+    Document level &
+    No &
+    \makecell[l]{Configurable:\\Eventual or strong consistency} & \\
+
+    \cline{2-6}
+
+    &
+    \textbf{CouchDB} &
+    MVCC &
+    Document level &
+    Yes &
+    Eventual consistency & \\
+
+    \cline{2-6}
+
+    \makecell[l]{\textbf{Graph}\\\textbf{stores}} &
+    \textbf{Neo4j} &
+    ACID &
+    Transaction level &
+    No &
+    Eventual consistency & \\
+
+    \bottomrule
+  \end{tabular}
+
+  \caption{NoSQL data stores: Data integrity}
+  \label{tbl:integrity}
+\end{table}
