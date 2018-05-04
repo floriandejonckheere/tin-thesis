@@ -147,3 +147,35 @@ Full-text search and geospatial functions are provided by certain data stores, h
 \begin{landscape}
   \input{tables/04-hosting}
 \end{landscape}
+
+Table \ref{tbl:hosting} provides insight into the aspects related to hosting one or more database instances.
+First, the type of license is important when hosting the data store.
+Since we have restricted our research to licenses classified as free by the \textcite{FreeSoftwareFoundation1985}, none of these data stores prevent hosting instances without incurring additional licensing costs.
+However, for two out of three data stores commercial support is available as well.
+Commercial support includes licensing the product for enterprise use, which usually includes additional functionality -- commonly related to scalability -- and customer support.
+
+MongoDB is dual-licensed.
+% https://www.gnu.org/licenses/agpl-3.0.en.html
+% https://www.apache.org/licenses/LICENSE-2.0
+The database management system itself is licensed under the GNU Affero General Public License version 3.
+The language bindings -- called drivers -- while officially supported are licensed under a different license, the Apache license
+
+% https://www.gnu.org/licenses/why-affero-gpl.en.html
+The GNU Affero General Public License version 3 is a modified version of the GNU General Public License version 3.
+The GNU General Public License requires developers that modify software licensed under the GPL to distribute their modifications as well.
+However, the license does not cover the case of service providers: if a developer modifies the source code and runs the software on a server, allowing other users to interact with it, distribution of the modified source code is not required.
+The AGPL adds a provision to prevent this loophole.
+Whenever a modified version of software licensed under the AGPL runs on a server, the modified source code must be available to download.
+In the case of data stores, this makes sure that the software remains free and cannot be commercially exploited.
+
+CouchDB, being an Apache project, is licensed under the Apache license.
+
+The Neo4j graph store is dual-licensed as well: the Community Edition is licensed under the GPL version 3, and the Enterprise edition is licensed under the AGPL version 3.\\
+Deciding on data store hosting is a difficult topic, which is not within the scope of this research.
+We merely enumerate the options available for every data store.
+Since all products are licensed under a free license, it is possible for invididuals and companies to host instances themselves.
+MongoDB and Neo4j provide commercial support for this use case.
+However, running a data store instance can also be outsourced to a plethora of companies and hosting providers.
+Both MongoDB and Neo4j integrate with various cloud providers such as Amazon EC2, Google Cloud Platform or the Digital Ocean hosting platform.\\
+
+%% Conclusion
