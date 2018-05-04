@@ -59,43 +59,36 @@ In conclusion, the data stores included in the study will be MongoDB and CouchDB
 \label{sec:comparative-study}
 
 Data stores and databases can be compared and analyzed using many quantitative and qualitative aspects.
-In this thesis we propose a selection of criteria based on the usefulness applied to the studied use case.
+In this section we propose a selection of criteria based on the usefulness applied to the studied use case.
 Since the landscape and feature-set of NoSQL data stores is changing on a weekly base, the impact of these technologies must be carefully considered in order to reach a durable conclusion in this research.
 
 The features of a data store that are taken into account in this comparative study are:
 
 \begin{itemize}
   %% Features
-  \item Persistence
-    % In-memory, SSD, HDFS
   \item Querying capabilities
     \begin{itemize}
       \item Language
-        % HTTP/REST, Cypher, BSON, SparQL
       \item Protocol
-        % HTTP, REST, binary, Thrift
       \item MapReduce
-      \item SQL
     \end{itemize}
+
+  %% Language
+  \item Programming language
   \item Language bindings
 
   %% Integrity
   \item Integrity model
-    % ACID, BASE
-
   \item Atomicity
+  \item Revision control
   \item Consistency
-  \item Isolation
-  \item Durability
-  \item Transactions
 
   %% Scalability
+  \item Persistence
   \item Partitioning
   \item High Availability
   \item Concurrency
-    % MVCC
   \item Replication
-
 
   %% Various
   \item License
@@ -113,7 +106,7 @@ Aspects omitted from the study are:
   \item Cloud hosting
 \end{itemize}
 
-% Security: auditing, authentication, authorization
+%% Omitted aspects
 The specific use case described in this thesis does not focus on security, since the data store is not public facing and clients do not interact directly with it.
 Security measures include but are not limited to authentication, authorization, encryption and auditing.
 None of these are features that are required or useful for the comparison.
@@ -135,4 +128,71 @@ Compression of data in the database is not included in the comparison.
 Builtin compression may provide additional storage space but as it is a disk space-CPU usage tradeoff we have chosen to only consider CPU usage.
 Akin to compression, we leave the choice of cloud hosting up to the database administrator.
 
-Full-text search and geospatial functions are provided by certain data stores, however these features are not used by the platform.
+Full-text search and geospatial functions are provided by certain data stores, however these features are not used by the platform and subsequently are not relevant to this comparative study.\\
+
+%% Comparative study
+
+\begin{table}
+  \sffamily
+  \begin{tabular}{l l l l l l l l l}
+    \toprule
+    &
+    &
+    \multicolumn{3}{l}{\textbf{Querying}} &
+    \multicolumn{2}{l}{\textbf{Language}} &
+    & \\
+
+    \cline{3-8}
+
+    &
+    &
+    \textbf{Language} &
+    \textbf{Protocols} &
+    \textbf{MapReduce} &
+    \textbf{Language} &
+    \textbf{Language bindings} &
+    \textbf{License} &
+    \textbf{Commercial support} \\
+
+    \cline{3-8}
+
+    \multirow{2}{*}{\makecell{\textbf{Document}\\\textbf{stores}}} &
+    \textbf{MongoDB} &
+    JavaScript &
+    \makecell{MongoDB Wire Protocol\\REST (3rd party)} &
+    Yes &
+    C++ &
+    &
+    \makecell{GNU AGPLv3 (database)\\Apache (language drivers)} &
+    Yes \\
+
+    \cline{2-8}
+
+    &
+    \textbf{CouchDB} &
+    REST &
+    HTTP &
+    Yes &
+    Erlang &
+    &
+    Apache &
+    Yes \\
+
+    \cline{2-8}
+
+    \makecell{\textbf{Graph}\\\textbf{stores}} &
+    \textbf{Neo4j} &
+    \makecell{Cypher\\SparQL\\Gremlin (3rd party)} &
+    HTTP, Bolt &
+    No &
+    Java &
+    \makecell{.NET\\Java\\JavaScript\\Python\\Ruby (unofficially)} &
+    GNU GPLv3 (Community Edition), AGPLv3 (Enterprise Edition) &
+    Yes \\
+
+    \bottomrule
+  \end{tabular}
+
+  \caption{Querying and features}
+  \label{tbl:query-features}
+\end{table}
