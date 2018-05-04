@@ -5,18 +5,6 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-%~ De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
-
-%~ \begin{itemize}
-  %~ \item context, achtergrond
-  %~ \item afbakenen van het onderwerp
-  %~ \item verantwoording van het onderwerp, methodologie
-  %~ \item probleemstelling
-  %~ \item onderzoeksdoelstelling
-  %~ \item onderzoeksvraag
-  %~ \item \ldots
-%~ \end{itemize}
-
 \section{Context}
 \label{sec:context}
 
@@ -81,19 +69,25 @@ Second, a concrete recommendation of a NoSQL data store for the Open Webslides p
 \section{Expected results and conclusions}
 \label{sec:expected-results-and-conclusions}
 
-% Expected result 1: Graph DB is most fitting data model: mimics social network, nodes always logically close to user entrypoint
-% Expected result 2: RDF stores may be an interesting solution instead of property graph stores
-% Expected result 3: Relational and NewSQL ACID is not necessary for use case
-
-Expected results and conclusions\\
+We expect to find a comprehensive answer to all of the research questions proposed in this chapter.
+Primarily, this involves finding the best NoSQL data model for the studied use case.
+We expect to find that graph databases are the most fitting data store in this context.
+This results from the train of thought that the Open Webslides Recent Activity feed data is structured as a directed graph, and behaves as such.
+In addition, we also expect to find that RDF triple stores may be an interesting option to entertain, however these are out of the scope of this research.
+Finally, we predict that relational, NewSQL and other databases that provide ACID guarantees will not be among the most efficient solutions for this use case, due to strong consistency not being a requirement.\\
 
 In \cref{ch:state-of-the-art} an overview will be presented of current research, applied solutions and other related work in the research domain based on a literature study.
-This literary review will then be used to give a broad and global overview of the research domain, introducing various relational and NoSQL concepts and explaining the motivation behind NoSQL and big data in \cref{ch:overview}.
+This literary review will then be used to give a broad and global overview of the research domain, introducing various relational and NoSQL concepts and explaining the ideas behind NoSQL and polyglot persistence in \cref{ch:overview}.
 
 \Cref{ch:methodology} will clarify the analytical research approaches used in this thesis to attempt to formulate an answer to the research questions.
 The research is split into three distinct parts.
-The first part, \Cref{ch:data-stores} will evaluate existing NoSQL data stores, and select the data stores used for comparison in this thesis.
-The second part in \cref{ch:data-model} proposes the conceptual and logical data model that may be used in the Open Webslides project, and presents examples of queries that may be frequently executed on the data set.
-\Cref{ch:comparative-study} combines the proposed data models and reference queries in order to perform and discuss performance benchmarks on the data stores selected in \cref{ch:data-stores}.
+The first part, \Cref{ch:data-stores} will evaluate existing NoSQL data stores using a comparative study in the context of the Open Webslides use case.
+Certain NoSQL categories will also be ruled out in this chapter, and a concrete selection of NoSQL database management systems will be made for further comparison.
 
-Finally, \cref{ch:conclusion} will present a general conclusion and summarize the research, answering the research questions.
+The second part in \cref{ch:data-model} describes the domain model that is used in the Open Webslides project, and proposes the conceptual and logical data models for every included NoSQL database.
+Example queries that cater to the needs of the domain will also be drawn up and implemented.
+\Cref{ch:comparative-study} combines the proposed data models and reference queries in order to perform and discuss a quantitative study on the data stores selected in \cref{ch:data-stores}.
+
+\Cref{ch:opportunities} will conclude and reflect upon the opportunities and inadequacies encountered in the research, providing an entrypoint for future studies.
+
+Finally, \cref{ch:conclusion} will present a general conclusion and summarize the research, formulating answers on all of the research questions.
