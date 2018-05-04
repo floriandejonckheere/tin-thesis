@@ -132,67 +132,67 @@ Full-text search and geospatial functions are provided by certain data stores, h
 
 %% Comparative study
 
-\begin{table}
-  \sffamily
-  \begin{tabular}{l l l l l l l l l}
-    \toprule
-    &
-    &
-    \multicolumn{3}{l}{\textbf{Querying}} &
-    \multicolumn{2}{l}{\textbf{Language}} &
-    & \\
+\begin{landscape}
+  % TODO: references
+  \begin{table}
+    \sffamily
+    \begin{tabular}{l l l l l l l l l}
+      \toprule
+      &
+      &
+      \multicolumn{3}{l}{\textbf{Querying}} &
+      \multicolumn{2}{l}{\textbf{Language}} &
+      & \\
 
-    \cline{3-8}
+      \cline{3-7}
 
-    &
-    &
-    \textbf{Language} &
-    \textbf{Protocols} &
-    \textbf{MapReduce} &
-    \textbf{Language} &
-    \textbf{Language bindings} &
-    \textbf{License} &
-    \textbf{Commercial support} \\
+      &
+      &
+      \textbf{Language} &
+      \textbf{Protocols} &
+      \textbf{MapReduce} &
+      \textbf{Language} &
+      \textbf{Language bindings} \\
 
-    \cline{3-8}
+      \cline{3-8}
 
-    \multirow{2}{*}{\makecell{\textbf{Document}\\\textbf{stores}}} &
-    \textbf{MongoDB} &
-    JavaScript &
-    \makecell{MongoDB Wire Protocol\\REST (3rd party)} &
-    Yes &
-    C++ &
-    &
-    \makecell{GNU AGPLv3 (database)\\Apache (language drivers)} &
-    Yes \\
+      \multirow{2}{*}{\makecell[l]{\textbf{Document}\\\textbf{stores}}} &
+      \textbf{MongoDB} &
+      \small{JavaScript} &
+      \makecell[l]{MongoDB Wire Protocol\\REST \footnotemark[1]} &
+      Yes &
+      C++ &
+      % https://docs.mongodb.com/manual/applications/drivers/
+      \makecell[l]{C/C++, C\#, Java,\\Node.js, Perl, PHP,\\Python, Ruby, Scala\\Erlang\footnotemark[1], Go\footnotemark[1]} \\
 
-    \cline{2-8}
+      \cline{2-8}
 
-    &
-    \textbf{CouchDB} &
-    REST &
-    HTTP &
-    Yes &
-    Erlang &
-    &
-    Apache &
-    Yes \\
+      &
+      \textbf{CouchDB} &
+      REST &
+      HTTP &
+      Yes &
+      Erlang &
+      % https://cwiki.apache.org/confluence/display/COUCHDB/CouchDB+clients
+      \makecell[l]{C/C++\footnotemark[1], Dart\footnotemark[1], Go\footnotemark[1],\\Java\footnotemark[1], Lua\footnotemark[1], Node.js\footnotemark[1],\\Python\footnotemark[1], R\footnotemark[1],\\Ruby\footnotemark[1], Scala\footnotemark[1]} \\
 
-    \cline{2-8}
+      \cline{2-8}
 
-    \makecell{\textbf{Graph}\\\textbf{stores}} &
-    \textbf{Neo4j} &
-    \makecell{Cypher\\SparQL\\Gremlin (3rd party)} &
-    HTTP, Bolt &
-    No &
-    Java &
-    \makecell{.NET\\Java\\JavaScript\\Python\\Ruby (unofficially)} &
-    GNU GPLv3 (Community Edition), AGPLv3 (Enterprise Edition) &
-    Yes \\
+      \makecell[l]{\textbf{Graph}\\\textbf{stores}} &
+      \textbf{Neo4j} &
+      \makecell[l]{Cypher\\SparQL\footnotemark[1]\\Gremlin\footnotemark[1]} &
+      \makecell[l]{HTTP\\Bolt} &
+      No &
+      Java &
+      % https://neo4j.com/docs/developer-manual/current/drivers/
+      \makecell[l]{C\#, Java,\\JavaScript, Python,\\C/C++\footnotemark[1], Clojure\footnotemark[1],\\Erlang\footnotemark[1], Go\footnotemark[1], Haskell\footnotemark[1],\\Perl\footnotemark[1], PHP\footnotemark[1], R\footnotemark[1], Ruby\footnotemark[1]} \\
 
-    \bottomrule
-  \end{tabular}
+      \bottomrule
+    \end{tabular}
 
-  \caption{Querying and features}
-  \label{tbl:query-features}
-\end{table}
+    \caption{NoSQL data stores: Querying and language support}
+    \label{tbl:query-language}
+  \end{table}
+
+  \footnotetext[1]{3\textsuperscript{rd} party community supported}
+\end{landscape}
