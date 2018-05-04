@@ -1,0 +1,51 @@
+% TODO: references
+\begin{table}
+  \sffamily
+  \begin{tabular}{l l l l l l l l l}
+    \toprule
+    &
+    &
+    \multicolumn{4}{l}{\textbf{Scalability}}\\
+
+    \cline{3-6}
+
+    &
+    &
+    \textbf{Persistence} &
+    \textbf{Partitioning} &
+    \textbf{Replication} &
+    \textbf{Concurrency control}\\
+
+    \cline{3-6}
+
+    \multirow{2}{*}{\makecell[l]{\textbf{Document}\\\textbf{stores}}} &
+    \textbf{MongoDB} &
+    \makecell[l]{Memory\\Disk} &
+    Shard key &
+    Master-slave &
+    \makecell[l]{MVCC (document)\\locks (global, database, collection)} & \\
+
+    \cline{2-6}
+
+    &
+    \textbf{CouchDB} &
+    \makecell[l]{Memory\\Disk} &
+    Consistent hashing &
+    Multi-master &
+    MVCC & \\
+
+    \cline{2-6}
+
+    \makecell[l]{\textbf{Graph}\\\textbf{stores}} &
+    \textbf{Neo4j} &
+    \makecell[l]{Memory\\Disk} &
+    Cache sharding &
+    Master-slave &
+    Locks & \\
+
+    \bottomrule
+  \end{tabular}
+
+  \caption{NoSQL data stores: Scalability}
+  \label{tbl:scalability}
+\end{table}
