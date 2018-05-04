@@ -1,0 +1,51 @@
+% TODO: references
+\begin{table}
+  \sffamily
+  \begin{tabular}{l l l l l l l l l}
+    \toprule
+    &
+    &
+    \multicolumn{4}{l}{\textbf{Features}}\\
+
+    \cline{3-5}
+
+    &
+    &
+    \textbf{License} &
+    \textbf{Commercial support} &
+    \textbf{Cloud environment}\\
+
+    \cline{3-6}
+
+    \multirow{2}{*}{\makecell[l]{\textbf{Document}\\\textbf{stores}}} &
+    \textbf{MongoDB} &
+    \makecell[l]{GNU AGPLv3 (database)\\Apache (drivers)} &
+    % https://www.mongodb.com/commercial-license
+    Yes &
+    % https://www.mongodb.com/cloud
+    \makecell[l]{Amazon EC2\\Google Cloud Platform\\Microsoft Azure\\Digital Ocean\\Cloud hosting partners} & \\
+
+    \cline{2-6}
+
+    &
+    \textbf{CouchDB} &
+    Apache &
+    No &
+    No & \\
+
+    \cline{2-6}
+
+    \makecell[l]{\textbf{Graph}\\\textbf{stores}} &
+    \textbf{Neo4j} &
+    \makecell[l]{GNU GPLv3 (Community Edition),\\AGPLv3 (Enterprise Edition)} &
+    % https://neo4j.com/licensing/
+    Yes &
+    % https://neo4j.com/developer/guide-cloud-deployment/
+    \makecell[l]{Amazon EC2\\Google Cloud Platform\\Microsoft Azure\\Digital Ocean\\Cloud hosting partners} & \\
+
+    \bottomrule
+  \end{tabular}
+
+  \caption{NoSQL data stores: Features}
+  \label{tbl:features}
+\end{table}
