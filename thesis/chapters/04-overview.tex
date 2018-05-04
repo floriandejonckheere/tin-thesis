@@ -41,7 +41,7 @@ Data is not stored in rows and columns as is the case in the relational model, b
 \textcite{Nayak2013} divides the data models used by NoSQL data stores into five categories.
 
 \subsection{Key-value}
-\label{sec:key-value}
+\label{subsec:key-value}
 
 Key-value data stores are simple in design, yet powerful and efficient when used correctly.
 A key-value data store allows the user to store schemaless data using a plain, unique key, creating a \textit{key} and \textit{value} pair.
@@ -49,7 +49,7 @@ Similar to hash tables, the values are stored and queried using the provided key
 Modern key-value data stores prefer high scalability over consistency, entailing that more advanced ad-hoc querying and analytical operations on the data such as joins are not available.
 
 \subsection{Column-oriented}
-\label{sec:column-oriented}
+\label{subsec:column-oriented}
 
 Column-oriented data stores are designed to store data by column rather than by row.
 This kind of NoSQL data store is more similar to relational database systems than the other categories.
@@ -57,7 +57,7 @@ In column-oriented data stores, each key is associated with a set of attributes,
 Concretely this means that the data is indexed by column value, rather than by row.
 
 \subsection{Document}
-\label{sec:document}
+\label{subsec:document}
 
 Document databases store their data in documents, indexed by a unique key.
 This is technically a subclass of key-value stores, however the difference lies in the interpretation of the data.
@@ -65,7 +65,7 @@ Since documents are schemaless, each document may have a comparable structure, o
 In contrast with key-value data stores, the value (document) is not opaque to the database management system, but is interpreted and used for query optimization.
 
 \subsection{Graph}
-\label{sec:graph}
+\label{subsec:graph}
 
 As the name suggests, graph data stores keep their data in the form of a graph.
 The graph is made up of nodes and edges, the former being the entities containing the data and the latter being the relations between these entities.
@@ -73,7 +73,7 @@ Graph data stores use a technique called \textit{index-free adjacency}, where ev
 This makes graph traversal a very fast operation. Graph databases are ACID compliant.
 
 \subsection{Object-oriented}
-\label{sec:object-oriented}
+\label{subsec:object-oriented}
 
 Object-oriented data stores represent the data as an object, closely resembling the concept of an object in object-oriented programming languages.
 This puts object-oriented data stores much closer to the programming environment than other database systems.
@@ -81,10 +81,8 @@ It provides all features inherent to object-oriented languages, such as data enc
 The concepts of class, class attributes and an object can be mapped onto the relational concepts of a table, columns and a tuple.
 This concept of data storage makes software development more flexible.
 
-% Triple store?
-
 \subsection{Multi-model}
-\label{sec:multi-model}
+\label{subsec:multi-model}
 Data stores are generally built and optimized around one data model.
 However, there exist multi-model data stores as well.
 These database systems allow storing data using any of the different data models mentioned before, while integrating these into the same server package.
