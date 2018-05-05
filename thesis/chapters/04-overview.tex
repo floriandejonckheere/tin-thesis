@@ -55,6 +55,9 @@ Column-oriented data stores are designed to store data by column rather than by 
 This kind of NoSQL data store is more similar to relational database systems than the other categories.
 In column-oriented data stores, each key is associated with a set of attributes, stored in columns.
 Concretely this means that the data is indexed by column value, rather than by row.
+% TODO: elaborate
+% TODO: reference Column-oriented Database Systems
+% TODO: reference Column-Stores vs. Row-Stores: How Different Are They Really?
 
 \subsection{Document}
 \label{subsec:document}
@@ -121,3 +124,6 @@ Database systems respecting the ACID guarantees choose consistency over availabi
 NewSQL is a type of relational database management system providing scalability similar to NoSQL data stores, while still maintaining the ACID guarantees.
 Since this a blanket term, many different architectures exist in NewSQL databases.
 However, one common feature is their relational model inheritance and their ability to utilize SQL as query interface.
+
+% ACID: scale vertical
+% BASE: scale horizontal and vertical

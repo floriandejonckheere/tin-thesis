@@ -93,8 +93,13 @@ Using this description of the domain, we can start to derive logical and physica
 % References (normalized) -> Smaller documents, but gain is very small since only a few fields get duplicated (typically only display_name)
 
 % Step 2. See links, find entities
-% Step 3. Example JSON
-% Step 4. Implement in Ruby
+% Step 3. Normalized data model + example JSON
+% Step 4. Convert normalized -> denormalized by embedding as much documents as possible
+
+% Hoberman (2014): five heuristics for embedding or referencing
+
+% Step 5. Denormalized data model + example JSON
+% Step 6. Implement in Ruby
 
 Document data stores provide a number of different approaches to storing linked data.
 We attempt to cover the different methods, discussing common approaches and trade offs for each option.
@@ -185,3 +190,4 @@ This leads us to the graph model in figure \ref{fig:graph-model}.
 % Select the N most recent events, ordered reverse chronologically
 % Insert event "User X created Topic Y"
 % Insert event "User X reacted to User Y's comment on Topic Z"
+% Concurrent queries pls
