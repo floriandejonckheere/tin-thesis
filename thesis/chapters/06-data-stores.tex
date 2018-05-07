@@ -165,6 +165,25 @@ Luckily, all major vendors prove to be adequately supported by first- or third-p
   \input{tables/02-integrity}
 \end{landscape}
 
+Even though all of the compared data stores are classified as NoSQL and based on the principle of \textit{eventual consistency}, the integrity model is different for each.
+MongoDB is designed with the \gls{base} integrity model in mind, which prioritizes availability over consistency over data in the \gls{cap} theorem.
+CouchDB is designed around the \gls{base} model as well, however the data store solved the problem in a different way.
+Documents in CouchDB are stored using a technique called \gls{mvcc}.
+Neo4j however, enforces ACID guarantees as only data store included in the comparison.
+
+Data stores designed around the \gls{base} model typically do not provide any strong consistency guarantees.
+This is reflected in the fact that MongoDB and CouchDB provide atomic operations only on document level.
+This means that operations on documents -- and embedded child documents -- are atomic, however operations on multiple documents are not guaranteed to be completely atomic.
+Neo4j is ACID-compliant and does provide atomic transactions for multiple operations akin to the database transactions found in relational data stores.
+
+CouchDB's concurrency control method is based on the technique of \gls{mvcc}.
+Subsequently it is the only data store that provides native version control as a result of the concurrency control method used in the database engine.
+Neither MongoDB or Neo4j provide any similar feature natively.
+
+NoSQL data stores are in general based on the principle of eventual consistency, as tradeoff versus the availability according to the CAP theorem.
+However, since the start of the development on MongoDB a lot of research and implementation has been done, and the software will soon provide both the option to configure the database to enable strong consistency, and atomic operations on multiple documents -- similar to transactions.
+Both MongoDB and Neo4j provide eventual consistency as dictated by the principles of the CAP theorem.
+
 \begin{landscape}
   \input{tables/03-scalability}
 \end{landscape}
