@@ -136,6 +136,31 @@ Full-text search and geospatial functions are provided by certain data stores, h
   \input{tables/01-querying-language}
 \end{landscape}
 
+One of the most important factors when deciding on a NoSQL data store is the capability to communicate with the data store, since NoSQL does not have a unified interface like SQL signifies for relational databases.
+Choosing a certain data store may allow the developer to integrate data storage easier into the application.
+Every NoSQL data store has its own standard for composing queries, related but not depending on the protocol used for communication with the server.
+MongoDB allows querying using a JavaScript API, natively over MongoDB's binary protocol or over HTTP (REST) using a third party plugin.
+% TODO: reference
+Subsequently, MongoDB is popular among server-side applications written in JavaScript and Node.js.
+CouchDB takes another approach and provides a RESTful interface over HTTP to query, modify and manage the database.
+
+The Neo4j graph store is a different story.
+The native querying language of Neo4j is called Cypher, and is much closer to SQL than MongoDB or CouchDB's way of querying.
+Cypher can be used natively both over HTTP and over Neo4j's binary Bolt protocol.
+Third party plugins can extend Neo4j to provide interfaces for SparQL and Gremlin querying languages.
+
+Another factor that might come into play when choosing a data store is the ability to support MapReduce, explicitly or under the hood.
+% TODO: reference paper
+MapReduce is a conceptual framework and implementation for processing large data sets using multiple processing entities.
+It is composed of a \textit{map} and a \textit{reduce} procedure.
+The former filters and sorts the data, while the latter performs an aggregating or summarizing operation as a result to the query.
+
+The chosen document data stores both support MapReduce as normal operating procedure.
+% https://neo4j.com/blog/native-vs-non-native-graph-technology/
+The graph store does not support Neo4j, instead building upon \textit{index-free adjacency}.
+
+Luckily, all major vendors prove to be adequately supported by first- or third-party efforts.
+
 \begin{landscape}
   \input{tables/02-integrity}
 \end{landscape}
