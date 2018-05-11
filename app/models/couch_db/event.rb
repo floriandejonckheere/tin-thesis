@@ -21,5 +21,7 @@ module CouchDB
     ##
     # Validations
     #
+    validates :predicate,
+              :inclusion => {:in => %i[created updated renamed commented annotated reacted] }
   end
 end

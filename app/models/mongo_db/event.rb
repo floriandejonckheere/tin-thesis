@@ -4,12 +4,15 @@ module MongoDB
   class Event
     include Mongoid::Document
     include Mongoid::Timestamps::Created
+    extend Enumerize
 
     ##
     # Properties
     #
-    field :predicate,
-          :type => Symbol
+    field :predicate
+
+    enumerize :predicate,
+              :in => %i[created updated renamed commented annotated reacted]
 
     ##
     # Relationships
