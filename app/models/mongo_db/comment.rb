@@ -14,7 +14,7 @@ module MongoDB
     # Relationships
     #
     has_one :topic
-    has_one :subject
+    embeds_one :subject
 
     ##
     # Validations

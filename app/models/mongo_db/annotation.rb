@@ -7,9 +7,6 @@ module MongoDB
     ##
     # Properties
     #
-    field :title,
-          :type => Symbol
-
     ##
     # Relationships
     #

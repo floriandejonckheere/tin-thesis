@@ -14,8 +14,7 @@ module MongoDB
     ##
     # Relationships
     #
-    has_one :subject,
-            :class_name => 'User'
+    embeds_one :subject
 
     has_one :object,
             :as => :object
