@@ -7,8 +7,7 @@ module MongoDB
     ##
     # Properties
     #
-    field :first_name,
-          :type => String
+    field :first_name
 
     ##
     # Relationships
