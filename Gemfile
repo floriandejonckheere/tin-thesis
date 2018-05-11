@@ -7,6 +7,8 @@ ruby '2.5.0'
 
 # Mongoid for MongoDB
 gem 'mongoid'
+# CouchRest for CouchDB
+gem 'couchrest_model'
 # Neo4j
 gem 'neo4j'
 
