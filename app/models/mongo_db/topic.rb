@@ -12,6 +12,11 @@ module MongoDB
     ##
     # Relationships
     #
+    embedded_in :event,
+                :polymorphic => true
+
+    has_many :events,
+             :class_name => 'MongoDB::Event'
     ##
     # Validations
     #

@@ -17,10 +17,14 @@ module MongoDB
     ##
     # Relationships
     #
-    embeds_one :subject
+    embeds_one :subject,
+               :class_name => 'MongoDB::Subject'
 
-    has_one :object,
-            :as => :object
+    embeds_one :object,
+               :as => :event
+
+    belongs_to :topic,
+               :class_name => 'MongoDB::Topic'
 
     ##
     # Validations

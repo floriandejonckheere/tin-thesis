@@ -12,8 +12,11 @@ module MongoDB
     ##
     # Relationships
     #
-    has_one :topic
-    embeds_one :subject
+    embedded_in :event,
+                :polymorphic => true
+
+    embeds_one :subject,
+               :class_name => 'MongoDB::Subject'
 
     ##
     # Validations
