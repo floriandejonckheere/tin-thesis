@@ -59,11 +59,11 @@ Consider the following domain description structured as activity events in the R
 ``
 \textbf{Bob} reacted to \textbf{John}'s comment on \textbf{Topic B}.
 ''
-
 % TODO: elaborate a bit more on the different event types
 % TODO: clearly define relations/hyperlinks
 % TODO: explain more where these phrases are used
 % TODO: explain (subj,pred,obj) -> sentence, not RDF
+% TODO: additional, different events for topics page?
 
 Using this description of the domain, we can start to derive logical and physical data models for the selected NoSQL data stores.
 
@@ -91,10 +91,28 @@ Using this description of the domain, we can start to derive logical and physica
 % Step 1. Normalized or denormalized?
 % Embedded collections (denormalized) -> better read performance but a bit of data duplicated
 % References (normalized) -> Smaller documents, but gain is very small since only a few fields get duplicated (typically only display_name)
+% Document stores prefer flat structure, or not linked that much
 
 % Step 2. See links, find entities
+% event -> subject
+% event -> topic (object)
+% event -> comment (object)
+% comment -> subject
+% comment -> topic
+% event: predicate
+% event: text (comment/annotation?)
+% event: reaction
+
 % Step 3. Normalized data model + example JSON
 % Step 4. Convert normalized -> denormalized by embedding as much documents as possible
+% entrypoints queries: event, topic
+%   not user: selecting only by user activity is not nice, and embedding user is not a lot of information
+% event embeds subject
+% comment embeds subject
+% event never embeds object, because it might point to embedded object (comment) or other collection (topic). So object always has to be a reference.
+% event always has reference to topic
+
+% https://community.toadworld.com/platforms/nosql/w/wiki/350.mongodb-schema-design
 
 % Hoberman (2014): five heuristics for embedding or referencing
 
@@ -187,7 +205,13 @@ This leads us to the graph model in figure \ref{fig:graph-model}.
 
 % Example queries on the data model
 
-% Select the N most recent events, ordered reverse chronologically
 % Insert event "User X created Topic Y"
 % Insert event "User X reacted to User Y's comment on Topic Z"
 % Concurrent queries pls
+
+% 1. Select N most recent events in platform, ordered reverse chronologically
+% 2. Select N most recent events for a list of subscribed topics
+% 3. Select N most recent events for a topic
+% 4. Select N most recent events authored by a specific user (user profile page)???
+% 5. Insert N events
+% 6. Truncate events?
