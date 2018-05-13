@@ -20,5 +20,8 @@ module MongoDB
     ##
     # Validations
     #
+    ##
+    # Methods
+    #
   end
 end
