@@ -1,14 +1,39 @@
 \chapter{Opportunities}
 \label{ch:opportunities}
 
-% Unified terminology, see paper
-% Unified querying language for NoSQL data stores (UnQL)
-% A Co-Relational Model of Data for Large Shared Data Banks
-% NoAM
-% Standardized benchmarking
+Since the playing field of NoSQL is comprised of a lot of different products, varying in data model and features, choosing the right data store for a use case is a difficult choice.
+The analysis and comparison of the NoSQL data stores in this research has revealed certain pain points and opportunities for future research.
 
-% RDF as data store
+First, a common terminology needs to be established for NoSQL data stores, at least for data stores within the same NoSQL category that adhere to the same data model.
+Comparing data stores using different vocabulary for the same concepts is confusing and impedes comparison and analysis of these products.
+Establishing a common terminology in the NoSQL field will not only allow to make a more informed decision and doing this more efficient, but also facilitates the switch between different NoSQL products.
 
-% In benchmarks:
-%   Tune databases more
-%   Clustering
+Secondly, the difficulty and time penalties imposed by the proposed implementation of the data models and reference queries in the three compared NoSQL data stores, proved that there certainly is an opportunity for a common querying language between NoSQL products, at least for data stores that have the same data model.
+For example, the difference in interface between MongoDB's JavaScript API and CouchDB's REST API -- while still having the same data model -- does not allow for an easy switch between the two data stores, effectively requiring a complete rewrite and -engineering of the data storage layer in the application.
+Standardizing the querying of NoSQL data stores -- at least per category -- would likely help the adoption of NoSQL storage systems and lower developer learning curve.
+
+% TODO: reference for Hive
+% TODO: reference for UnQL
+% TODO: reference for https://www.arangodb.com/2012/04/is_unql_dead/
+% TODO: reference for SQLite
+Some experimental solutions already exist to aggregate querying on certain data stores.
+Hive provides an interface that uses SQL-like semantics to allow querying multiple data stores, however this project is in practice limited to a small number of backing stores, most importantly HBase and Cassandra.
+Another proposed solution is UnQL, a Unified Querying Language for NoSQL data stores.
+This collaboration between Couchbase and SQLite aimed to implement a unified API covering all NoSQL data stores, from document-oriented to graph data stores.
+However, seeing the massive scope of this project, it seems to have suffered from a severe case of hybris and is no longer being developed.
+
+% TODO: reference for NoAM (Database Design for NoSQL Systems)
+There exists a similar discrepancy in data modeling for NoSQL data storage solutions.
+Every product and more generally every NoSQL data store category imposes its own implementation-specific data modeling layer.
+Since reimplementation and adjustment of the data storage layer of the application is a far reaching and costly operation, designing an application's data model for an intermediate, abstract data model before approaching the practical implementation would be a solution for this problem.
+AUTHOR suggests a novel abstract data model for NoSQL systems called NoAM (NoSQL Abstract Model), which exploits certain commonalities between different NoSQL data models, allowing developers to model information in an intermediate format that can be adapted to multiple storage systems.
+
+Additionally, RDF triple stores were not considered in the scope of this research.
+However, similarly to key-value stores, usage of RDF semantics and the performance implications of data stores using simple data models may provide an interesting entrypoint for future research, structured as a use case study.
+
+Finally, benchmarking NoSQL solutions is also a pain point encountered in this research.
+There is no standardized way to provide reliable benchmarks of the different NoSQL categories, in part due to the data models that differ conceptually.
+Any performance comparisons have to be done either at an atomic entity level, or a global use-case level as is presented in this thesis in order to obtain results that are reliable and not tainted by any modeling-specific conditions.
+Furthermore, plenty of important factors were not considered in this research.
+The performance benchmarks do not take into account the horizontal scalability of NoSQL solutions, and use the default configuration for each product.
+Finetuning the database management system parameters would allow performance gains without any additional logical design or implementation.
