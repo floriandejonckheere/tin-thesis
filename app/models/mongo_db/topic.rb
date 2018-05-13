@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Topic
-    include Mongoid::Document
-
+  class Topic < MongoDB::Object
     ##
     # Properties
     #
@@ -12,16 +10,17 @@ module MongoDB
     ##
     # Relationships
     #
-    embedded_in :event,
-                :polymorphic => true
-
     has_many :events,
              :class_name => 'MongoDB::Event'
+
     ##
     # Validations
     #
     ##
     # Methods
     #
+    def to_s
+      title
+    end
   end
 end

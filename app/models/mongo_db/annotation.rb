@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Annotation
-    include Mongoid::Document
-
+  class Annotation < MongoDB::Object
     ##
     # Properties
     #
@@ -12,14 +10,14 @@ module MongoDB
     ##
     # Relationships
     #
-    embedded_in :event,
-                :polymorphic => true
-
     ##
     # Validations
     #
     ##
     # Methods
     #
+    def to_s
+      'annotation'
+    end
   end
 end

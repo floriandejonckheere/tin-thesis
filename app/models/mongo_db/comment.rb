@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Comment
-    include Mongoid::Document
-
+  class Comment < MongoDB::Object
     ##
     # Properties
     #
@@ -12,17 +10,20 @@ module MongoDB
     ##
     # Relationships
     #
-    embedded_in :event,
-                :polymorphic => true
-
     embeds_one :subject,
                :class_name => 'MongoDB::Subject'
 
     ##
     # Validations
     #
+    validates :subject,
+              :presence => true
+
     ##
     # Methods
     #
+    def to_s
+      'comment'
+    end
   end
 end

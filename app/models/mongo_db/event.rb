@@ -21,6 +21,7 @@ module MongoDB
                :class_name => 'MongoDB::Subject'
 
     embeds_one :object,
+               :class_name => 'MongoDB::Object',
                :as => :event
 
     belongs_to :topic,
@@ -29,8 +30,32 @@ module MongoDB
     ##
     # Validations
     #
+    validates :subject,
+              :presence => true
+
+    validates :object,
+              :presence => true
+
     ##
     # Methods
     #
+    def to_s
+      case predicate
+      when 'created'
+        "#{subject} created #{object}"
+      when 'updated'
+        "#{subject} updated #{object}"
+      when 'renamed'
+        "#{subject} renamed #{object}"
+      when 'commented'
+        "#{subject} commented on #{object}"
+      when 'annotated'
+        "#{subject} annotated #{object}"
+      when 'reacted'
+        "#{subject} reacted to #{object}"
+      else
+        "#{subject} #{predicate} #{object}"
+      end
+    end
   end
 end

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Subject
+  class Object
     include Mongoid::Document
 
     ##
     # Properties
     #
-    field :first_name
+    field :_type
 
     ##
     # Relationships
@@ -18,8 +18,5 @@ module MongoDB
     ##
     # Methods
     #
-    def to_s
-      first_name
-    end
   end
 end
