@@ -203,15 +203,52 @@ This leads us to the graph model in figure \ref{fig:graph-model}.
 \section{Reference queries}
 \label{sec:reference-queries}
 
-% Example queries on the data model
-
-% Insert event "User X created Topic Y"
-% Insert event "User X reacted to User Y's comment on Topic Z"
 % Concurrent queries pls
 
-% 1. Select N most recent events in platform, ordered reverse chronologically
-% 2. Select N most recent events for a list of subscribed topics
-% 3. Select N most recent events for a topic
-% 4. Select N most recent events authored by a specific user (user profile page)???
-% 5. Insert N events
-% 6. Truncate events?
+In order to perform a quantitative analysis on the selected data stores and the proposed physical data models, we present \TODO{five} reference queries in this chapter.
+These reference queries will reflect the method of querying that is assumed to be the most common in the physical platform implementation, and mirrors the way data is queried from a database perspective.
+All reference queries will be implemented using the available language bindings, however the generated implementation-specific query will also be presented.
+
+Since the data of the use case is aimed at a write-once, read-many character, the majority of queries will not touch the data itself but merely read it.
+We will present \TODO{four} queries that only request data, and \TODO{one} query that will insert new data into the data store.
+
+\subsection{Querying}
+\label{subsec:querying}
+
+\subsubsection{Query 1}
+\label{subsubsec:query-1}
+
+``
+Select N most recent events, ordered reverse chronologically
+''
+
+\subsubsection{Query 2}
+\label{subsubsec:query-2}
+
+``
+Select N most recent events, where the event is related to a topic in a list of given topics, ordered reverse chronologically
+''
+
+\subsubsection{Query 3}
+\label{subsubsec:query-3}
+
+``
+Select N most recent events, where the event is related to a given topic, ordered reverse chronologically
+''
+
+\subsubsection{Query 4}
+\label{subsubsec:query-4}
+
+``
+Select N most recent events, where the event is related to a given user, ordered reverse chronologically
+''
+
+\subsection{Insertion}
+\label{subsec:insertion}
+
+\subsubsection{Query 5}
+\label{subsubsec:query-5}
+
+``
+Insert a given event into the database
+''
