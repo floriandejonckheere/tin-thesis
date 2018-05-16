@@ -17,12 +17,12 @@ COUNT = [
 ##
 # Execute block benchmark according to parameters
 #
-def benchmark(&block)
+def benchmark
   ITERATIONS.each do |iteration|
     COUNT.each do |count|
       it "executes #{iteration} iterations with limit #{count}" do
         b = Benchmark.measure do
-          iteration.times { block.call }
+          iteration.times { yield count }
         end
 
         puts 'it = %8s, co = %4s, ti = %3ss' % [iteration, count, b.real.round(2)]
