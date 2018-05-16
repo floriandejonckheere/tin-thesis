@@ -132,3 +132,6 @@ sympy-plots-for-*.tex/
 
 # IDE files
 .idea
+
+# Private files
+thesis/private
