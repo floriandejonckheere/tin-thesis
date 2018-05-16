@@ -12,7 +12,7 @@ module MongoDB
     field :predicate
 
     enumerize :predicate,
-              :in => %i[created updated renamed commented_on annotated reacted_on]
+              :in => %i[created updated renamed commented_on annotated reacted_to]
 
     ##
     # Relationships
@@ -24,7 +24,7 @@ module MongoDB
                :class_name => 'MongoDB::Object',
                :as => :event
 
-    belongs_to :topic,
+    embeds_one :topic,
                :class_name => 'MongoDB::Topic'
 
     ##

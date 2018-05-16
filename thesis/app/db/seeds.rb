@@ -76,7 +76,7 @@ puts "Creating #{FACTOR * 5} :annotated events"
 end
 
 ## Comments
-puts "Creating #{FACTOR * 4} :commented events"
+puts "Creating #{FACTOR * 4} :commented_on events"
 (FACTOR * 4).times do
   topic = topics.sample
   topic.save!
@@ -84,19 +84,19 @@ puts "Creating #{FACTOR * 4} :commented events"
   comment = comments.sample
   comment.save!
 
-  MongoDB::Event.create! :predicate => :commented,
+  MongoDB::Event.create! :predicate => :commented_on,
                          :subject => subjects.sample,
                          :object => comment,
                          :topic => topic
 end
 
 ## Reactions
-puts "Creating #{FACTOR} :reacted events"
+puts "Creating #{FACTOR} :reacted_to events"
 (FACTOR / 5).times do
   topic = topics.sample
   topic.save!
 
-  MongoDB::Event.create! :predicate => :reacted,
+  MongoDB::Event.create! :predicate => :reacted_to,
                          :subject => subjects.sample,
                          :object => topic,
                          :topic => topic
