@@ -12,7 +12,7 @@ module MongoDB
     field :predicate
 
     enumerize :predicate,
-              :in => %i[created updated renamed commented annotated reacted]
+              :in => %i[created updated renamed commented_on annotated reacted_on]
 
     ##
     # Relationships
@@ -40,22 +40,7 @@ module MongoDB
     # Methods
     #
     def to_s
-      case predicate
-      when 'created'
-        "#{subject} created #{object}"
-      when 'updated'
-        "#{subject} updated #{object}"
-      when 'renamed'
-        "#{subject} renamed #{object}"
-      when 'commented'
-        "#{subject} commented on #{object}"
-      when 'annotated'
-        "#{subject} annotated #{object}"
-      when 'reacted'
-        "#{subject} reacted to #{object}"
-      else
-        "#{subject} #{predicate} #{object}"
-      end
+      "#{subject} #{predicate} #{object}"
     end
   end
 end
