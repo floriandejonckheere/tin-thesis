@@ -29,6 +29,21 @@
 \selectlanguage{dutch}
 \chapter*{Samenvatting}
 
+De opkomst van grootschalige, dynamische web applicaties heeft geleid tot een enorme toename in de behoefte voor performante database systemen om de overvloed van informatie gegenereerd door gebruikersactiviteit op te slaan.
+Het antwoord van de industry op dit probleem is de NoSQL beweging, die beschikbaarheid and schaalbaarheid verkiest over traditionele belangen zoals data consistentie en betrouwbaarheid.
+Een belangrijker wordende vraag voor onderzoekers en ontwikkelaars in het vakdomein is hoe de opslag van deze informatie efficient kan gebeuren, om de performantie van de queries te maximaliseren, toegepast op de relevante use case en inherente structuur van de betrokken data.
+
+Deze thesis duikt in de wereld van NoSQL en niet-relationele data modeling door middel van een vergelijkende studie van diverse NoSQL data store categorie\"{e}n en leveranciers.
+De \textit{Recent Activity feed} van het Open Webslides project wordt gebruikt als case study.
+Een vergelijkende studie voor elk van de \TODO{vijf} categorie\"{e}n van NoSQL data stores wordt naar voren geschoven, waarbij factoren relevant voor de use case besproken worden.
+Vervolgens worden twee logische datamodellen voor document en graph data stores opgesteld, samen met drie bijbehorende implementaties voor de MongoDB, CouchDB en Neo4j data stores.
+
+Het onderzoek concludeert dat document stores de meest effici\"{e}nte oplossing bieden onder de vergeleken categorie\"{e}n.
+De NoSQL data stores worden in het Open Webslides platform gebruikt complementair aan een relationele database, gebruik makend van \textit{polyglot persistence} om een performante en schaalbare applicatie te verkrijgen.
+
+De NoSQL implementaties ontwikkeld in deze thesis zullen bekwame en krachtige oplossingen bieden voor het probleem voorgesteld in de case study.
+Er zijn echter ook veel mogelijkheden om de grenzen van dit onderzoek te overstijgen boven de aanvankelijke use case, en verdere contributies aan het vakdomein te leveren.
+
 
 \selectlanguage{english}
 }{}
@@ -43,8 +58,8 @@ The industry's answer to this problem is the NoSQL movement, which prioritizes a
 An increasingly interesting question for researchers and developers in the field is how to store this data in order to maximize the query performance, considering the use case and the inherent structure of the data involved.
 
 This thesis dives into the world of NoSQL and non-relational data modeling, comparing and examining the different NoSQL data store types and vendors.
-The Recent Activity feed of the Open Webslides platform is used as a case study.
-For the \TODO{five} categories of NoSQL data stores, a comparative study is presented in which attributes relevant to the use case are compared.
+The \textit{Recent Activity feed} of the Open Webslides platform is used as a case study.
+For the \TODO{five} categories of NoSQL data stores, a comparative study is presented in which aspects relevant to the use case are compared.
 Subsequently, two logical data models for document and graph data stores are presented, along with three corresponding implementations for the MongoDB, CouchDB and Neo4j data stores.
 
 The research concluded that document stores are the most efficient data stores among the solutions considered.
