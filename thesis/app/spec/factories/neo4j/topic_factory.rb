@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :neo4j_topic, :class => Neo4j::Topic do
-    title Faker::Lorem.words(6).join(' ').capitalize
+    title { Faker::Lorem.words(6).join(' ').capitalize }
   end
 end
