@@ -16,7 +16,7 @@ module Neo4j
     has_many :out,
              :events,
              :type => :about,
-             :model_class => 'Neo4j::Object'
+             :model_class => 'Neo4j::Item'
 
     ##
     # Validations

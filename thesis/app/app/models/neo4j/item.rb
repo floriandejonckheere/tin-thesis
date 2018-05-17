@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Object
+  class Item
     include Neo4j::ActiveNode
 
     ##

@@ -6,7 +6,7 @@ module Neo4j
     include Neo4j::Timestamps::Created
 
     from_class 'Neo4j::Subject'
-    to_class 'Neo4j::Object'
+    to_class 'Neo4j::Item'
 
     ##
     # Properties
