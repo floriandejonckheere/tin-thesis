@@ -1,24 +1,31 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Topic < Item
+  class Topic
+    include Neo4j::ActiveNode
+
     ##
     # Properties
     #
     property :title,
              :type => String
 
-    property :description,
-             :type => String
-
     ##
     # Relations
     #
+    has_many :out,
+             :events,
+             :type => :about,
+             :model_class => 'Neo4j::Object'
 
     ##
     # Validations
     #
-    validates :title,
-              :presence => true
+    ##
+    # Methods
+    #
+    def to_s
+      title
+    end
   end
 end

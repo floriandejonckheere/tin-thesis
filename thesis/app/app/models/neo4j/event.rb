@@ -3,9 +3,10 @@
 module Neo4j
   class Event
     include Neo4j::ActiveRel
+    include Neo4j::Timestamps::Created
 
-    from_class 'Subject'
-    to_class 'Object'
+    from_class 'Neo4j::Subject'
+    to_class 'Neo4j::Object'
 
     ##
     # Properties
@@ -18,6 +19,5 @@ module Neo4j
     ##
     # Validations
     #
-    validates_presence_of :timestamp
   end
 end

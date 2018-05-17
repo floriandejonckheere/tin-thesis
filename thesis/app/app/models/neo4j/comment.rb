@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Comment < Item
+  class Comment < Neo4j::Object
     ##
     # Properties
     #
@@ -12,25 +12,18 @@ module Neo4j
     # Relations
     #
     has_one :out,
-            :user,
+            :subject,
             :type => :by,
-            :model_class => 'Neo4j::User'
-
-    has_one :out,
-            :item,
-            :type => :on,
-            :model_class => %i[Neo4j::Topic Neo4j::Comment]
+            :model_class => 'Neo4j::Subject'
 
     ##
     # Validations
     #
-    validates :text,
-              :presence => true
-
-    validates :user,
-              :presence => true
-
-    validates :item,
-              :presence => true
+    ##
+    # Methods
+    #
+    def to_s
+      'comment'
+    end
   end
 end
