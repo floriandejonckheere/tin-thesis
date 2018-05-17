@@ -10,7 +10,7 @@ module Neo4j
     ##
     # Properties
     #
-    enum :predicate => %i[created updated renamed commented annotated reacted]
+    enum :predicate => %i[created updated renamed commented_on annotated reacted_to]
 
     property :timestamp,
              :type => Date
