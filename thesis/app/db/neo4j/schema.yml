@@ -12,12 +12,22 @@
 
 ---
 :constraints:
+- CONSTRAINT ON ( `neo4j::item`:`Neo4j::Item` ) ASSERT `neo4j::item`.uuid IS UNIQUE
+- CONSTRAINT ON ( `neo4j::migrations::schemamigration`:`Neo4j::Migrations::SchemaMigration`
+  ) ASSERT `neo4j::migrations::schemamigration`.migration_id IS UNIQUE
+- CONSTRAINT ON ( `neo4j::subject`:`Neo4j::Subject` ) ASSERT `neo4j::subject`.uuid
+  IS UNIQUE
+- CONSTRAINT ON ( `neo4j::topic`:`Neo4j::Topic` ) ASSERT `neo4j::topic`.uuid IS UNIQUE
+- CONSTRAINT ON ( applicationrecord:ApplicationRecord ) ASSERT applicationrecord.uuid
+  IS UNIQUE
+- CONSTRAINT ON ( event:Event ) ASSERT event.uuid IS UNIQUE
 - CONSTRAINT ON ( item:Item ) ASSERT item.uuid IS UNIQUE
 - CONSTRAINT ON ( schemamigration:SchemaMigration ) ASSERT schemamigration.migration_id
   IS UNIQUE
 - CONSTRAINT ON ( subject:Subject ) ASSERT subject.uuid IS UNIQUE
 - CONSTRAINT ON ( topic:Topic ) ASSERT topic.uuid IS UNIQUE
-:indexes: []
+:indexes:
+- INDEX ON :Event(predicate)
 :versions:
 - '20180429121306'
 - '20180517165523'
@@ -26,3 +36,5 @@
 - '20180517170032'
 - '20180517170033'
 - '20180517170034'
+- '20180518093310'
+- '20180518093311'

@@ -2,22 +2,35 @@
 
 module Neo4j
   class Event
-    include Neo4j::ActiveRel
+    include Neo4j::ActiveNode
     include Neo4j::Timestamps::Created
-
-    from_class 'Neo4j::Subject'
-    to_class 'Neo4j::Item'
 
     ##
     # Properties
     #
     enum :predicate => %i[created updated renamed commented_on annotated reacted_to]
 
-    property :timestamp,
-             :type => Date
+    ##
+    # Relations
+    #
+    has_one :out,
+            :subject,
+            :type => :by,
+            :model_class => 'Neo4j::Subject'
+
+    has_one :out,
+            :item,
+            :type => :on,
+            :model_class => 'Neo4j::Item'
 
     ##
     # Validations
     #
+    ##
+    # Methods
+    #
+    def to_s
+      "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
+    end
   end
 end
