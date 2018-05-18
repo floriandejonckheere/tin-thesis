@@ -5,14 +5,12 @@ module MongoDB
     ##
     # Properties
     #
-    field :title
+    field :title,
+          :type => String
 
     ##
     # Relationships
     #
-    has_many :events,
-             :class_name => 'MongoDB::Event'
-
     ##
     # Validations
     #
@@ -20,7 +18,7 @@ module MongoDB
     # Methods
     #
     def to_s
-      title
+      "'#{title}'"
     end
   end
 end

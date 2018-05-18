@@ -7,14 +7,21 @@ module MongoDB
     ##
     # Properties
     #
-    field :first_name
+    field :first_name,
+          :type => String
 
     ##
     # Relationships
     #
+    embedded_in :event,
+                :class_name => 'MongoDB::Event'
+
     ##
     # Validations
     #
+    validates :first_name,
+              :presence => true
+
     ##
     # Methods
     #

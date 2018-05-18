@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Neo4j
-  class Comment < Neo4j::Item
+  class Comment < Item
     ##
     # Properties
     #

@@ -9,10 +9,15 @@ module MongoDB
     ##
     # Properties
     #
-    field :predicate
+    field :predicate,
+          :type => String
 
     enumerize :predicate,
-              :in => %i[created updated renamed commented_on annotated reacted_to]
+              :in => %i[created updated renamed commented_on annotated reacted_to],
+              :predicates => true
+
+    field :text,
+          :type => String
 
     ##
     # Relationships
@@ -24,12 +29,13 @@ module MongoDB
                :class_name => 'MongoDB::Item',
                :as => :event
 
-    embeds_one :topic,
-               :class_name => 'MongoDB::Topic'
-
     ##
     # Validations
     #
+    validates :text,
+              :presence => true,
+              :if => :commented_on?
+
     validates :subject,
               :presence => true
 
@@ -40,7 +46,11 @@ module MongoDB
     # Methods
     #
     def to_s
-      "#{subject} #{predicate} #{item}"
+      if predicate == :commented_on
+        "#{subject} #{predicate} #{item}: #{text}"
+      else
+        "#{subject} #{predicate} #{item}"
+      end
     end
   end
 end

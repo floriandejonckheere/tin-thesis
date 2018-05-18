@@ -5,8 +5,6 @@ module MongoDB
     ##
     # Properties
     #
-    field :text
-
     ##
     # Relationships
     #
