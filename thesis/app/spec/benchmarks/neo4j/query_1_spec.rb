@@ -10,7 +10,7 @@ RSpec.describe 'Neo4j' do
       benchmark do |count|
         Neo4j::Event
           .all
-          .order(:created_at)
+          .order(:created_at => :desc)
           .limit(count)
           .each(&:to_s)
       end

@@ -39,19 +39,22 @@ Neo4j::Topic.all.each do |topic|
 
   Neo4j::Event.create! :subject => subject,
                        :item => topic,
-                       :predicate => :created
+                       :predicate => :created,
+                       :created_at => Faker::Time.backward(365)
 
   3.times do
     Neo4j::Event.create! :subject => subject,
                          :item => topic,
-                         :predicate => weighted_rand(:updated => 0.9, :renamed => 0.1)
+                         :predicate => weighted_rand(:updated => 0.9, :renamed => 0.1),
+                         :created_at => Faker::Time.backward(365)
   end
 end
 
 (FACTOR * 5).times do
   Neo4j::Event.create! :subject => subjects.sample,
                        :item => topics.sample,
-                       :predicate => :annotated
+                       :predicate => :annotated,
+                       :created_at => Faker::Time.backward(365)
 end
 
 ## Comments
@@ -68,13 +71,15 @@ items = (topics + comments)
   Neo4j::Event.create! :subject => subjects.sample,
                        :item => items.sample,
                        :predicate => :commented_on,
-                       :text => Faker::Lorem.words(20).join(' ').capitalize
+                       :text => Faker::Lorem.words(20).join(' ').capitalize,
+                       :created_at => Faker::Time.backward(365)
 end
 
 (FACTOR / 2).times do
   Neo4j::Event.create! :subject => subjects.sample,
                        :item => items.sample,
-                       :predicate => :reacted_to
+                       :predicate => :reacted_to,
+                       :created_at => Faker::Time.backward(365)
 end
 
 tx.commit
