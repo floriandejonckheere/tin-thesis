@@ -1,9 +1,5 @@
 # frozen_string_literals: true
 
-##
-# Neo4j utility functions
-#
-
 puts 'Seeding Neo4j database'
 
 tx = Neo4j::ActiveBase.current_session.transaction

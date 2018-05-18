@@ -20,4 +20,5 @@ end
 # Seeding
 #
 
+require_relative 'seeds/mongo_db'
 require_relative 'seeds/neo4j'
