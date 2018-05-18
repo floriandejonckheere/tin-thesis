@@ -1,14 +1,69 @@
 \chapter{Comparative study}
 \label{ch:comparative-study}
 
-% Quantitative criteria
-% Performance benchmarks
-% Netflix benchmark
-% http://www.bgbenchmark.org/BG/
-% Yahoo! Cloud Serving Benchmark (YCSB)
-% Queries benchmarked
+In this chapter we will implement the previously proposed physical data models for the MongoDB, CouchDB and Neo4j data stores.
+In this context, a Ruby on Rails application was developed that uses three libraries that provide language bindings to the respective data stores.
+% TODO: references
+A custom benchmarking framework was implemented using the RSpec library to provide structure and maintainability and the \texttt{Benchmark} class built into the Ruby implementation to measure query execution.
 
+\section{Testing setup}
+\label{sec:testing-setup}
 
-%% Benchmarks
+In order to keep the results of the tests consistent, the following rules are applied:
 
-% Number of database connections = 1 => methodology
+\begin{itemize}
+  \item Query caching is disabled
+  \item Connection pooling is disabled
+  \item Clustering is disabled
+  \item No additional performance tweaks were applied on the database management systems
+  \item All disk persistence is mapped to memory on a RAM disk, transparent to the database management systems
+\end{itemize}
+
+Native protocols were chosen for every data store: Mongo Wire Protocol for MongoDB, HTTP for CouchDB and Bolt for Neo4j.
+
+All benchmarks were performed on a single machine with the following specifications:
+
+\begin{itemize}
+  \item Intel Core i7-3840QM (4 cores, 8 threads), 45W TDP
+  \item Hyperthreading and \TODO{Intel Turbo Boost} enabled
+  \item 32GB DDR4 RAM
+  \item 180GB SATA-III SSD
+\end{itemize}
+
+The following software versions were used:
+
+\begin{itemize}
+  \item Arch Linux (rolling release)
+  \item MongoDB 3.6.3
+  \item CouchDB 2.1.1
+  \item Neo4j Community Edition 3.0.6
+  \item Ruby 2.5.0
+\end{itemize}
+
+\section{Procedure}
+\label{sec:procedure}
+
+In order to compare the performance of the three data stores, the following procedure was followed.
+
+First, the database was filled with random testing data.
+The amount of testing data linearly depends on a multiplication factor, which \TODO{varied} throughout the benchmark tests.
+
+Next, the full test suite was ran sequentially for the three data stores, and the timing results were written to separate files.
+It is important to note that every reference query was executed many times, depending on different factors.
+Since the execution time of a single iteration is negligable, every query was executed a number of times to negate the effect of external factors, such as operating system scheduling and I/O wait times.
+We have chosen the iteration counts of \TODO{1 000, 10 000 and 100 000}.
+Having multiple iteration runs gives us the opportunity to analyze the vertical scalability of the query as well.
+As indicated in the informal descriptions of the reference queries, the query itself is also dependent on a variable $N$ which signifies the event count that is to be retrieved from the database.
+We believe a sane default for this value in a concrete implementation would be 100, meaning that 100 events will be retrieved on every query run.
+However, in the test suite this variable takes the value of \TODO{100, 1 000 and 10 000} to allow for more reliable timings.
+
+This gives us 9 timing results for every query for every data store in total.
+These results are analyzed, graphed and discussed in the sections below.
+
+\section{Previous work}
+\label{sec:previous-work}
+
+% Netflix benchmark, http://www.bgbenchmark.org/BG/, Yahoo! Cloud Serving Benchmark (YCSB)
+
+\section{Conclusion}
+\label{sec:comparative-study-conclusion}
