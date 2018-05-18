@@ -67,7 +67,8 @@ items = (topics + comments)
 (FACTOR * 5).times do
   Neo4j::Event.create! :subject => subjects.sample,
                        :item => items.sample,
-                       :predicate => :commented_on
+                       :predicate => :commented_on,
+                       :text => Faker::Lorem.words(20).join(' ').capitalize
 end
 
 (FACTOR / 2).times do

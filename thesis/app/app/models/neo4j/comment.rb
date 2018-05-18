@@ -21,6 +21,12 @@ module Neo4j
     ##
     # Validations
     #
+    validates :subject,
+              :presence => true
+
+    validates :topic,
+              :presence => true
+
     ##
     # Methods
     #

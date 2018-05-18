@@ -21,6 +21,9 @@ module Neo4j
     ##
     # Validations
     #
+    validates :first_name,
+              :presence => true
+
     ##
     # Methods
     #

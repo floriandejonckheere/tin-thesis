@@ -29,14 +29,24 @@ module Neo4j
     ##
     # Validations
     #
+    validates :text,
+              :presence => true,
+              :if => :commented_on?
+
+    validates :subject,
+              :presence => true
+
+    validates :item,
+              :presence => true
+
     ##
     # Methods
     #
     def to_s
       if predicate == :commented_on
-        return "#{subject} #{predicate.to_s.humanize.downcase} #{item}: #{text}"
+        "#{subject} #{predicate.to_s.humanize.downcase} #{item}: #{text}"
       else
-        return "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
+        "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
       end
     end
   end
