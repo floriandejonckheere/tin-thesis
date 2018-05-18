@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Annotation < MongoDB::Object
+  class Annotation < MongoDB::Item
     ##
     # Properties
     #

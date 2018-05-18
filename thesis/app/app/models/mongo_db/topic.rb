@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Topic < MongoDB::Object
+  class Topic < MongoDB::Item
     ##
     # Properties
     #

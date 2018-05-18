@@ -20,8 +20,8 @@ module MongoDB
     embeds_one :subject,
                :class_name => 'MongoDB::Subject'
 
-    embeds_one :object,
-               :class_name => 'MongoDB::Object',
+    embeds_one :item,
+               :class_name => 'MongoDB::Item',
                :as => :event
 
     embeds_one :topic,
@@ -33,14 +33,14 @@ module MongoDB
     validates :subject,
               :presence => true
 
-    validates :object,
+    validates :item,
               :presence => true
 
     ##
     # Methods
     #
     def to_s
-      "#{subject} #{predicate} #{object}"
+      "#{subject} #{predicate} #{item}"
     end
   end
 end
