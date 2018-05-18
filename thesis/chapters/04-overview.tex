@@ -48,6 +48,14 @@ A key-value data store allows the user to store schemaless data using a plain, u
 Similar to hash tables, the values are stored and queried using the provided key which is used as an index.
 Modern key-value data stores prefer high scalability over consistency, entailing that more advanced ad-hoc querying and analytical operations on the data such as joins are not available.
 
+\subsection{Document}
+\label{subsec:document}
+
+Document databases store their data in documents, indexed by a unique key.
+This is technically a subclass of key-value stores, however the difference lies in the interpretation of the data.
+Since documents are schemaless, each document may have a comparable structure, or a completely different one.
+In contrast with key-value data stores, the value (document) is not opaque to the database management system, but is interpreted and used for query optimization.
+
 \subsection{Column-oriented}
 \label{subsec:column-oriented}
 
@@ -58,14 +66,6 @@ Concretely this means that the data is indexed by column value, rather than by r
 % TODO: elaborate
 % TODO: reference Column-oriented Database Systems
 % TODO: reference Column-Stores vs. Row-Stores: How Different Are They Really?
-
-\subsection{Document}
-\label{subsec:document}
-
-Document databases store their data in documents, indexed by a unique key.
-This is technically a subclass of key-value stores, however the difference lies in the interpretation of the data.
-Since documents are schemaless, each document may have a comparable structure, or a completely different one.
-In contrast with key-value data stores, the value (document) is not opaque to the database management system, but is interpreted and used for query optimization.
 
 \subsection{Graph}
 \label{subsec:graph}
