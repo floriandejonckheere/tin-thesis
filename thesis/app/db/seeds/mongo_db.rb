@@ -1,13 +1,6 @@
 # frozen_string_literal: true
 
 ##
-# MongoDB utility functions
-#
-def mongodb_rand(model)
-  model.skip(rand(model.count)).first
-end
-
-##
 # Clear database
 #
 [
@@ -27,7 +20,7 @@ topics = FACTOR.times.map { FactoryBot.build(:mongodb_topic) }
 annotations = (FACTOR * 5).times.map { FactoryBot.build(:mongodb_annotation) }
 comments = (FACTOR * 5).times.map do
   c = FactoryBot.build :mongodb_comment,
-                       :subject => FactoryBot.build(:mongodb_subject)
+                       subjects.sample
 end
 
 ## Topics
@@ -90,8 +83,11 @@ puts "Creating #{FACTOR} :reacted_to events"
   topic = topics.sample
   topic.save!
 
+  comment = comments.sample
+  comment.save!
+
   MongoDB::Event.create! :predicate => :reacted_to,
                          :subject => subjects.sample,
-                         :object => topic,
+                         :object => comment,
                          :topic => topic
 end
