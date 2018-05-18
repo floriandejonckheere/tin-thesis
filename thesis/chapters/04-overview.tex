@@ -28,7 +28,7 @@ Reuter and H\"arder introduced the concept of ACID: an acronym referring to a se
 
 In the early 2000s, a totally different concept of data storage was popularized.
 NoSQL data stores provide a system of storage that is ``non SQL'' or ``non relational''.
-More recently, the NoSQL denomination has also been explained as ``not only SQL'', pointing on the fact that some data stores provide a different interface besides SQL.
+More recently, the NoSQL denomination has also been explained as ``not only SQL'', pointing on the fact that most NoSQL data stores provide a different interface besides SQL.
 Many databases expose a REST API as primary execution interface.
 Other data stores have devised their own binary communication protocol, such as the Bolt protocol \autocite{Bolt2015} for the Neo4j graph data store.
 
@@ -38,7 +38,14 @@ The use of non-relational data stores was motivated by the needs of Web 2.0 comp
 NoSQL provides a way to store massive amounts of data in a flexible way.
 The architecture of such systems is usually more simple, and focuses more on horizontal as opposed to vertical scalability.
 Data is not stored in rows and columns as is the case in the relational model, but rather in a different data structure.
-\textcite{Nayak2013} divides the data models used by NoSQL data stores into five categories.
+
+\textcite{Sadalage2012} reject the proposition that NoSQL data stores replace relational data stores.
+Rather, the technology is meant to complement the relational one, and substituting one for another is not the recommended course of action for an arbitrary use case.
+Since both systems are designed from the ground up with very different ideas in mind, developers have to think about the potential advantages and pitfalls of each.
+NoSQL has certain use cases where it shines, whereas the relational data model is a much better fit for other purposes.
+The use of multiple data storage technologies and database management systems within the same application is called \textit{polyglot persistence}.
+
+\textcite{Nayak2013} divide the data models used by NoSQL data stores into five categories.
 
 \subsection{Key-value}
 \label{subsec:key-value}
