@@ -222,12 +222,30 @@ We will present \TODO{four} queries that only request data, and \TODO{one} query
 Select N most recent events, ordered reverse chronologically
 ''
 
+This query, as most simple reference query presented, is an example of a query that can be used on the homepage of the platform.
+% TODO: Github reference
+When a user opens the web application, a reverse chronologically ordered list of events is presented, much like how the activity feed on the Github platform is structured.
+This view allows for a quick overview of the activity in the platform, and since the user is not signed in yet, it is not tailored.
+This also means that everyone who visits the platform without signing in will receive the same events in their Recent Activity feed.
+
+\subsubsection*{MongoDB}
+\subsubsection*{CouchDB}
+\subsubsection*{Neo4j}
+
 \subsubsection{Query 2}
 \label{subsubsec:query-2}
 
 ``
 Select N most recent events, where the event is related to a topic in a list of given topics, ordered reverse chronologically
 ''
+
+As mentioned in chapter \TODO{??}, a user also has to ability to subscribe to topics.
+Once the user logs in to the platform, the Recent Activity feed can be presented in a more attractive way.
+The events in the feed will then consist of only events related to topics the user has subscribed to (which also includes the topics where the user is author or contributor).
+
+\subsubsection*{MongoDB}
+\subsubsection*{CouchDB}
+\subsubsection*{Neo4j}
 
 \subsubsection{Query 3}
 \label{subsubsec:query-3}
@@ -236,12 +254,26 @@ Select N most recent events, where the event is related to a topic in a list of 
 Select N most recent events, where the event is related to a given topic, ordered reverse chronologically
 ''
 
+Every topic also has an overview page, which mainly contains metadata such as description, author, contributors and other information not directly related to the course content.
+Next to the metadata, a custom Recent Activity feed is also included on the page.
+This feed only contains events related to the topic the user is currently viewing, and effectively presents a timeline of changes and discussions.
+
+\subsubsection*{MongoDB}
+\subsubsection*{CouchDB}
+\subsubsection*{Neo4j}
+
 \subsubsection{Query 4}
 \label{subsubsec:query-4}
 
 ``
 Select N most recent events, where the event is related to a given user, ordered reverse chronologically
 ''
+
+Similarly to topics, a user's profile page also includes a timeline of \TODO{his/her} activities: additions, deletions, comments and annotations that were recently made by that user.
+
+\subsubsection*{MongoDB}
+\subsubsection*{CouchDB}
+\subsubsection*{Neo4j}
 
 \subsection{Insertion}
 \label{subsec:insertion}
@@ -252,3 +284,13 @@ Select N most recent events, where the event is related to a given user, ordered
 ``
 Insert N given events
 ''
+
+Finally, since read requests will most likely outnumber write requests with several magnitudes, only one insertion query is presented.
+This query inserts a random event into the database.
+
+\subsubsection*{MongoDB}
+\subsubsection*{CouchDB}
+\subsubsection*{Neo4j}
+
+\section{Conclusion}
+\label{sec:data-model-conclusion}
