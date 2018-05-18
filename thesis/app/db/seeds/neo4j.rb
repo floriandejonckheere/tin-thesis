@@ -6,6 +6,8 @@
 
 puts 'Seeding Neo4j database'
 
+tx = Neo4j::ActiveBase.current_session.transaction
+
 ##
 # Clear database
 #
@@ -73,3 +75,5 @@ end
                        :item => items.sample,
                        :predicate => :reacted_to
 end
+
+tx.commit
