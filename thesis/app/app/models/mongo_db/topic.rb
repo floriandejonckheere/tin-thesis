@@ -14,6 +14,9 @@ module MongoDB
     ##
     # Validations
     #
+    validates :title,
+              :presence => true
+
     ##
     # Methods
     #

@@ -14,6 +14,9 @@ module Neo4j
     ##
     # Validations
     #
+    validates :title,
+              :presence => true
+
     ##
     # Methods
     #
