@@ -189,6 +189,71 @@ Both MongoDB and Neo4j provide eventual consistency as dictated by the principle
 \end{landscape}
 
 % MongoDB: 16MB limit for documents
+A big part of the featureset that NoSQL data stores have to offer is the possibility to scale horizontally over multiple nodes, called \textit{clustering}.
+\TODO{Almost all} relational database management systems scale very good vertically on a single node, however scaling to multiple nodes is a more complex issue.
+This is where NoSQL systems typically stand out, prioritizing availability over consistency according to the BASE principles.
+
+MongoDB, CouchDB and Neo4j all support keeping the dataset in memory, and persistence to disk.
+Memory accesses are typically magnitudes faster than disk access, independent of whether traditional rotating media or more mordern solid state technologies are used.
+The database management system will frequently commit the memory pages to disk, to ensure durability of the data.
+
+% TODO: reference for sharding
+Since NoSQL data stores are designed from the ground up to be used in a distributed context, the method used to support partitioning is of paramount importance.
+Distributed databases typically partition networks using a method called \textit{sharding}.
+Sharding is the division of the entire dataset pushed to different nodes based on certain, predetermined criteria.
+Choosing the sharding criteria in a smart way can allow all sorts of distribution models, from an equal division over all nodes to a weighted distribution based on node capabilities.
+One technique commonly used by multinational companies is sharding based on geographical location.
+This ensures that the data of a user in a certain geographical area is pushed to a node close to that geographical area, which in turn helps out server latency and improves the general responsiveness of the server.
+% TODO: reference for facebook sharding
+Facebook is one example of this: the company has a userbase and data centers that stretch over the entire world.
+The algorithm used in Facebook's sharding selection is based on the most important geographical location for a user.
+
+% TODO: fact check
+MongoDB sharding is based on a shard key within the document; this shard key can be either determined by the developer to allow more finegrained control over the process, or automatically determined based on the unique identifier assigned to the document in order to allow for a roughly equal distribution.
+CouchDB's partitioning system works in a different way.
+It utilizes consistent hashing, which means that the document is hashed and distributed equal over the available nodes.
+
+% TODO: references
+Finally, the Neo4j's clustering and horizontal scalability capabilities are less extensive.
+Neo4j sharding is based on cache sharding, where only the data cache is sharded.
+
+% TODO: image for replication types
+The partitioning method goes hand in hand with the replication capabilities of the data store.
+Replication types are usually characterised and divided based upon the amount of \textit{masters} and \textit{slaves} in the cluster.
+A master is a server that is the authoritative source for data, while a slave is a node that is dependent on the master for certain queries.
+The intention of this system is that when one or more hosts go down, the cluster can still continue to handle requests, albeit not every single one depending on what node went down.
+For example, Neo4j's slave nodes in a cluster can only handle read requests, all write requests are forwarded to the master node.
+A master failure in this setup renders the cluster at least read-only, and potentially only able to access part of the data that wass stored on the slave nodes.
+
+% TODO: references
+In certain cases the cluster is able to automatically recover from a master failure by a process called \textit{master election}, where a new authoritative master node is chosen.
+This type of capability is commonly seen key-value stores.
+
+% TODO: fact check
+Similarly to Neo4j, MongoDB operates in a master-slave configuration: one authoritative master, and an undetermined amount of slave nodes.
+CouchDB on the contrary, supports a multi-master or master-to-master configuration.
+These configurations allow for multiple master nodes to exist within the cluster, and CouchDB implements a quorum algorithm between master nodes in order to allow for eventual consistency in the cluster.
+% TODO: use cases for multi-master/master-master
+
+% TODO: reference to some paper about rdbms locking
+Finally, the way a data store implements its concurrency control algorithm is important for both horizontal and vertical scalability.
+Traditionally, relational database management systems handle concurrent accesses using a pessimistic locking system, utilizing row-, table- and database-level locks.
+Two type of locks exist in this context: \TODO{mutual} locks (colloquially known as \texit{reader locks}), and exclusive locks (\textit{writer locks}).
+The former implements a mechanism to allow an undetermined amount of requests to access the data without mutating it, the latter prevents more than one request to modify the data at the same time, provided there are no existing reader or writer locks.
+
+In this aspect, Neo4j behaves more like a relational database.
+As mentioned before, all write requests are handled by the master node in the cluster, and the concurrent requests are restricted using a lock mechanism.
+
+% TODO: fact check
+CouchDB takes an entirely different approach to concurrency control.
+Revision control is a feature built natively into the data store, and it is used in a mechanism called Multi-Version Concurrency Control (MVCC) to provide concurrent write access to data.
+In short, MVCC redirects running write requests on a document to a new version of that document, while still serving the old version to concurrent read requests.
+Once the write request on the new version is finished, the pointer pointing to the most recent version of the document is updated to point to the new, updated document instead of the old, obsolete document.
+This also has the benefit of automatically making document writes atomic, since only one value has to be updated in the end: the document pointer.
+% TODO: conflict resolution?
+
+MongoDB also makes use of MVCC, however certain requests are still restricted using locks.
+This relates to requests that modify the entire database management system, the database or the collection and \TODO{mutual} and exclusive locks are enforced respectively.
 
 \begin{landscape}
   \input{tables/04-hosting}
