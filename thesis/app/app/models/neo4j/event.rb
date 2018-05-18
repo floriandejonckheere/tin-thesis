@@ -29,6 +29,9 @@ module Neo4j
     ##
     # Validations
     #
+    validates :predicate,
+              :presence => true
+
     validates :text,
               :presence => true,
               :if => :commented_on?
