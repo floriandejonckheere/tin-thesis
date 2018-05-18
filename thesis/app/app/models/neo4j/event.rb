@@ -33,8 +33,7 @@ module Neo4j
     # Methods
     #
     def to_s
-      case predicate
-      when :commented_on
+      if predicate == :commented_on
         return "#{subject} #{predicate.to_s.humanize.downcase} #{item}: #{text}"
       else
         return "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
