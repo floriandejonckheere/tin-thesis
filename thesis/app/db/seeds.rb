@@ -2,7 +2,7 @@
 
 ## Variables
 # Test data multiplication factor
-FACTOR = 10
+FACTOR = 100
 
 ##
 # Global utility functions
