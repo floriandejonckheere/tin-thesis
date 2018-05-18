@@ -10,6 +10,9 @@ module Neo4j
     #
     enum :predicate => %i[created updated renamed commented_on annotated reacted_to]
 
+    property :text,
+             :type => String
+
     ##
     # Relations
     #
@@ -30,7 +33,12 @@ module Neo4j
     # Methods
     #
     def to_s
-      "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
+      case predicate
+      when :commented_on
+        return "#{subject} #{predicate.to_s.humanize.downcase} #{item}: #{text}"
+      else
+        return "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
+      end
     end
   end
 end

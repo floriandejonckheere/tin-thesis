@@ -5,9 +5,6 @@ module Neo4j
     ##
     # Properties
     #
-    property :text,
-             :type => String
-
     ##
     # Relations
     #
@@ -16,6 +13,11 @@ module Neo4j
             :type => :by,
             :model_class => 'Neo4j::Subject'
 
+    has_one :out,
+            :topic,
+            :type => :on,
+            :model_class => 'Neo4j::Topic'
+
     ##
     # Validations
     #
@@ -23,7 +25,7 @@ module Neo4j
     # Methods
     #
     def to_s
-      'comment'
+      "#{subject}'s comment on #{topic}"
     end
   end
 end

@@ -10,6 +10,11 @@ module Neo4j
     ##
     # Relationships
     #
+    has_many :in,
+             :events,
+             :type => :on,
+             :model_class => 'Neo4j::Event'
+
     ##
     # Validations
     #
