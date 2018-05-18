@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MongoDB
-  class Comment < MongoDB::Item
+  class Comment < Item
     ##
     # Properties
     #
