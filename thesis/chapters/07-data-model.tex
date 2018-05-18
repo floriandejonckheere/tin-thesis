@@ -1,7 +1,7 @@
 \chapter{Data model}
 \label{ch:data-model}
 
-In this section we describe the conceptual domain of this research, and provide a logical data model that fits the domain.
+In this chapter we describe the conceptual domain of this research, and provide a logical data model that fits the domain.
 For every NoSQL data model selected, we also propose a physical data model.
 This data model will then be implemented in a Ruby on Rails application using the available language bindings.
 Finally, a set of reference queries will be proposed, queries that may typically be used in the context of the Recent Activity feed.
@@ -294,3 +294,8 @@ This query inserts a random event into the database.
 
 \section{Conclusion}
 \label{sec:data-model-conclusion}
+
+In this chapter we presented an introduction to the domain, and provided some examples of events in the Recent Activity feed.
+Futhermore, we analyzed this domain description, and derived a logical data model for both document- and graph-oriented data stores.
+Next, we proposed an implementation of this logical data model for two document-oriented, and one graph-oriented data store in the Ruby language bindings available for the respective database management systems.
+Finally, we presented five reference queries for the three data stores, and included both a language binding-specific DSL and a physical query implementation for each.
