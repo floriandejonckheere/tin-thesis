@@ -8,7 +8,10 @@ RSpec.describe 'Neo4j' do
   context 'querying' do
     describe 'Select N most recent events, where the event is related to a topic in a list of given topics, ordered reverse chronologically' do
       # Select 50 random topics
-      ids = Neo4j::Topic.skip(rand Neo4j::Topic.count).limit(50).map &:id
+      ids = Neo4j::Topic
+            .skip(rand Neo4j::Topic.count)
+            .limit(50)
+            .map(&:id)
 
       benchmark do |count|
         Neo4j::Topic
