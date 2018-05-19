@@ -97,6 +97,8 @@ Using this logical description of the domain, we can start to derive physical da
 \section{Physical data model}
 \label{sec:physical-data-model}
 
+% TODO: motivate ORM choice and alternatives
+
 \subsection{Document-oriented data model}
 \label{subsec:document-data-model}
 
@@ -264,8 +266,22 @@ This view allows for a quick overview of the activity in the platform, and since
 This also means that everyone who visits the platform without signing in will receive the same events in their Recent Activity feed.
 
 \subsubsection*{MongoDB}
+
+\begin{minted}{ruby}
+MongoDB::Event
+  .all
+  .order_by(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
+
 \subsubsection*{CouchDB}
+
+% TODO
+
 \subsubsection*{Neo4j}
+
+% TODO
 
 \subsubsection{Query 2}
 \label{subsubsec:query-2}
@@ -279,8 +295,25 @@ Once the user logs in to the platform, the Recent Activity feed can be presented
 The events in the feed will then consist of only events related to topics the user has subscribed to (which also includes the topics where the user is author or contributor).
 
 \subsubsection*{MongoDB}
+
+\begin{minted}{ruby}
+# List of subscribed topic identifiers
+topic_ids = [...]
+
+MongoDB::Event
+  .in('item._id' => topic_ds)
+  .order_by(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
+
 \subsubsection*{CouchDB}
+
+% TODO
+
 \subsubsection*{Neo4j}
+
+% TODO
 
 \subsubsection{Query 3}
 \label{subsubsec:query-3}
@@ -294,8 +327,25 @@ Next to the metadata, a custom Recent Activity feed is also included on the page
 This feed only contains events related to the topic the user is currently viewing, and effectively presents a timeline of changes and discussions.
 
 \subsubsection*{MongoDB}
+
+\begin{minted}{ruby}
+# Topic identifier
+topic_id = ...
+
+MongoDB::Event
+  .where('item._id' => topic_id)
+  .order_by(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
+
 \subsubsection*{CouchDB}
+
+% TODO
+
 \subsubsection*{Neo4j}
+
+% TODO
 
 \subsubsection{Query 4}
 \label{subsubsec:query-4}
@@ -307,8 +357,25 @@ Select N most recent events, where the event is related to a given user, ordered
 Similarly to topics, a user's profile page also includes a timeline of \TODO{his/her} activities: additions, deletions, comments and annotations that were recently made by that user.
 
 \subsubsection*{MongoDB}
+
+\begin{minted}{ruby}
+# Subject identifier
+subject_id = ...
+
+MongoDB::Event
+  .where('subject._id' => subject_id)
+  .order_by(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
+
 \subsubsection*{CouchDB}
+
+% TODO
+
 \subsubsection*{Neo4j}
+
+% TODO
 
 \subsection{Insertion}
 \label{subsec:insertion}
@@ -324,10 +391,26 @@ Finally, since read requests will most likely outnumber write requests with seve
 The query creates a single event in the data store.
 
 \subsubsection*{MongoDB}
+
+\begin{minted}{ruby}
+# Subject identifier
+subject_id = ...
+
+# Item identifier
+item_id = ...
+
+MongoDB::Event.create! :subject => subject_id,
+                       :item => item_id,
+                       :predicate => :updated
+\end{minted}
+
 \subsubsection*{CouchDB}
+
+% TODO
+
 \subsubsection*{Neo4j}
 
-% TODO: Explain what ORMs are available
+% TODO
 
 \section{Conclusion}
 \label{sec:data-model-conclusion}
