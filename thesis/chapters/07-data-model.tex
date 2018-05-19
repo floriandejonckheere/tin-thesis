@@ -281,7 +281,13 @@ MongoDB::Event
 
 \subsubsection*{Neo4j}
 
-% TODO
+\begin{minted}{ruby}
+Neo4j::Event
+  .all
+  .order(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
 
 \subsubsection{Query 2}
 \label{subsubsec:query-2}
@@ -313,7 +319,17 @@ MongoDB::Event
 
 \subsubsection*{Neo4j}
 
-% TODO
+\begin{minted}{ruby}
+# List of subscripted topic identifiers
+topic_ids = [...]
+
+Neo4j::Topic
+  .where(:id => topic_ids)
+  .events
+  .order_by(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
 
 \subsubsection{Query 3}
 \label{subsubsec:query-3}
@@ -345,7 +361,17 @@ MongoDB::Event
 
 \subsubsection*{Neo4j}
 
-% TODO
+\begin{minted}{ruby}
+# Topic identifier
+topic_id = ...
+
+Neo4j::Topic
+  .find(topic_id)
+  .events
+  .order(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
 
 \subsubsection{Query 4}
 \label{subsubsec:query-4}
@@ -375,7 +401,17 @@ MongoDB::Event
 
 \subsubsection*{Neo4j}
 
-% TODO
+\begin{minted}{ruby}
+# Subject identifier
+subject_id = ...
+
+Neo4j::Subject
+  .find(subject_id)
+  .events
+  .order(:created_at => :desc)
+  .limit(count)
+  .each(&:to_s)
+\end{minted}
 
 \subsection{Insertion}
 \label{subsec:insertion}
@@ -410,7 +446,17 @@ MongoDB::Event.create! :subject => subject_id,
 
 \subsubsection*{Neo4j}
 
-% TODO
+\begin{minted}{ruby}
+# Subject identifier
+subject_id = ...
+
+# Item identifier
+item_id = ...
+
+Neo4j::Event .create! :subject => subject_id,
+                      :item => topic_id,
+                      :predicate => :updated
+\end{minted}
 
 \section{Conclusion}
 \label{sec:data-model-conclusion}
