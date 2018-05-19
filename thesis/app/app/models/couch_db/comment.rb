@@ -1,23 +1,27 @@
 # frozen_string_literal: true
 
 module CouchDB
-  class Comment < CouchRest::Model::Base
+  class Comment < Item
     ##
     # Properties
     #
-    property :title,
-             Symbol
-
     ##
     # Relationships
     #
-    belongs_to :topic
-
     property :subject,
-             Subject
+             CouchDB::Subject
+
+    property :topic,
+             CouchDB::Topic
 
     ##
     # Validations
     #
+    ##
+    # Methods
+    #
+    def to_s
+      "#{subject}'s comment on #{topic}"
+    end
   end
 end

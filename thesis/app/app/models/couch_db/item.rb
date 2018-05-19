@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module CouchDB
-  class Annotation < CouchRest::Model::Base
+  class Item < CouchRest::Model::Base
+    include CouchRest::Model::Embeddable
+
     ##
     # Properties
     #
@@ -10,6 +12,9 @@ module CouchDB
     #
     ##
     # Validations
+    #
+    ##
+    # Methods
     #
   end
 end

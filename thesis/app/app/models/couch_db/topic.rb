@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module CouchDB
-  class Topic < CouchRest::Model::Base
+  class Topic < Item
     ##
     # Properties
     #
@@ -14,5 +14,14 @@ module CouchDB
     ##
     # Validations
     #
+    validates :title,
+              :presence => true
+
+    ##
+    # Methods
+    #
+    def to_s
+      "'#{title}'"
+    end
   end
 end

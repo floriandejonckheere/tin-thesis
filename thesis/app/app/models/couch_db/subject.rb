@@ -16,5 +16,14 @@ module CouchDB
     ##
     # Validations
     #
+    validates :first_name,
+              :presence => true
+
+    ##
+    # Methods
+    #
+    def to_s
+      first_name
+    end
   end
 end
