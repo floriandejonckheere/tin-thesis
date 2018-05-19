@@ -254,7 +254,7 @@ These configurations allow for multiple master nodes to exist within the cluster
 % TODO: reference to some paper about rdbms locking
 Finally, the way a data store implements its concurrency control algorithm is important for both horizontal and vertical scalability.
 Traditionally, relational database management systems handle concurrent accesses using a pessimistic locking system, utilizing row-, table- and database-level locks.
-Two type of locks exist in this context: \TODO{mutual} locks (colloquially known as \texit{reader locks}), and exclusive locks (\textit{writer locks}).
+Two type of locks exist in this context: \TODO{mutual} locks (colloquially known as \textit{reader locks}), and exclusive locks (\textit{writer locks}).
 The former implements a mechanism to allow an undetermined amount of requests to access the data without mutating it, the latter prevents more than one request to modify the data at the same time, provided there are no existing reader or writer locks.
 
 In this aspect, Neo4j behaves more like a relational database.

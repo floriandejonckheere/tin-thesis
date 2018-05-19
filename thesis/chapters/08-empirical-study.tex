@@ -6,13 +6,15 @@ In this context, a Ruby on Rails application was developed that uses three libra
 % TODO: references
 A custom benchmarking framework was implemented using the RSpec library to provide structure and maintainability and the \texttt{Benchmark} class built into the Ruby implementation to measure query execution.
 
+% TODO: motivate why ORM used and not direct interaction with database
+
 \section{Testing setup}
 \label{sec:testing-setup}
 
 In order to keep the results of the tests consistent, the following rules are applied:
 
 \begin{itemize}
-  \item Query caching is disabled
+  \item Query caching is disabled in MongoDB. Neo4j does not have an equivalent feature.
   \item Connection pooling is disabled
   \item Clustering is disabled
   \item No additional performance tweaks were applied on the database management systems
