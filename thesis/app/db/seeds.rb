@@ -21,4 +21,5 @@ end
 #
 
 require_relative 'seeds/mongo_db'
+require_relative 'seeds/couch_db'
 require_relative 'seeds/neo4j'
