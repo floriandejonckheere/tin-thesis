@@ -242,12 +242,12 @@ The physical data model for Neo4j is implemented using the community-supported N
 
 % Concurrent queries pls
 
-In order to perform a quantitative analysis on the selected data stores and the proposed physical data models, we present \TODO{five} reference queries in this chapter.
-These reference queries will reflect the method of querying that is assumed to be the most common in the physical platform implementation, and mirrors the way data is queried from a database perspective.
+In order to perform an empricial analysis on the selected data stores and the proposed physical data models, we present five reference queries in this chapter.
+These reference queries will reflect the method of querying that would be the most common in the physical platform implementation, and mirrors the way data is queried from a database perspective.
 All reference queries will be implemented using the available language bindings, however the generated implementation-specific query will also be presented.
 
-Since the data of the use case is aimed at a write-once, read-many character, the majority of queries will not touch the data itself but merely read it.
-We will present \TODO{four} queries that only request data, and \TODO{one} query that will insert new data into the data store.
+Since the data of the use case is aimed at a write-once, read-many character, the majority of queries will not touch the data itself, but rather only read it.
+Four read-only queries are included in the following sections, and one query that will insert new data into the data store.
 
 \subsection{Querying}
 \label{subsec:querying}
@@ -289,6 +289,29 @@ Neo4j::Event
   .each(&:to_s)
 \end{minted}
 
+\begin{minted}{cypher}
+MATCH (result_neo4jevent:`Event`)
+  RETURN result_neo4jevent
+  ORDER BY result_neo4jevent.created_at DESC
+  LIMIT {limit_1} | {:limit_1=>count}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>result_neo4jevent.id}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>result_neo4jevent.id}
+\end{minted}
+
+The Neo4j ORM call get converted into three distinct queries: one to get the \texttt{Event} node and two queries to get the related nodes \texttt{Subject} and \texttt{Item}.
+
 \subsubsection{Query 2}
 \label{subsubsec:query-2}
 
@@ -329,6 +352,29 @@ Neo4j::Topic
   .order_by(:created_at => :desc)
   .limit(count)
   .each(&:to_s)
+\end{minted}
+
+\begin{minted}{cypher}
+MATCH (node2:`Topic`:`Item`)
+  WHERE (node2.uuid IN {node2_uuid})
+  MATCH (node2)<-[rel1:`on`]-(result_events:`Event`)
+  RETURN result_events
+  ORDER BY result_events.created_at DESC
+  LIMIT {limit_1} | {:limit_1=>1, :node2_uuid=>topic_ids}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>node2.id}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>node2.id}
 \end{minted}
 
 \subsubsection{Query 3}
@@ -373,6 +419,29 @@ Neo4j::Topic
   .each(&:to_s)
 \end{minted}
 
+\begin{minted}{cypher}
+MATCH (neo4j_topic)
+  WHERE (ID(neo4j_topic) = {ID_neo4j_topic})
+  MATCH (neo4j_topic)<-[rel1:`on`]-(result_events:`Event`)
+  RETURN result_events
+  ORDER BY result_events.created_at DESC
+  LIMIT {limit_1} | {:limit_1=>1, :ID_neo4j_topic=>topic_id}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>neo4j_topic.id}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>neo4j_topic.id}
+\end{minted}
+
 \subsubsection{Query 4}
 \label{subsubsec:query-4}
 
@@ -411,6 +480,35 @@ Neo4j::Subject
   .order(:created_at => :desc)
   .limit(count)
   .each(&:to_s)
+\end{minted}
+
+\begin{minted}{cypher}
+MATCH (n:`Subject`)
+  WHERE (n.uuid = {n_uuid})
+  RETURN n
+  ORDER BY n.uuid
+  LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
+
+MATCH (neo4j_subject)
+  WHERE (ID(neo4j_subject) = {ID_neo4j_subject})
+  MATCH (neo4j_subject)<-[rel1:`by`]-(result_events:`Event`)
+  RETURN result_events
+  ORDER BY result_events.created_at DESC
+  LIMIT {limit_1} | {:limit_1=>1, :ID_neo4j_subject=>subject_id}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>result_events.id}
+
+MATCH (previous:`Event`)
+  WHERE (ID(previous) = {ID_previous})
+  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+  RETURN
+    ID(previous),
+    collect(next) | {:ID_previous=>result_events.id}
 \end{minted}
 
 \subsection{Insertion}
@@ -456,6 +554,53 @@ item_id = ...
 Neo4j::Event .create! :subject => subject_id,
                       :item => topic_id,
                       :predicate => :updated
+\end{minted}
+
+\begin{minted}{cypher}
+MATCH (n:`Subject`)
+  WHERE (n.uuid = {n_uuid})
+  RETURN n
+  ORDER BY n.uuid
+  LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
+
+MATCH (n:`Item`)
+  WHERE (n.uuid = {n_uuid})
+  RETURN n
+  ORDER BY n.uuid
+  LIMIT {limit_1} | {:n_uuid=>item_id, :limit_1=>1}
+
+CREATE (n:`Event`)
+  SET n = {props}
+  RETURN n | {:props=>{:uuid=>event_id, :created_at=>1526737892, :predicate=>1}}
+
+MATCH (n:`Subject`)
+  WHERE (n.uuid = {n_uuid})
+  RETURN n
+  LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
+
+MATCH
+    (from_node),
+    (to_node)
+  WHERE
+    (ID(from_node) = {ID_from_node}) AND
+    (ID(to_node) = {ID_to_node})
+  CREATE (from_node)-[rel:`by` {rel_create_props}]->(to_node)
+    | {:ID_from_node=>event_id, :ID_to_node=>subject_id, :rel_create_props=>{}}
+
+MATCH (n:`Item`)
+  WHERE (n.uuid = {n_uuid})
+  RETURN n
+  LIMIT {limit_1} | {:n_uuid=>item_id, :limit_1=>1}
+
+MATCH
+    (from_node),
+    (to_node)
+  WHERE
+    (ID(from_node) = {ID_from_node}) AND
+    (ID(to_node) = {ID_to_node})
+  CREATE (from_node)-[rel:`on` {rel_create_props}]->(to_node)
+    | {:ID_from_node=>event_id, :ID_to_node=>item_id, :rel_create_props=>{}}
+
 \end{minted}
 
 \section{Conclusion}
