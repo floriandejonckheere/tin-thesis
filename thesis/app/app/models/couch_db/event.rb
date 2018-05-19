@@ -8,11 +8,10 @@ module CouchDB
     # Properties
     #
     property :predicate,
-             Symbol
+             String
 
     enumerize :predicate,
-              :in => %i[created updated renamed commented_on annotated reacted_to],
-              :predicates => true
+              :in => %i[created updated renamed commented_on annotated reacted_to]
 
     property :text,
              String
@@ -37,7 +36,7 @@ module CouchDB
 
     validates :text,
               :presence => true,
-              :if => :commented_on?
+              :if => -> { predicate == :commented_on? }
 
     validates :subject,
               :presence => true
@@ -54,6 +53,13 @@ module CouchDB
       else
         "#{subject} #{predicate} #{item}"
       end
+    end
+
+    ##
+    # Views
+    #
+    design do
+      view :all
     end
   end
 end
