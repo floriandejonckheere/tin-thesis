@@ -217,17 +217,33 @@ It utilizes consistent hashing, which means that the document is hashed and dist
 Finally, the Neo4j's clustering and horizontal scalability capabilities are less extensive.
 Neo4j sharding is based on cache sharding, where only the data cache is sharded.
 
-% TODO: image for replication types
-The partitioning method goes hand in hand with the replication capabilities of the data store.
-Replication types are usually characterised and divided based upon the amount of \textit{masters} and \textit{slaves} in the cluster.
-A master is a server that is the authoritative source for data, while a slave is a node that is dependent on the master for certain queries.
-The intention of this system is that when one or more hosts go down, the cluster can still continue to handle requests, albeit not every single one depending on what node went down.
-For example, Neo4j's slave nodes in a cluster can only handle read requests, all write requests are forwarded to the master node.
-A master failure in this setup renders the cluster at least read-only, and potentially only able to access part of the data that wass stored on the slave nodes.
+\begin{figure}
+  \centering
+  \includegraphics[width=.6\textwidth]{img/replication-master-slave.png}
+  \caption{Master-slave replication}
+  \label{img:replication-master-slave}
+\end{figure}
 
+Another important feature related to the architecture of a storage cluster is the replication model and capabilities.
+Replication models are characterised and divided based upon the amount of \textit{masters} and \textit{slaves} in the cluster.
+A \textit{master} is a server that is the authoritative source for data, while a \textit{slave} is a node that is dependent on the master for certain queries.
+This implies that in a master-slave replicated cluster, all write requests go solely to the master node, which then replicates the modifications to the slave nodes.
+While master nodes can handle read and write requests, slave nodes can only handle read requests.
+The inherent scalability for read requests in this architecture means it is a very good candidate for data models where the read requests outnumber the write requests by a large amount.
+
+As a side-effect, the cluster itself is more resilient to slave node failures: when a slave node goes down, the remaining nodes can balance the load and the cluster can continue to function.
+However, a master failure in this setup renders the cluster at least read-only, and -- depending on the sharding configuration -- potentially only able to serve part of the data that was stored on the nodes.
+Neo4j is an example of a data store that operates under a master-slave replication configuration.
 % TODO: references
 In certain cases the cluster is able to automatically recover from a master failure by a process called \textit{master election}, where a new authoritative master node is chosen.
-This type of capability is commonly seen key-value stores.
+This type of capability is commonly seen by data stores supporting more simple data models, such as key-value stores.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.4\textwidth]{img/replication-master-master.png}
+  \caption{Master-master replication}
+  \label{img:replication-master-master}
+\end{figure}
 
 % TODO: fact check
 Similarly to Neo4j, MongoDB operates in a master-slave configuration: one authoritative master, and an undetermined amount of slave nodes.
