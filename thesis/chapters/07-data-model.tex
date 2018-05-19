@@ -84,6 +84,7 @@ We present the following conventions and rules to be followed in all NoSQL data 
   \item The action of an activity is called the \textit{predicate}
   \item The predicate can be one of the following values:\\ \texttt{created}, \texttt{updated}, \texttt{renamed}, \texttt{commented\_on}, \texttt{annotated}, \texttt{reacted\_to}
   \item The object to which an action refers, is called the \textit{item}
+  \item The item can reference topics and comments
   \item No additional attribute to facilitate hyperlinks will be included
 \end{itemize}
 
@@ -99,23 +100,7 @@ Using this logical description of the domain, we can start to derive physical da
 \subsection{Document-oriented data model}
 \label{subsec:document-data-model}
 
-% References (normalized) vs embedded collections (denormalized)
-  % Normalized: when read performance outweighs data duplication, hierarchical data sets
-  % Denormalized: "contains" relationship, one-to-many
-% Document growth: small documents
 % Atomicity on write document level: atomic dependencies stored in same document
-% Sharding: on date?
-% Indexes: inexpensive because write once
-% Data expiration/TTL: can't use
-
-% Capped collections
-
-% Inclusion of data: outdated data sometimes
-
-% Step 1. Normalized or denormalized?
-% Embedded collections (denormalized) -> better read performance but a bit of data duplicated
-% References (normalized) -> Smaller documents, but gain is very small since only a few fields get duplicated (typically only display_name)
-% Document stores prefer flat structure, or not linked that much
 
 % Step 2. See links, find entities
 % event -> subject
@@ -143,18 +128,60 @@ Using this logical description of the domain, we can start to derive physical da
 % Step 5. Denormalized data model + example JSON
 % Step 6. Implement in Ruby
 
-Document data stores provide a number of different approaches to storing linked data.
-We attempt to cover the different methods, discussing common approaches and trade offs for each option.
-In general, data can be linked in two different ways.
+The fundamental building block of a document data store is a document.
+The document data model provides two distinct approaches to link between different documents.
+Each option has its own advantages and disadvantages, and the proposed data models attempt to use the most efficient option for the use case, despite making some tradeoffs.
 
 \begin{enumerate}
-  \item Embedded collections (denormalized data).
+  \item \textbf{Embedded collections} (denormalized data).
         Embedding of data stores information in a single document.
         This technique is commonly used when the entity \textit{contains} the embedded entity: for example storing contact details of a user.
         Another use for this approach is storing one-to-many relationships, where the child documents are always queried within the context of the parent document.
-  \item References (normalized data): Storing a reference to another document, similar to storing keys to other tables in the relational model.
-
+  \item \textbf{References} (normalized data): Storing a reference to another document, similar to storing keys to other tables in the relational model.
 \end{enumerate}
+
+Embedded collections provide better performance, since the embedded document is included in the parent document and the database management system does not have to execute an additional query.
+The disadvantage of embedding is that data may be duplicated, if an embedded document is included in multiple parent documents.
+Using referenced documents yields the exact opposite effects: slower performance due to additional queries, yet less data duplication in case of a multiply referenced document.
+
+Since the data model has to be optimized for read performance, we will try to use embedded documents wherever possible.
+
+From the domain description of the use case, we can identify one main entity which may be stored in its own collection: \texttt{Event}.
+This is the entrypoint of the Recent Activity feed, and the event document will embed or reference all other entities.
+The first relation that can be identified is the subject relation: every event has exactly one subject.
+However, we can infer that \texttt{Event} is not the only entity that has a link to \texttt{Subject}.
+Every comment also references \texttt{Subject}.
+Since the only information included in the \texttt{Subject} entity is a name, we have chosen to embed \texttt{Subject} in the parent documents.
+The data duplication of a single attribute is negligible as opposed tot the performance penalty encountered when using a referenced document in this case.
+
+The same train of thought can be applied to \texttt{Topic}: both \texttt{Event} and \texttt{Comment} reference the entity, yet it only contains one attribute.
+Subsequently \texttt{Topic} will be used only as an embedded document as well.
+
+One \TODO{remarkable} downside of this approach is that when a user changes the name or title of a subject or topic respectively, the existing data in the NoSQL database does not get updated and the Recent Activity feed may display outdated information.
+
+The way a comment gets stored in the document data store is very particular.
+The storage of both a comment and an event referencing the comment in different collections is redundant, since the database will never be queried from the perspective of a comment.
+Considering this, every top-level comment -- comments made on a topic -- is stored as a \texttt{text} attribute of an event.
+This way the \texttt{item} of that event still refers to the topic itself.
+Events for child comments -- comments made on another comment -- are structured differently.
+In this case, the \texttt{item} refers to the parent comment, but does not include its text.
+This flexible approach allows us to store the information efficiently.
+% TODO: code samples for events and comments -- specifically child comments
+
+This leads us to the following physical document data models, implemented in the Ruby on Rails application.
+
+\subsubsection{MongoDB implementation}
+\label{subsubsec:mongodb-implementation}
+
+% TODO: reference
+The physical data model for MongoDB is implemented using the Mongoid library, which provides Ruby and Ruby on Rails bindings to the data store.
+Mongoid is officially supported by Mongo, Inc.
+
+\subsubsection{CouchDB implementation}
+\label{subsubsec:couchdb-implementation}
+
+% TODO: reference
+The physical data model for CouchDB is implemented using the Couchrest Model library, which provides Ruby and Ruby on Rails bindings to the data store.
 
 \subsection{Graph-oriented data model}
 \label{subsec:graph-data-model}
