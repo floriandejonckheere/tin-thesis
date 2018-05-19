@@ -1,33 +1,33 @@
 \chapter{Data model}
 \label{ch:data-model}
 
-In this chapter we describe the conceptual domain of this research, and provide a logical data model that fits the domain.
-For every NoSQL data model selected, we also propose a physical data model.
-This data model will then be implemented in a Ruby on Rails application using the available language bindings.
-Finally, a set of reference queries will be proposed, queries that may typically be used in the context of the Recent Activity feed.
+In this chapter we describe the conceptual domain of the use case, and provide logical data models applied to the NoSQL data models selected in the previous chapter.
+Physical data models for MongoDB, CouchDB and Neo4j will be presented, along with an implementation in a demo Ruby on Rails application using the available language bindings.
+Finally, a set of reference queries that may typically be used in the context of the Recent Activity feed will be proposed.
+These queries will be formally described, and subsequently implemented in the query languages specific to the three data stores.
 
 \section{Domain description}
 \label{sec:domain-description}
 
-On the Open Webslides platform, there is technically no distinction between a teacher's and a student's account.
-Both of them are represented by the \texttt{User} entity in the database.
+On the Open Webslides platform, no distinction is made between a teacher and a student in the data model.
+Both are represented by the \texttt{User} entity in the database.
 This entity contains information pertaining to the user, such as email address, first name and last name.
 The data models described in the next sections will closely follow the existing data model of the platform.
-However, certain irrelevant attributes are omitted from the model in order to improve readability and simplify abstraction.
+However, attributes irrelevant to the Recent Activity feed are omitted from the model and not available in the NoSQL data store, in order to improve efficiency and simplify abstraction.
 
 A user can create or modify course content in an interactive online editor.
 The actual course content, formally called a topic, is stored inside a git repository on the filesystem.
 However, the platform also maintains a record of topic metadata in the relational database.
 This metadata includes title and description, but also permissions and contributors on the course content.
-Per illustration, the \texttt{title} and \texttt{description} attributes are included in the data models.
 
-From a technological perspective, the user has three distinct paths of action for (co-)creation on course content.
+From a technical perspective, the user has three distinct paths of action for creation and co-creation on course content.
 Since the permission model in the platform is not relevant to this research, we will not go into detail on it.
-First, the user can directly modify the course content if the user has permission to do so.
+First, the user can directly modify the course content if the user has permission to perform this action.
 The second option is creating annotations on the topic.
 This allows the user to attach private or public notes to specific content on the topic.
-Annotations are stored in the relational database, mapped to the \texttt{Annotation} entity.
-The entity contains a logical pointer to the annotated content, which is omitted from the data models.
+Annotations are stored in the relational database, in the \texttt{Annotation} entity.
+The entity contains a logical pointer to the annotated content.
+
 The final possibility to integrate user content into a topic is by adding comments.
 In contrast to annotations, comments have a typical structure.
 They can take the form of questions, notes, suggestions, and can also be nested - which allows simple interaction and conversation between multiple users, and effectively enables dialogue between students and teachers.
@@ -37,37 +37,61 @@ This entails that the authoritative information will not be stored in that data 
 Accordingly, some information may be omitted from this data store, while other information is copied.
 
 Consider the following domain description structured as activity events in the Recent Activity feed.
+These events are items that a user may typically encounter in the web application as part of the feed.
 
 ``
-\textbf{John} created \textbf{Topic A}.
+\textbf{\underline{John}} created \textbf{\underline{Topic A}}.
 ''
 
 ``
-\textbf{Jane} commented on \textbf{Topic B}:
-\textit{This is not a good example. Try and find a better one.}
+\textbf{\underline{Jane}} commented on \textbf{\underline{Topic B}}:
+\textit{This is not a good example. Try and find a better one.}}
 ''
 
 ``
-\textbf{John} commented on \textbf{Jane}'s comment on \textbf{Topic B}:
-\textit{I agree.}
+\textbf{\underline{John}} commented on \textbf{\underline{Jane}'s comment} on \underline{Topic B}:
+\textit{I agree.}}
 ''
 
 ``
-\textbf{Jane} annotated \textbf{Topic A}.
+\textbf{\underline{Jane}} annotated \textbf{\underline{Topic A}}.
 ''
 
 ``
-\textbf{Bob} reacted to \textbf{John}'s comment on \textbf{Topic B}.
+\textbf{\underline{Bob}} updated \textbf{\underline{Topic B}}.
 ''
-% TODO: elaborate a bit more on the different event types
-% TODO: clearly define relations/hyperlinks
-% TODO: explain more where these phrases are used
-% TODO: explain (subj,pred,obj) -> sentence, not RDF
-% TODO: additional, different events for topics page?
 
-Using this description of the domain, we can start to derive logical and physical data models for the selected NoSQL data stores.
+``
+\textbf{\underline{Bob}} reacted to \textbf{\underline{John}'s comment} on \underline{Topic B}.
+''
 
-% Typical usage of data is important: write once, no update, read many queried reverse chronologically
+From this description we can already derive some requirements to take into account when designing the data models.
+Every event has a structure characterised by three aspects.
+First, there is a user at the base of the action, and in the descriptions this is the subject of every sentence.
+Second, the subject performs an action, and the actions are limited to a certain subset as determined by the developer.
+Third, the user operates on an object, which is usually but not always a topic.
+
+In the activity events, the underlined text fragments represent hyperlinks in the web application to the relevant entities.
+A hyperlink for a user may link to the profile page of the user, or the contributions of the respective user on the relevant topic.
+Similarly, a hyperlink for a topic may link to a page that presents an overview of the topic, or directly to course content inside the topic.
+The actual destination is up to the developers of the platform, and is not directly relevant for this research.
+However, the existence of these hyperlinks entails that every aspect previously described has to consist of at least one attribute that is used in the hyperlinks -- most likely this will be the unique identifier of the entity in question.\\
+
+We present the following conventions and rules to be followed in all NoSQL data models.
+
+\begin{itemize}
+  \item The user of an activity is called the \textit{subject}
+  \item The action of an activity is called the \textit{predicate}
+  \item The predicate can be one of the following values:\\ \texttt{created}, \texttt{updated}, \texttt{renamed}, \texttt{commented\_on}, \texttt{annotated}, \texttt{reacted\_to}
+  \item The object to which an action refers, is called the \textit{item}
+  \item No additional attribute to facilitate hyperlinks will be included
+\end{itemize}
+
+Furthermore, since the data in the NoSQL data store is generated in function of the business-critical data in the platform, it is expected to be written to the database only once, and read many times.
+This enables us to design data models where read performance is prioritized over write performance.
+It is also important to note that the data is always queried in a reverse chronological way, since the Recent Activity feed displays the most recent events first.
+
+Using this logical description of the domain, we can start to derive physical data models for the selected NoSQL data stores.
 
 \section{Physical data model}
 \label{sec:physical-data-model}
@@ -154,6 +178,10 @@ The first entity that is identified are the \textit{nodes}
 % Event
 % Comment->User, Comment->Topic due to the nodes inherent referent nature
 
+% Assumptions: cannot create nested comments for more than 2 levels
+% Comments on topics are not instantiated
+% Comments on other comments => other comment is instantiated
+% No data duplication, because 'other comment's  text is not even in entity :D
 
 From the domain description, we can derive the labels, nodes and relationships to build the graph data model.
 The first entities that are identified are the nodes.
@@ -282,15 +310,17 @@ Similarly to topics, a user's profile page also includes a timeline of \TODO{his
 \label{subsubsec:query-5}
 
 ``
-Insert N given events
+Insert N given :created or :updated events
 ''
 
-Finally, since read requests will most likely outnumber write requests with several magnitudes, only one insertion query is presented.
-This query inserts a random event into the database.
+Finally, since read requests will most likely outnumber write requests with several magnitudes in the studied use case, only one query where data is inserted is presented.
+The query creates a single event in the data store.
 
 \subsubsection*{MongoDB}
 \subsubsection*{CouchDB}
 \subsubsection*{Neo4j}
+
+% TODO: Explain what ORMs are available
 
 \section{Conclusion}
 \label{sec:data-model-conclusion}
@@ -299,3 +329,5 @@ In this chapter we presented an introduction to the domain, and provided some ex
 Futhermore, we analyzed this domain description, and derived a logical data model for both document- and graph-oriented data stores.
 Next, we proposed an implementation of this logical data model for two document-oriented, and one graph-oriented data store in the Ruby language bindings available for the respective database management systems.
 Finally, we presented five reference queries for the three data stores, and included both a language binding-specific DSL and a physical query implementation for each.
+
+% TODO: Conclusion about ORMs
