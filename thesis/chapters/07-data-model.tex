@@ -186,71 +186,54 @@ The physical data model for CouchDB is implemented using the Couchrest Model lib
 \subsection{Graph-oriented data model}
 \label{subsec:graph-data-model}
 
-Using the examples of activity events in \cref{sec:domain-description}, we can identify the components used in database graph model.
-The first entity that is identified are the \textit{nodes}
+Using the examples of activity events in \cref{sec:domain-description}, several entities can be identified.
+These entities are used to model the \textit{nodes}, \textit{labels} and \textit{edges} in the graph data stores
 
-%% Nodes
-
-% User, Annotation, Topic, Comment
-
-%% Labels
-
-% Subject, Object
-
-%% Relations
-
-% Event
-% Comment->User, Comment->Topic due to the nodes inherent referent nature
-
-% Assumptions: cannot create nested comments for more than 2 levels
-% Comments on topics are not instantiated
-% Comments on other comments => other comment is instantiated
-% No data duplication, because 'other comment's  text is not even in entity :D
-
-From the domain description, we can derive the labels, nodes and relationships to build the graph data model.
-The first entities that are identified are the nodes.
-In the domain, we have four main entities.
+The first step is to extract the nodes from the description.
+In the domain, there are four main entities.
 
 \begin{itemize}
-  \item \texttt{User}
-  \item \texttt{Topic}
-  \item \texttt{Comment}
-  \item \texttt{Annotation}
+  \item Event
+  \item Subject
+  \item Topic
+  \item Comment
 \end{itemize}
 
-In order for the Recent Activity feed to string all this together, there is also an entity to represent an activity event called \texttt{Event}.
-\texttt{Event}s have relationships to all other entities according to the (subject, predicate, object)-triple explained in \cref{sec:logical-data-model}.
+Similarly to the document data model, \texttt{Event} represents an entry in the Recent Activity feed.
 
-% Labels
-Neoj data modeling supports something called \textit{Labels}, a graph construct that groups nodes into sets.
-A set contains nodes with the same label.
+Neo4j data modeling also supports labels, a graph construct that groups nodes into sets.
+A set contains all nodes that are labeled with the same label.
 A node can have any number of labels.
 
-In the domain model, we can distinguish one case where labels are very useful.
-The \textit{object} of the event triple can be one of multiple entities, in this thesis the scope is restricted to \texttt{Topic}, \texttt{Comment} and \texttt{Annotation}.
-Using this label abstraction allows future expansion with more object entity types.
-Consequently, we propose the label \texttt{Object} which aggregates nodes of these types.
-To keep the naming in the data model consistent, the lable \texttt{Subject} will also be applied to nodes of the type \texttt{User}.
+In the use case, there is one important opportunity to make use of node labels.
+The \texttt{item} relation of \texttt{Event} can reference multiple other entities, in this case \texttt{Topic} and \texttt{Comment}.
+Using the label \texttt{Item} on top of the \texttt{Topic} and \texttt{Comment} labels allows room for future expansion to other entity types.
 
-% Relationships
-We can identify the following interactions between the entities:
+A number of relationships can be identified in the domain description.
 
 \begin{itemize}
-  \item A \texttt{User} is the author of many \texttt{Topic}s
-  \item A \texttt{Topic} has many \texttt{Comment}s attached to it
-  \item A \texttt{Topic} has many \texttt{Annotation}s attached to it
-  \item Both \texttt{Comment}s and \texttt{Annotation}s are created by a \texttt{User}
-  \item A \texttt{Comment} optionally has many children comments
+  \item \texttt{Event} has one \texttt{Subject}
+  \item \texttt{Event} has one \texttt{Item}
+  \item \texttt{Comment} has one \texttt{Subject}
+  \item \texttt{Comment} has one \texttt{Topic}
 \end{itemize}
 
-Additionally, the \texttt{Event} entity introduces the following interactions:
+These relationships are modeled in the graph data store as edges.
 
-\begin{itemize}
-  \item An \texttt{Event} relates to a \texttt{User} (the subject)
-  \item An \texttt{Event} relates to an object
-\end{itemize}
+This leads to the graph data model in figure \ref{fig:graph-model}.
 
-This leads us to the graph model in figure \ref{fig:graph-model}.
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\textwidth]{img/graph-model.png}
+  \caption{Graph data model}
+  \label{fig:graph-model}
+\end{figure}
+
+\subsubsection{Neo4j implementation}
+\label{subsubsec:neo4j-implementation}
+
+% TODO: reference
+The physical data model for Neo4j is implemented using the community-supported Neo4j.rb library, which provides Ruby and Ruby on Rails bindings to the data store.
 
 \section{Reference queries}
 \label{sec:reference-queries}
