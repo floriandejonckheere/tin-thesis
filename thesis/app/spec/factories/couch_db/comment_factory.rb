@@ -2,5 +2,6 @@
 
 FactoryBot.define do
   factory :couchdb_comment, :class => CouchDB::Item do
+    item_type :comment
   end
 end

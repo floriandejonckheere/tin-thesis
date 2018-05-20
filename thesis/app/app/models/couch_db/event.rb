@@ -49,9 +49,9 @@ module CouchDB
     #
     def to_s
       if predicate == :commented_on
-        "#{subject} #{predicate} #{item}: #{text}"
+        "#{subject} #{predicate.to_s.humanize.downcase} #{item}: #{text}"
       else
-        "#{subject} #{predicate} #{item}"
+        "#{subject} #{predicate.to_s.humanize.downcase} #{item}"
       end
     end
 

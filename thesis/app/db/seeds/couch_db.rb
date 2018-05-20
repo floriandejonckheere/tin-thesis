@@ -5,7 +5,7 @@ puts 'Seeding CouchDB database'
 ##
 # Clear database
 #
-CouchDB::Event.all.each &:delete
+CouchDB::Event.all.each &:destroy
 
 ##
 # Seed database

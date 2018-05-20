@@ -53,9 +53,9 @@ module CouchDB
     #
     def to_s
       case item_type
-      when :topic
+      when 'topic'
         "'#{title}'"
-      when :comment
+      when 'comment'
         "#{subject}'s comment on #{topic}"
       else
         'item'
