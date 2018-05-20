@@ -16,7 +16,8 @@ module CouchDB
     property :text,
              String
 
-    timestamps!
+    property :created_at,
+             Time
 
     ##
     # Relationships
@@ -37,6 +38,9 @@ module CouchDB
     validates :text,
               :presence => true,
               :if => -> { predicate == :commented_on }
+
+    validates :created_at,
+              :presence => true
 
     validates :subject,
               :presence => true
@@ -60,9 +64,6 @@ module CouchDB
     #
     design do
       view :all
-
-      view :by_subject
-      view :by_item
     end
   end
 end
