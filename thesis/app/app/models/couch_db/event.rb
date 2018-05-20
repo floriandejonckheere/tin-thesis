@@ -63,7 +63,12 @@ module CouchDB
     # Views
     #
     design do
-      view :all
+      view :ordered,
+           :map => "function(doc) {
+             if (doc['#{model_type_key}'] == 'CouchDB::Event' && doc.created_at) {
+               emit([doc.created_at], doc);
+             }
+           }"
     end
   end
 end
