@@ -36,7 +36,7 @@ module CouchDB
 
     validates :text,
               :presence => true,
-              :if => -> { predicate == :commented_on? }
+              :if => -> { predicate == :commented_on }
 
     validates :subject,
               :presence => true
@@ -60,6 +60,9 @@ module CouchDB
     #
     design do
       view :all
+
+      view :by_subject
+      view :by_item
     end
   end
 end
