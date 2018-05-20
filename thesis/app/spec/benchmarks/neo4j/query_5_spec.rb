@@ -14,14 +14,14 @@ RSpec.describe 'Neo4j' do
                    .id
 
       # Select random topic
-      topic_id = Neo4j::Topic
-                 .skip(rand Neo4j::Topic.count)
-                 .first
-                 .id
+      item_id = Neo4j::Item
+                .skip(rand Neo4j::Item.count)
+                .first
+                .id
 
       benchmark do
         Neo4j::Event .create! :subject => subject_id,
-                              :item => topic_id,
+                              :item => item_id,
                               :predicate => :updated
       end
     end
