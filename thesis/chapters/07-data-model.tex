@@ -2,7 +2,7 @@
 \label{ch:data-model}
 
 In this chapter we describe the conceptual domain of the use case, and provide logical data models applied to the NoSQL data models selected in the previous chapter.
-Physical data models for MongoDB, CouchDB and Neo4j will be presented, along with an implementation in a demo Ruby on Rails application using the available language bindings.
+Physical data models for MongoDB, CouchDB and Neo4j will be presented, along with an implementation in a demo Ruby on Rails application using Ruby language bindings.
 Finally, a set of reference queries that may typically be used in the context of the Recent Activity feed will be proposed.
 These queries will be formally described, and subsequently implemented in the query languages specific to the three data stores.
 
@@ -97,7 +97,28 @@ Using this logical description of the domain, we can start to derive physical da
 \section{Physical data model}
 \label{sec:physical-data-model}
 
-% TODO: motivate ORM choice and alternatives
+\subsection{Language bindings}
+\label{subsec:language-bindings}
+
+\Cref{tbl:query-language} lists for every NoSQL data store the programming languages for which language bindings are available.
+Some of these are developed, maintained and officially supported by the database vendor, while others blossomed forth from a community effort.
+% TODO: references
+For developing the physical data model, we have selected the most popular language bindings for Ruby and Ruby on Rails' ActiveModel according to RubyGems.
+If there is an official library available, it is preferred over a community library, with a view on the maintainability of the application.
+
+For MongoDB, an officially supported language binding is available for plain Ruby and Ruby on Rails.
+% TODO: reference
+The latter library, called Mongoid, integrates MongoDB directly into the Rails ecosystem and was chosen as a viable candidate for developing the physical data model and queries.
+
+CouchDB on the contrary, does not have an officially supported Ruby binding.
+% TODO: reference
+The most popular gem on RubyGems is CouchRest and its ActiveModel equivalent, CouchRest Model.
+However, as of the time of writing, CouchRest Model is not well maintained, with only five beta releases and no stable releases during the past three years.
+Since this library provides all the necessary integrations to develop the CouchDB data model and queries, it was chosen as framework in which to implement these.
+
+Finally, Neo4j does not have an officially supported library, however the database vendor recommends using a community supported alternative called Neo4j.rb.
+This library integrates the Neo4j graph database with the Ruby on Rails stack and was subsequently used as a platform to develop the graph data model and queries.
+
 
 \subsection{Document-oriented data model}
 \label{subsec:document-data-model}
