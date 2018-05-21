@@ -8,38 +8,70 @@ A custom benchmarking framework was implemented using the RSpec library to provi
 
 % TODO: motivate why ORM used and not direct interaction with database
 
-\section{Testing setup}
-\label{sec:testing-setup}
+\section{Previous work}
+\label{sec:previous-work}
+
+% Netflix benchmark, http://www.bgbenchmark.org/BG/, XGDBench
+
+In current literature there are already some studies present that compare NoSQL data stores based on a performance review.
+\textcite{Abramova2014} compare the Cassandra, HBase, MongoDB, OrientDB and Redis data stores.
+The authors are using the Yahoo! Cloud Serving Benchmark \autocite{Cooper2010}, which presents a framework to facilitate performance comparisons for cloud-based systems by providing a core set of benchmarks.
+The paper concludes that Redis, as in-memory database, provides the best performance in query processing.
+Redis is optimized for \textit{get} and \textit{put} operations due to in-memory data mapping.
+On the other hand, Cassandra and HBase are optimized for update operations.
+
+Finally, MongoDB was found to be the data store with the slowest execution times, having an overall performance that was more than 58 times lower in comparison with Redis.
+This proves that in-memory mapping of data results in a very performant query processing system.
+
+\textcite{Schmid2015} develop a performance comparison aimed at applications using geo-functionalities present in the database management system.
+The authors conclude that requests purely on attributes NoSQL data stores are superior over relational data stores.
+For requests using geo-functions the NoSQL data stores also perform constant for increasing dataset sizes.
+For smaller datasets with a more interlinked architecture, the relational data stores perform predictably better.
+
+\textcite{Barahmand2015} quantify the horizontal and vertical scalability of MongoDB and HBase in the context of a social benchmarking framework named BG \autocite{Barahmand2013}.
+This benchmarking framework models a social graph in the data store and performs simple operations reading and writing small amounts of data with in a social interaction context.
+The researchers found that both data stores scale superlinearly, limited by the complete utilization of certain nodes in the cluster.
+
+The experimental comparison by \textcite{Kolomivcenko2013} concludes that Neo4j is the most performant product under the compared graph data stores, especially in graph traversal queries.
+The authors also indicate that MongoDB performs well in queries that are not or lightly graph related.
+
+During the research of this thesis, we decided not to use BG or the Yahoo! Cloud Serving Benchmark.
+First, there is already literature in the field concerning these benchmarks and the data stores that were selected for comparison in this thesis.
+These sources provide additional input when formulating an answer on the research questions.
+However, developing custom benchmarks adjusted to the workload and environment the data schema is intended to be used in, it presents a more realistic view.
+Coupled with the fact that this research delivers a Ruby implementation ready to be integrated into the existing platform, the decision not to primarily use any external benchmarks was taken.
+
+\section{Experimental setup}
+\label{sec:experimental-setup}
 
 In order to keep the results of the tests consistent, the following rules are applied:
 
 \begin{itemize}
-  \item Query caching is disabled in MongoDB. Neo4j does not have an equivalent feature.
+  \item Query caching is disabled in Mongoid. CouchRest Model and Neo4j.rb do not have an equivalent feature.
   \item Connection pooling is disabled
-  \item Clustering is disabled
+  \item Clustering is disabled as horizontal scalability performance is not within the scope of this research
   \item No additional performance tweaks were applied on the database management systems
-  \item All disk persistence is mapped to memory on a RAM disk, transparent to the database management systems
+  \item \TODO{All disk persistence is mapped to memory on a RAM disk, transparent to the database management systems}
 \end{itemize}
 
 Native protocols were chosen for every data store: Mongo Wire Protocol for MongoDB, HTTP for CouchDB and Bolt for Neo4j.
 
-All benchmarks were performed on a single machine with the following specifications:
+All tests were performed on a single machine with the following specifications.
 
 \begin{itemize}
-  \item Intel Core i7-3840QM (4 cores, 8 threads), 45W TDP
+  \item Ruby 2.5.0, operating under Arch Linux
+  \item Intel Core i7-3840QM (4 cores, 8 threads)
   \item Hyperthreading and \TODO{Intel Turbo Boost} enabled
   \item 32GB DDR4 RAM
   \item 180GB SATA-III SSD
 \end{itemize}
 
-The following software versions were used:
+The data store versions that were tested are the following versions.
 
 \begin{itemize}
-  \item Arch Linux (rolling release)
   \item MongoDB 3.6.3
   \item CouchDB 2.1.1
   \item Neo4j Community Edition 3.0.6
-  \item Ruby 2.5.0
 \end{itemize}
 
 \section{Procedure}
@@ -48,9 +80,14 @@ The following software versions were used:
 In order to compare the performance of the three data stores, the following procedure was followed.
 
 First, the database was filled with random testing data.
-The amount of testing data linearly depends on a multiplication factor, which \TODO{varied} throughout the benchmark tests.
+The script in \TODO{listing whatever} was developed in order to create random data and insert this into each of the three data stores.
+The variable \texttt{FACTOR} in the script is a multiplication factor that directly influences the amount of data generated.
+For the benchmarks in this research, the \texttt{FACTOR} variable was set to \TODO{WHATEVER}, which yields \TODO{WHATEVER} entities in every database.
+
+% TODO: describe amount of requests etc. better
 
 Next, the full test suite was ran sequentially for the three data stores, and the timing results were written to separate files.
+During the test suite all three databases were running in the background.
 It is important to note that every reference query was executed many times, depending on different factors.
 Since the execution time of a single iteration is negligable, every query was executed a number of times to negate the effect of external factors, such as operating system scheduling and I/O wait times.
 We have chosen the iteration counts of \TODO{1 000, 10 000 and 100 000}.
@@ -60,12 +97,9 @@ We believe a sane default for this value in a concrete implementation would be 1
 However, in the test suite this variable takes the value of \TODO{100, 1 000 and 10 000} to allow for more reliable timings.
 
 This gives us 9 timing results for every query for every data store in total.
-These results are analyzed, graphed and discussed in the sections below.
 
-\section{Previous work}
-\label{sec:previous-work}
-
-% Netflix benchmark, http://www.bgbenchmark.org/BG/, Yahoo! Cloud Serving Benchmark (YCSB)
+\section{Results}
+\label{sec:results}
 
 \section{Conclusion}
 \label{sec:comparative-study-conclusion}
