@@ -9,7 +9,7 @@ RSpec.describe 'CouchDB' do
     describe 'Select N most recent events, ordered reverse chronologically' do
       benchmark do |count|
         CouchDB::Event
-          .ordered
+          .by_created_at
           .descending
           .limit(count)
           .each(&:to_s)

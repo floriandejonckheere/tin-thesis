@@ -63,10 +63,27 @@ module CouchDB
     # Views
     #
     design do
-      view :ordered,
+      ## Return events ordered by created_at
+      view :by_created_at,
            :map => "function(doc) {
-             if (doc['#{model_type_key}'] == 'CouchDB::Event' && doc.created_at) {
-               emit([doc.created_at], doc);
+             if (doc['#{model_type_key}'] == 'CouchDB::Event') {
+               emit(doc.created_at, doc);
+             }
+           }"
+
+      ## Return events with topic item, ordered randomly
+      view :random_with_topic,
+           :map => "function(doc) {
+             if (doc['#{model_type_key}'] == 'CouchDB::Event' && doc.item.item_type == 'topic') {
+               emit(Math.random(), doc);
+             }
+           }"
+
+      # Return events with topic item
+      view :with_topic,
+           :map => "function(doc) {
+             if (doc['#{model_type_key}'] == 'CouchDB::Event' && doc.item.item_type == 'topic') {
+               emit(doc.created_at, doc);
              }
            }"
     end
