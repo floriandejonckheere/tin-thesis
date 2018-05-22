@@ -6,24 +6,23 @@
 \label{ch:methodology}
 
 Analyzing and comparing every NoSQL data storage solution is not feasible due to the sheer number of competing products.
-Therefore we have made a selection of the most popular NoSQL data stores in the different NoSQL categories that are included in the research.
-This selection is mainly motivated by a list of the most popular databases kept up to date by \textcite{DBEngine2018}.
-For every category, we select the most popular databases by reported score, which is in turn based on several other criteria.
+Therefore only a selection of the most popular NoSQL data stores in the different NoSQL categories are considered in the research.
+This selection is motivated by a list of the most popular databases kept up to date by \textcite{DBEngine2018}, and by the Gartner Magic Quadrant 2018 \autocite{Gartner2018}.
+For every category, we select the most popular databases by quadrant and reported score, which is in turn based on several other criteria.
 DB-Engine Ranking attempts to estimate the overall popularity of the data store on the Web.
 
-Next, the selected data stores are committed to a general comparison.
-In this comparative study we analyze every solution based on various aspects.
+Next, the selected data stores are subject to a use case based comparison.
+In this comparative study every solution is analyzed based on various aspects.
 The data model, which is the main driving force behind many other aspects, is one of the main focus points.
-We also focus on the querying capabilities, scaling, partitioning and replication, consistency and concurrency control.
-Certain aspects are not discussed in detail due to their irrelevance to the presented use case.
-Examples of these criteria include security, authentication and auditing.
+The NoSQL data stores are also discussed in relation to querying capabilities, scaling, partitioning and replication, consistency and concurrency control.
+Certain aspects are not analyzed in detail due to their irrelevance to the use case, such as database security, authentication and auditing capabilities.
 
-In the following chapter, the conceptual and logical data model of the Open Webslides project is presented.
-Building upon this, a physical data model is discussed and implemented for the various categories of NoSQL data stores that were selected in the first part of the research.
-Finally, the characteristic data access flow within the application is examined, and a few reference queries are introduced.
+In the subsequent chapter, the conceptual and logical data model of the Open Webslides project is presented.
+Building upon this, a physical data model is discussed and implemented for the various NoSQL data stores that were selected in the first part of the paper.
+Finally, the characteristic data access flow within the application is examined, and five reference queries are introduced.
 These queries are examples of queries that could typically be used to retrieve data from the data store as part of the normal operating procedures of the Open Webslides application.
 
 Finally, the implementation of the data model and the reference queries are used in the last part of the research as a base for qualitative benchmarks.
 Since the Open Webslides application is built on Ruby and Ruby on Rails, the benchmarks will be implemented in a Ruby on Rails application, making use of the available Ruby language bindings to the various data stores examined.
-For every data store used in the benchmark, the most popular ORM gem is used as determined by the RubyGems repository
-Related work and previous NoSQL database benchmarks are also considered in this part, however it is referenced only as a baseline due to the fact that previous work does not cover the specific use case and NoSQL data stores studied in this thesis.
+For every data store used in the benchmark, the most popular ORM gem is used as determined by the RubyGems repository \autocite{RubyGems2003}.
+Related work and previous NoSQL database benchmarks are also considered in this part, however it is referenced only as a baseline due to the fact that previous work does not cover the specific use case and NoSQL data stores studied in this research.
