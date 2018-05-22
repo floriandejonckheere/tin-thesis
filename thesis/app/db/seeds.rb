@@ -2,7 +2,7 @@
 
 ## Variables
 # Test data multiplication factor
-FACTOR = 100
+FACTOR = 5000
 
 ##
 # Global utility functions
@@ -21,5 +21,5 @@ end
 #
 
 require_relative 'seeds/mongo_db'
-require_relative 'seeds/couch_db'
+# require_relative 'seeds/couch_db'
 require_relative 'seeds/neo4j'
