@@ -101,5 +101,48 @@ This gives us 9 timing results for every query for every data store in total.
 \section{Results}
 \label{sec:results}
 
+% TODO first: iteration count is not a big variable anymore, but explain that the tests
+% are ran a number of times after each other sequentially. Count is written down in every test and depends on database
+
+% Use only query 1 and 3, because 4 is similar to 3 and ~~2 is not implemented in every language?~~
+% also consider 5
+
+% Experiment 1: varying data set size
+% For a fixed iteration count (M: 50_000, N: 5000)
+% For a fixed query count (100)
+
+% Experiment 2: varying query count
+% For a fixed dataset size (factor = 5000)
+% For a iteration count (...)
+
+% Experiment 3: comparison of dbs
+% small-scale tests: mongo is 500 times faster
+% formal tests: table with iteration count and execution times for every query
+
+\subsection{Dataset size}
+
+First, the effects of the complete data size are analyzed.
+By varying the multiplication factor in the seed data generator the size of dataset can be controlled.
+
+\input{tables/dataset-size}
+
+\subsection{Iteration count}
+\label{subsec:iteration-count}
+
+First, we will research the effects of the iteration count on the different queries and data stores.
+This experiment represents the sequential lookup on a single node for every query.
+
+The dataset size chosen for these experiments represent a multiplication factor of 5000, yielding roughly 72 000 events in every database.
+A query count of 100 was chosen as sane default.
+
+
+% Variable: iterations
+
+\subsection{Query size}
+
+% Variable: query count
+
 \section{Conclusion}
 \label{sec:comparative-study-conclusion}
+
+%   Language bindings: mongo yes, couch no, neo4j yes; impedance mismatch in mongo, especially related to polymorphism
