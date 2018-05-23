@@ -1,12 +1,9 @@
 \chapter{Empirical study}
 \label{ch:empirical-study}
 
-In this chapter we will implement the previously proposed physical data models for the MongoDB, CouchDB and Neo4j data stores.
-In this context, a Ruby on Rails application was developed that uses three libraries that provide language bindings to the respective data stores.
-% TODO: references
-A custom benchmarking framework was implemented using the RSpec library to provide structure and maintainability and the \texttt{Benchmark} class built into the Ruby implementation to measure query execution.
-
-% TODO: motivate why ORM used and not direct interaction with database
+In this chapter the previously proposed physical data models for MongoDB and Neo4j are implemented and put to the test.
+A Ruby on Rails application was developed that uses Mongoid and Neo4j.rb libraries to provide connectivity to the data stores.
+Custom benchmarking scripts were implemented using the RSpec library \autocite{RSpec2005} and the \texttt{Benchmark} class built into the Ruby implementation.
 
 \section{Previous work}
 \label{sec:previous-work}
@@ -35,11 +32,11 @@ The researchers found that both data stores scale superlinearly, limited by the 
 The experimental comparison by \textcite{Kolomivcenko2013} concludes that Neo4j is the most performant product under the compared graph data stores, especially in graph traversal queries.
 The authors also indicate that MongoDB performs well in queries that are not or lightly graph related.
 
-During the research of this thesis, we decided not to use BG or the Yahoo! Cloud Serving Benchmark.
+During the research of this thesis, the decision not to use BG or the Yahoo! Cloud Serving Benchmark was made.
 First, there is already literature in the field concerning these benchmarks and the data stores that were selected for comparison in this thesis.
 These sources provide additional input when formulating an answer on the research questions.
-However, developing custom benchmarks adjusted to the workload and environment the data schema is intended to be used in, it presents a more realistic view.
-Coupled with the fact that this research delivers a Ruby implementation ready to be integrated into the existing platform, the decision not to primarily use any external benchmarks was taken.
+However, developing custom benchmarks adjusted to the workload and environment the data schema is intended to be used in, present a more realistic view of real-word performance.
+This is coupled with the fact that this research delivers a Ruby implementation ready to be integrated into the existing platform.
 
 \section{Experimental setup}
 \label{sec:experimental-setup}
@@ -47,14 +44,13 @@ Coupled with the fact that this research delivers a Ruby implementation ready to
 In order to keep the results of the tests consistent, the following rules are applied:
 
 \begin{itemize}
-  \item Query caching is disabled in Mongoid. CouchRest Model and Neo4j.rb do not have an equivalent feature.
+  \item Query caching is disabled in Mongoid. Neo4j.rb does not have an equivalent feature.
   \item Connection pooling is disabled
   \item Clustering is disabled as horizontal scalability performance is not within the scope of this research
   \item No additional performance tweaks were applied on the database management systems
-  \item \TODO{All disk persistence is mapped to memory on a RAM disk, transparent to the database management systems}
 \end{itemize}
 
-Native protocols were chosen for every data store: Mongo Wire Protocol for MongoDB, HTTP for CouchDB and Bolt for Neo4j.
+Mongo Wire Protocol and Bolt Protocol were chosen as native protocols for MongoDB and Neo4j respectively.
 
 All tests were performed on a single machine with the following specifications.
 
@@ -70,79 +66,68 @@ The data store versions that were tested are the following versions.
 
 \begin{itemize}
   \item MongoDB 3.6.3
-  \item CouchDB 2.1.1
   \item Neo4j Community Edition 3.0.6
 \end{itemize}
 
 \section{Procedure}
 \label{sec:procedure}
 
-In order to compare the performance of the three data stores, the following procedure was followed.
+The following procedure was followed throughout the performance benchmarks.
 
 First, the database was filled with random testing data.
-The script in \TODO{listing whatever} was developed in order to create random data and insert this into each of the three data stores.
+The script in \TODO{listing whatever} was developed in order to create random data and insert this into each of the data stores.
 The variable \texttt{FACTOR} in the script is a multiplication factor that directly influences the amount of data generated.
-For the benchmarks in this research, the \texttt{FACTOR} variable was set to \TODO{WHATEVER}, which yields \TODO{WHATEVER} entities in every database.
 
-% TODO: describe amount of requests etc. better
+Next, every test was ran sequentially for the data stores, and the timing results were written to separate files.
+During the tests all database management systems were running in the background.
 
-Next, the full test suite was ran sequentially for the three data stores, and the timing results were written to separate files.
-During the test suite all three databases were running in the background.
-It is important to note that every reference query was executed many times, depending on different factors.
-Since the execution time of a single iteration is negligable, every query was executed a number of times to negate the effect of external factors, such as operating system scheduling and I/O wait times.
-We have chosen the iteration counts of \TODO{1 000, 10 000 and 100 000}.
-Having multiple iteration runs gives us the opportunity to analyze the vertical scalability of the query as well.
+Since the execution time of a single iteration of a query is negligable, every query was executed a number of times to negate the effect of external factors, such as operating system scheduling and I/O wait times.
+The effects of varying the iteration size are discussed in \cref{subsec:query-size}.
+Having multiple iteration runs allows analyzing the vertical scalability of the query in limited fashion as well.
 As indicated in the informal descriptions of the reference queries, the query itself is also dependent on a variable $N$ which signifies the event count that is to be retrieved from the database.
-We believe a sane default for this value in a concrete implementation would be 100, meaning that 100 events will be retrieved on every query run.
-However, in the test suite this variable takes the value of \TODO{100, 1 000 and 10 000} to allow for more reliable timings.
+The effects of varying query sizes were analyzed and discussed in \cref{subsec:query-size}.
+A sane default for query size in a concrete implementation could be 100, meaning that 100 events are retrieved every time the user loads the Recent Activity page.
 
-This gives us 9 timing results for every query for every data store in total.
+In summary, there are three variables that can be modified in the performance tests:
+
+\begin{itemize}
+  \item \textbf{Data multiplication factor}: total size of the dataset in the database
+  \item \textbf{Iteration size}: number of sequentially ran iterations of the query
+  \item \textbf{Query size}: number of retrieved events from the database
+\end{itemize}
 
 \section{Results}
 \label{sec:results}
 
-% TODO first: iteration count is not a big variable anymore, but explain that the tests
-% are ran a number of times after each other sequentially. Count is written down in every test and depends on database
-
-% Use only query 1 and 3, because 4 is similar to 3 and ~~2 is not implemented in every language?~~
-% also consider 5
-
-% Experiment 1: varying data set size
-% For a fixed iteration count (M: 50_000, N: 5000)
-% For a fixed query count (100)
-
-% Experiment 2: varying query count
-% For a fixed dataset size (factor = 5000)
-% For a iteration count (...)
-
-% Experiment 3: comparison of dbs
-% small-scale tests: mongo is 500 times faster
-% formal tests: table with iteration count and execution times for every query
+Small-scale, informal tests determined that the Neo4j implementation is many times slower than the MongoDB implementation.
+Hence, the the benchmarks are ran independently for MongoDB and Neo4j, using an iteration size that is magnitudes smaller for Neo4j, yet yielding roughly the same execution times.
 
 \subsection{Dataset size}
+\label{subsec:dataset-size}
 
-First, the effects of the complete data size are analyzed.
+First, the effects of the dataset size on the query performance are analyzed.
 By varying the multiplication factor in the seed data generator the size of dataset can be controlled.
 
+For MongoDB, an iteration count of 50 000 was used, while Neo4j was provided only 1000 iterations in order to have roughly the same execution time.
+All queries use a fixed query size of 100.
+
 \input{tables/dataset-size}
+
+\subsection{Query size}
+\label{subsec:query-size}
+
+Subsequently, the query size was varied throughout the performance tests.
+
+MongoDB repeats the following 10 000 times, while Neo4j only uses an iteration size of 10.
+All queries operate on a dataset with multiplication factor of 5000, yielding 72 500 events in the database.
 
 \subsection{Iteration count}
 \label{subsec:iteration-count}
 
-First, we will research the effects of the iteration count on the different queries and data stores.
-This experiment represents the sequential lookup on a single node for every query.
-
-The dataset size chosen for these experiments represent a multiplication factor of 5000, yielding roughly 72 000 events in every database.
-A query count of 100 was chosen as sane default.
-
-
-% Variable: iterations
-
-\subsection{Query size}
-
-% Variable: query count
+Similar to the previous queries, the multiplication factor in these tests is 5000.
+Query size for all queries is also 100.
 
 \section{Conclusion}
-\label{sec:comparative-study-conclusion}
+\label{sec:empirical-study-conclusion}
 
 %   Language bindings: mongo yes, couch no, neo4j yes; impedance mismatch in mongo, especially related to polymorphism
