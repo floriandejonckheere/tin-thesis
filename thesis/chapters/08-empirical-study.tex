@@ -109,11 +109,12 @@ This overhead is intended to be included in the measurements, since the total ti
 \subsection{Dataset size}
 \label{subsec:dataset-size}
 
-First, the effects of the dataset size on the query performance are analyzed.
 By varying the multiplication factor in the seed data generator the size of dataset can be controlled.
+The effects of dataset size on query performance were not tested and discussed in this paper.
+Since the system will most likely be scaled horizontally before dataset will reach a sufficiently large enough level to be measurable, this variable was not benchmarked.
+Horizontal scalability is not within the scope of this research.
 
-For MongoDB, an iteration count of 50 000 was used, while Neo4j was provided only 1000 iterations in order to have roughly the same execution time.
-All queries use a fixed query size of 100.
+All queries below were ran on a dataset with multiplication factor 5000, which implies that 72 500 events are stored in the database.
 
 \input{tables/dataset-size}
 
@@ -130,7 +131,7 @@ Queries 1, 2 and 3 in \cref{subsubsec:query-1} were used as queries in this test
 Query 4 is very similar to query 3 in structure of the queried data itself, so it was omitted.
 Query 5 is a query that tests insertion of data, and it was omitted as well due to the fact that query size is not relevant for insertion queries.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=.8\textwidth]{img/mongodb-query-size.png}
   \caption{MongoDB query size}
@@ -142,7 +143,7 @@ The vertical axis represents the execution time of 10 000 iterations of the quer
 
 All measured execution times fall roughly within 7 and 9 seconds, which means that the query execution time is constant for a varying query size in MongoDB
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=.8\textwidth]{img/neo4j-query-size.png}
   \caption{Neo4j query size}
@@ -167,21 +168,31 @@ Query size for all queries is 100.
 
 Analogous to the previous test, query 4 was not included in the benchmark.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=.8\textwidth]{img/mongodb-iteration-count.png}
   \caption{MongoDB iteration count}
   \label{fig:mongodb-iteration-count}
 \end{figure}
 
-\begin{figure}
+All MongoDB query execution times rise linearly in function of the iteration count.
+The first query gets slower a little bit faster than the other queries.
+This is due to the fact that the query operates on the entire dataset, whereas the other queries only consider part of the dataset.
+The effect of sorting through the entire dataset instead of a slice of it is not measurable within a single iteration, but it becomes visible when the iteration size is increased.
+
+\begin{figure}[H]
   \centering
   \includegraphics[width=.8\textwidth]{img/neo4j-iteration-count.png}
   \caption{Neo4j iteration count}
   \label{fig:neo4j-iteration-count}
 \end{figure}
 
+The Neo4j query execution times exhibit a behavious similar to the MongoDB query execution times.
+The first query is a lot slower than the others, and this effect is only amplified in the graph database.
+While query 2 also decreases in speed in function of iteration count, it is not as dramatic as the first query.
+
 \section{Conclusion}
 \label{sec:empirical-study-conclusion}
 
-%   Language bindings: mongo yes, couch no, neo4j yes; impedance mismatch in mongo, especially related to polymorphism
+We can conclude that MongoDB is a far superior solution for this specific use case.
+However, the data models, queries and database settings were not optimized at all, leaving the defaults in place.
