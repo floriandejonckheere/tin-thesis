@@ -12,10 +12,29 @@
 %% niet duidelijk zijn? Heeft het onderzoek geleid tot nieuwe vragen die
 %% uitnodigen tot verder onderzoek?
 
+The intended aim of NoSQL data stores is to store and process massive amounts of data in a distributed fashion.
+However, there exist multiple data models which store data in a different way, which can be more or less performant to the applied use case.
+NoSQL data stores are not ``one size fits all''.
 
-% Result: Mongo
-% Couch not supported
-% Neo too slow
-% Neo also acid, don't need that
+In this paper all proposed research questions were satisfactorily answered.
+First, a literature review offered insight in the NoSQL products currently available on the open source and commercial market.
+The different data models were discussed by advantages and disadvantages.
 
-% non-linked/embedded nature of mongodb increases performance massively
+Second, a conceptual and technical definition of the Open Webslides data model was designed and analyzed.
+This proved to be a valuable resource to proceed with the design and development of the physical data models and corresponding implementation in the MongoDB and Neo4j graph data stores.
+The second research question was answered by these presented data models, along with the five reference queries that were drawn up and represent typical usage in the studied use case.
+
+Finally, as most efficient data store MongoDB was selected as NoSQL candidate.
+Subsequently, the recommendation for the Open Webslides development team is to use the MongoDB as a polyglot persistent NoSQL database to store the derived data for the Recent Activity feed.
+
+In contrast to the expected results, using the Neo4j data store turned out to be magnitudes slower in performing the reference queries on the developed data model.
+Instead, MongoDB demonstrated that the document data model is far superior over the graph data model in this specific use case.
+The fact that the data from which the Recent Activity feed is derived is highly interlinked and easily structured as a graph, counteracts the expectations of a highly linked data structure to be efficient.
+
+It was found that MongoDB has excellent support for Ruby and Ruby on Rails using the Mongoid ORM framework.
+For all these reasons MongoDB is the clear winner as performant NoSQL data store for the Open Webslides' Recent Activity feed.
+
+This research presents a case study of NoSQL data store selection for a specific use case.
+The paper may offer additional opportunities for research as described in \cref{ch:opportunities}, and can be used as a guideline to pick the right data store for other, similar use cases.
+
+Finally, the physical implementation of the data schema proposed in this thesis can be implemented in the Open Webslides platform to integrate a highly scalable, performant polyglot infrastructure to accommodate the Recent Activity feed.
