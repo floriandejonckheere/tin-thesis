@@ -3,15 +3,15 @@ require 'benchmark'
 # Number of iterations to perform
 ITERATIONS = [
   1_000,
-  # 10_000,
-  # 100_000,
+  10_000,
+  100_000,
 ].freeze
 
 # Count of queried events
 COUNT = [
   100,
-  # 1_000,
-  # 10_000,
+  1_000,
+  10_000,
 ].freeze
 
 ##
