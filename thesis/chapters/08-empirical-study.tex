@@ -57,7 +57,7 @@ All tests were performed on a single machine with the following specifications.
 \begin{itemize}
   \item Ruby 2.5.0, operating under Arch Linux
   \item Intel Core i7-3840QM (4 cores, 8 threads)
-  \item Hyperthreading and \TODO{Intel Turbo Boost} enabled
+  \item Hyperthreading and Intel Turbo Boost enabled
   \item 32GB DDR4 RAM
   \item 180GB SATA-III SSD
 \end{itemize}
@@ -75,7 +75,7 @@ The data store versions that were tested are the following versions.
 The following procedure was followed throughout the performance benchmarks.
 
 First, the database was filled with random testing data.
-The script in \TODO{listing whatever} was developed in order to create random data and insert this into each of the data stores.
+The script included in \cref{ch:source-code} was developed in order to create random data and insert this into each of the data stores.
 The variable \texttt{FACTOR} in the script is a multiplication factor that directly influences the amount of data generated.
 
 Next, every test was ran sequentially for the data stores, and the timing results were written to separate files.
