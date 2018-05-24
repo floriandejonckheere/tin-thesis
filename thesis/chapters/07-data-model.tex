@@ -263,7 +263,7 @@ This also means that everyone who visits the platform without signing in will re
 \subsubsection*{MongoDB}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   MongoDB::Event
     .all
     .order_by(:created_at => :desc)
@@ -278,7 +278,7 @@ This also means that everyone who visits the platform without signing in will re
 \subsubsection*{Neo4j}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   Neo4j::Event
     .all
     .order(:created_at => :desc)
@@ -291,7 +291,7 @@ This also means that everyone who visits the platform without signing in will re
 \end{listing}
 
 \begin{listing}
-  \begin{minted}{cypher}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{cypher}
   MATCH (result_neo4jevent:`Event`)
     RETURN result_neo4jevent
     ORDER BY result_neo4jevent.created_at DESC
@@ -332,7 +332,7 @@ The events in the feed will then consist of only events related to topics the us
 \subsubsection*{MongoDB}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # List of subscribed topic identifiers
   topic_ids = [...]
 
@@ -350,7 +350,7 @@ The events in the feed will then consist of only events related to topics the us
 \subsubsection*{Neo4j}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # List of subscripted topic identifiers
   topic_ids = [...]
 
@@ -367,7 +367,7 @@ The events in the feed will then consist of only events related to topics the us
 \end{listing}
 
 \begin{listing}[H]
-  \begin{minted}{cypher}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{cypher}
   MATCH (node2:`Topic`:`Item`)
     WHERE (node2.uuid IN {node2_uuid})
     MATCH (node2)<-[rel1:`on`]-(result_events:`Event`)
@@ -408,7 +408,7 @@ This feed only contains events related to the topic the user is currently viewin
 \subsubsection*{MongoDB}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # Topic identifier
   topic_id = ...
 
@@ -426,7 +426,7 @@ This feed only contains events related to the topic the user is currently viewin
 \subsubsection*{Neo4j}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # Topic identifier
   topic_id = ...
 
@@ -444,7 +444,7 @@ This feed only contains events related to the topic the user is currently viewin
 \end{listing}
 
 \begin{listing}[H]
-  \begin{minted}{cypher}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{cypher}
   MATCH (neo4j_topic)
     WHERE (ID(neo4j_topic) = {ID_neo4j_topic})
     MATCH (neo4j_topic)<-[rel1:`on`]-(result_events:`Event`)
@@ -483,7 +483,7 @@ Similarly to topics, a profile page also includes a timeline of the user's activ
 \subsubsection*{MongoDB}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # Subject identifier
   subject_id = ...
 
@@ -501,7 +501,7 @@ Similarly to topics, a profile page also includes a timeline of the user's activ
 \subsubsection*{Neo4j}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # Subject identifier
   subject_id = ...
 
@@ -518,7 +518,7 @@ Similarly to topics, a profile page also includes a timeline of the user's activ
 \end{listing}
 
 \begin{listing}[H]
-  \begin{minted}{cypher}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{cypher}
   MATCH (n:`Subject`)
     WHERE (n.uuid = {n_uuid})
     RETURN n
@@ -567,7 +567,7 @@ The query creates a single event in the data store.
 \subsubsection*{MongoDB}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # Subject identifier
   subject_id = ...
 
@@ -586,7 +586,7 @@ The query creates a single event in the data store.
 \subsubsection*{Neo4j}
 
 \begin{listing}[H]
-  \begin{minted}{ruby}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{ruby}
   # Subject identifier
   subject_id = ...
 
@@ -603,7 +603,7 @@ The query creates a single event in the data store.
 \end{listing}
 
 \begin{listing}[H]
-  \begin{minted}{cypher}
+  \begin{minted}[baselinestretch=1,fontsize=\footnotesize]{cypher}
   MATCH (n:`Subject`)
     WHERE (n.uuid = {n_uuid})
     RETURN n
