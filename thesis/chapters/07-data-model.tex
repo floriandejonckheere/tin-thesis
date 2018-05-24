@@ -294,48 +294,59 @@ This also means that everyone who visits the platform without signing in will re
 
 \subsubsection*{MongoDB}
 
-\begin{minted}{ruby}
-MongoDB::Event
-  .all
-  .order_by(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  MongoDB::Event
+    .all
+    .order_by(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
 
-\subsubsection*{CouchDB}
-
-% TODO
+  \caption{MongoDB query 1}
+  \label{lst:mongodb-query-1}
+\end{listing}
 
 \subsubsection*{Neo4j}
 
-\begin{minted}{ruby}
-Neo4j::Event
-  .all
-  .order(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  Neo4j::Event
+    .all
+    .order(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
 
-\begin{minted}{cypher}
-MATCH (result_neo4jevent:`Event`)
-  RETURN result_neo4jevent
-  ORDER BY result_neo4jevent.created_at DESC
-  LIMIT {limit_1} | {:limit_1=>count}
+  \caption{Neo4j query 1}
+  \label{lst:neo4j-query-1}
+\end{listing}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>result_neo4jevent.id}
+\begin{listing}
+  \begin{minted}{cypher}
+  MATCH (result_neo4jevent:`Event`)
+    RETURN result_neo4jevent
+    ORDER BY result_neo4jevent.created_at DESC
+    LIMIT {limit_1} | {:limit_1=>count}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>result_neo4jevent.id}
-\end{minted}
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>result_neo4jevent.id}
+
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>result_neo4jevent.id}
+  \end{minted}
+
+  \caption{Neo4j query 1 (CYPHER)}
+  \label{lst:neo4j-query-1-cypher}
+\end{listing}
 
 The Neo4j ORM call get converted into three distinct queries: one to get the \texttt{Event} node and two queries to get the related nodes \texttt{Subject} and \texttt{Item}.
 
@@ -352,53 +363,68 @@ The events in the feed will then consist of only events related to topics the us
 
 \subsubsection*{MongoDB}
 
-\begin{minted}{ruby}
-# List of subscribed topic identifiers
-topic_ids = [...]
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # List of subscribed topic identifiers
+  topic_ids = [...]
 
-MongoDB::Event
-  .in('item._id' => topic_ds)
-  .order_by(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+  MongoDB::Event
+    .in('item._id' => topic_ds)
+    .order_by(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
+
+  \caption{MongoDB query 2}
+  \label{lst:mongodb-query-2}
+\end{listing}
 
 \subsubsection*{Neo4j}
 
-\begin{minted}{ruby}
-# List of subscripted topic identifiers
-topic_ids = [...]
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # List of subscripted topic identifiers
+  topic_ids = [...]
 
-Neo4j::Topic
-  .where(:id => topic_ids)
-  .events
-  .order_by(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+  Neo4j::Topic
+    .where(:id => topic_ids)
+    .events
+    .order_by(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
 
-\begin{minted}{cypher}
-MATCH (node2:`Topic`:`Item`)
-  WHERE (node2.uuid IN {node2_uuid})
-  MATCH (node2)<-[rel1:`on`]-(result_events:`Event`)
-  RETURN result_events
-  ORDER BY result_events.created_at DESC
-  LIMIT {limit_1} | {:limit_1=>1, :node2_uuid=>topic_ids}
+  \caption{Neo4j query 2}
+  \label{lst:neo4j-query-2}
+\end{listing}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>node2.id}
+\begin{listing}[H]
+  \begin{minted}{cypher}
+  MATCH (node2:`Topic`:`Item`)
+    WHERE (node2.uuid IN {node2_uuid})
+    MATCH (node2)<-[rel1:`on`]-(result_events:`Event`)
+    RETURN result_events
+    ORDER BY result_events.created_at DESC
+    LIMIT {limit_1} | {:limit_1=>1, :node2_uuid=>topic_ids}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>node2.id}
-\end{minted}
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>node2.id}
+
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>node2.id}
+  \end{minted}
+
+  \caption{Neo4j query 2 (CYPHER)}
+  \label{lst:neo4j-query-2-cypher}
+\end{listing}
 
 \subsubsection{Query 3}
 \label{subsubsec:query-3}
@@ -413,53 +439,69 @@ This feed only contains events related to the topic the user is currently viewin
 
 \subsubsection*{MongoDB}
 
-\begin{minted}{ruby}
-# Topic identifier
-topic_id = ...
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # Topic identifier
+  topic_id = ...
 
-MongoDB::Event
-  .where('item._id' => topic_id)
-  .order_by(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+  MongoDB::Event
+    .where('item._id' => topic_id)
+    .order_by(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
+
+  \caption{MongoDB query 3}
+  \label{lst:mongodb-query-3}
+\end{listing}
 
 \subsubsection*{Neo4j}
 
-\begin{minted}{ruby}
-# Topic identifier
-topic_id = ...
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # Topic identifier
+  topic_id = ...
 
-Neo4j::Topic
-  .find(topic_id)
-  .events
-  .order(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+  Neo4j::Topic
+    .find(topic_id)
+    .events
+    .order(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
 
-\begin{minted}{cypher}
-MATCH (neo4j_topic)
-  WHERE (ID(neo4j_topic) = {ID_neo4j_topic})
-  MATCH (neo4j_topic)<-[rel1:`on`]-(result_events:`Event`)
-  RETURN result_events
-  ORDER BY result_events.created_at DESC
-  LIMIT {limit_1} | {:limit_1=>1, :ID_neo4j_topic=>topic_id}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>neo4j_topic.id}
+  \caption{Neo4j query 3}
+  \label{lst:neo4j-query-3}
+\end{listing}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>neo4j_topic.id}
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cypher}
+  MATCH (neo4j_topic)
+    WHERE (ID(neo4j_topic) = {ID_neo4j_topic})
+    MATCH (neo4j_topic)<-[rel1:`on`]-(result_events:`Event`)
+    RETURN result_events
+    ORDER BY result_events.created_at DESC
+    LIMIT {limit_1} | {:limit_1=>1, :ID_neo4j_topic=>topic_id}
+
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>neo4j_topic.id}
+
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>neo4j_topic.id}
+  \end{minted}
+
+  \caption{Neo4j query 3 (CYPHER)}
+  \label{lst:neo4j-query-3 (CYPHER)}
+\end{listing}
 
 \subsubsection{Query 4}
 \label{subsubsec:query-4}
@@ -472,59 +514,74 @@ Similarly to topics, a user's profile page also includes a timeline of \TODO{his
 
 \subsubsection*{MongoDB}
 
-\begin{minted}{ruby}
-# Subject identifier
-subject_id = ...
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # Subject identifier
+  subject_id = ...
 
-MongoDB::Event
-  .where('subject._id' => subject_id)
-  .order_by(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+  MongoDB::Event
+    .where('subject._id' => subject_id)
+    .order_by(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
+
+  \caption{MongoDB query 4}
+  \label{lst:mongodb-query-4}
+\end{listing}
 
 \subsubsection*{Neo4j}
 
-\begin{minted}{ruby}
-# Subject identifier
-subject_id = ...
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # Subject identifier
+  subject_id = ...
 
-Neo4j::Subject
-  .find(subject_id)
-  .events
-  .order(:created_at => :desc)
-  .limit(count)
-  .each(&:to_s)
-\end{minted}
+  Neo4j::Subject
+    .find(subject_id)
+    .events
+    .order(:created_at => :desc)
+    .limit(count)
+    .each(&:to_s)
+  \end{minted}
 
-\begin{minted}{cypher}
-MATCH (n:`Subject`)
-  WHERE (n.uuid = {n_uuid})
-  RETURN n
-  ORDER BY n.uuid
-  LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
+  \caption{Neo4j query 4}
+  \label{lst:neo4j-query-4}
+\end{listing}
 
-MATCH (neo4j_subject)
-  WHERE (ID(neo4j_subject) = {ID_neo4j_subject})
-  MATCH (neo4j_subject)<-[rel1:`by`]-(result_events:`Event`)
-  RETURN result_events
-  ORDER BY result_events.created_at DESC
-  LIMIT {limit_1} | {:limit_1=>1, :ID_neo4j_subject=>subject_id}
+\begin{listing}[H]
+  \begin{minted}{cypher}
+  MATCH (n:`Subject`)
+    WHERE (n.uuid = {n_uuid})
+    RETURN n
+    ORDER BY n.uuid
+    LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>result_events.id}
+  MATCH (neo4j_subject)
+    WHERE (ID(neo4j_subject) = {ID_neo4j_subject})
+    MATCH (neo4j_subject)<-[rel1:`by`]-(result_events:`Event`)
+    RETURN result_events
+    ORDER BY result_events.created_at DESC
+    LIMIT {limit_1} | {:limit_1=>1, :ID_neo4j_subject=>subject_id}
 
-MATCH (previous:`Event`)
-  WHERE (ID(previous) = {ID_previous})
-  OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
-  RETURN
-    ID(previous),
-    collect(next) | {:ID_previous=>result_events.id}
-\end{minted}
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`by`]->(next:`Subject`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>result_events.id}
+
+  MATCH (previous:`Event`)
+    WHERE (ID(previous) = {ID_previous})
+    OPTIONAL MATCH (previous)-[rel1:`on`]->(next:`Item`)
+    RETURN
+      ID(previous),
+      collect(next) | {:ID_previous=>result_events.id}
+  \end{minted}
+
+  \caption{Neo4j query 4 (CYPHER)}
+  \label{lst:neo4j-query-4}
+\end{listing}
 
 \subsection{Insertion}
 \label{subsec:insertion}
@@ -541,78 +598,92 @@ The query creates a single event in the data store.
 
 \subsubsection*{MongoDB}
 
-\begin{minted}{ruby}
-# Subject identifier
-subject_id = ...
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # Subject identifier
+  subject_id = ...
 
-# Item identifier
-item_id = ...
+  # Item identifier
+  item_id = ...
 
-MongoDB::Event.create! :subject => subject_id,
-                       :item => item_id,
-                       :predicate => :updated
-\end{minted}
+  MongoDB::Event.create! :subject => subject_id,
+                         :item => item_id,
+                         :predicate => :updated
+  \end{minted}
+
+  \caption{MongoDB query 5}
+  \label{lst:mongodb-query-5}
+\end{listing}
 
 \subsubsection*{Neo4j}
 
-\begin{minted}{ruby}
-# Subject identifier
-subject_id = ...
+\begin{listing}[H]
+  \begin{minted}{ruby}
+  # Subject identifier
+  subject_id = ...
 
-# Item identifier
-item_id = ...
+  # Item identifier
+  item_id = ...
 
-Neo4j::Event .create! :subject => subject_id,
-                      :item => topic_id,
-                      :predicate => :updated
-\end{minted}
+  Neo4j::Event .create! :subject => subject_id,
+                        :item => topic_id,
+                        :predicate => :updated
+  \end{minted}
 
-\begin{minted}{cypher}
-MATCH (n:`Subject`)
-  WHERE (n.uuid = {n_uuid})
-  RETURN n
-  ORDER BY n.uuid
-  LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
+  \caption{Neo4j query 5}
+  \label{lst:neo4j-query-5}
+\end{listing}
 
-MATCH (n:`Item`)
-  WHERE (n.uuid = {n_uuid})
-  RETURN n
-  ORDER BY n.uuid
-  LIMIT {limit_1} | {:n_uuid=>item_id, :limit_1=>1}
+\begin{listing}[H]
+  \begin{minted}{cypher}
+  MATCH (n:`Subject`)
+    WHERE (n.uuid = {n_uuid})
+    RETURN n
+    ORDER BY n.uuid
+    LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
 
-CREATE (n:`Event`)
-  SET n = {props}
-  RETURN n | {:props=>{:uuid=>event_id, :created_at=>1526737892, :predicate=>1}}
+  MATCH (n:`Item`)
+    WHERE (n.uuid = {n_uuid})
+    RETURN n
+    ORDER BY n.uuid
+    LIMIT {limit_1} | {:n_uuid=>item_id, :limit_1=>1}
 
-MATCH (n:`Subject`)
-  WHERE (n.uuid = {n_uuid})
-  RETURN n
-  LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
+  CREATE (n:`Event`)
+    SET n = {props}
+    RETURN n | {:props=>{:uuid=>event_id, :created_at=>1526737892, :predicate=>1}}
 
-MATCH
-    (from_node),
-    (to_node)
-  WHERE
-    (ID(from_node) = {ID_from_node}) AND
-    (ID(to_node) = {ID_to_node})
-  CREATE (from_node)-[rel:`by` {rel_create_props}]->(to_node)
-    | {:ID_from_node=>event_id, :ID_to_node=>subject_id, :rel_create_props=>{}}
+  MATCH (n:`Subject`)
+    WHERE (n.uuid = {n_uuid})
+    RETURN n
+    LIMIT {limit_1} | {:n_uuid=>subject_id, :limit_1=>1}
 
-MATCH (n:`Item`)
-  WHERE (n.uuid = {n_uuid})
-  RETURN n
-  LIMIT {limit_1} | {:n_uuid=>item_id, :limit_1=>1}
+  MATCH
+      (from_node),
+      (to_node)
+    WHERE
+      (ID(from_node) = {ID_from_node}) AND
+      (ID(to_node) = {ID_to_node})
+    CREATE (from_node)-[rel:`by` {rel_create_props}]->(to_node)
+      | {:ID_from_node=>event_id, :ID_to_node=>subject_id, :rel_create_props=>{}}
 
-MATCH
-    (from_node),
-    (to_node)
-  WHERE
-    (ID(from_node) = {ID_from_node}) AND
-    (ID(to_node) = {ID_to_node})
-  CREATE (from_node)-[rel:`on` {rel_create_props}]->(to_node)
-    | {:ID_from_node=>event_id, :ID_to_node=>item_id, :rel_create_props=>{}}
+  MATCH (n:`Item`)
+    WHERE (n.uuid = {n_uuid})
+    RETURN n
+    LIMIT {limit_1} | {:n_uuid=>item_id, :limit_1=>1}
 
-\end{minted}
+  MATCH
+      (from_node),
+      (to_node)
+    WHERE
+      (ID(from_node) = {ID_from_node}) AND
+      (ID(to_node) = {ID_to_node})
+    CREATE (from_node)-[rel:`on` {rel_create_props}]->(to_node)
+      | {:ID_from_node=>event_id, :ID_to_node=>item_id, :rel_create_props=>{}}
+  \end{minted}
+
+  \caption{Neo4j query 5 (CYPHER)}
+  \label{lst:neo4j-query-5-cypher}
+\end{listing}
 
 \section{Conclusion}
 \label{sec:data-model-conclusion}
