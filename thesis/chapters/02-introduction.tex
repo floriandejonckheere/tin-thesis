@@ -19,7 +19,7 @@ However, there is a lot more potential to gain from the modernization of educati
 Education is still too often a one-way street, where students are obligated to process the course content without being provided much challenge or activity \autocite{OpenWebslides2017}.
 This does not allow for any dialogue to take place between students and teachers concerning feedback and improvement of the course material itself.
 
-Current educational software solutions do not allow co-creation discourse between teacher and students easily, in many cases due to technological constraints.
+Current educational software solutions do not allow co-creation discourse between teacher and students easily, in many cases due to technological constraints \autocite{Cocos2018}.
 Course material being locked to specific versions of proprietary software is just one of the many problems teachers might encounter when trying to apply this concept in real life.
 Using interactive tools and applications, the teacher can engage the students more directly.
 
@@ -49,6 +49,8 @@ The use of multiple data stores characterised by different data models is called
 
 This research thesis will provide a comparative and empirical study of existing NoSQL database solutions for the Open Webslides project to implement an efficient, scalable data storage system in the context of the \textit{Recent Activity} feed.
 A basic solution is already implemented within the platform, however the proposed data model allows for more flexibility and accommodates any future functionality expansion.
+
+\clearpage{}
 
 \section{Research questions}
 \label{sec:research-questions}
@@ -82,20 +84,20 @@ Primarily, this involves finding the best NoSQL data model for the studied use c
 We expect to find that graph databases are the most fitting data store in this context.
 This results from the train of thought that the Open Webslides Recent Activity feed data is structured as a directed graph, and behaves as such.
 
-Furthermore, since physical implementations will be developed during this research in order to perform the empirical study, the main result of this thesis is expected to be a concrete recommendation for a NoSQL product, and an implementation of the Recent Activity feed in the respective NoSQL product.
+Furthermore, since physical implementations will be developed during this research in order to perform the empirical study, the main result of this thesis is expected to be a concrete recommendation for a NoSQL product, and a reference implementation of the Recent Activity feed in the respective NoSQL product.
 
 In \cref{ch:state-of-the-art} an overview will be presented of current research, applied solutions and other related work in the research domain based on a literature study.
 This literary review will then be used to give a broad and global overview of the research domain, introducing various relational and NoSQL concepts and explaining the ideas behind NoSQL and polyglot persistence in \cref{ch:overview}.
 
 \Cref{ch:methodology} will clarify the methodology used in this thesis to attempt to formulate an answer to the research questions.
 The research is split into three distinct parts.
-The first part, \Cref{ch:data-stores} will evaluate existing NoSQL data stores using a comparative study in the context of the Open Webslides use case.
+The first part, \cref{ch:data-stores}, will evaluate existing NoSQL data stores using a comparative study in the context of the Open Webslides use case.
 Certain NoSQL categories will also be ruled out in this chapter, and a concrete selection of NoSQL database management systems will be made for further comparison.
 
 The second part in \cref{ch:data-model} describes the domain model that is used in the Open Webslides project, and proposes the logical and physical data models for every included NoSQL database.
 Reference queries that cater to the needs of the domain will also be drawn up and implemented.
-\Cref{ch:empirical-study} combines the proposed data models and reference queries in order to perform and discuss a quantitative study on the data stores selected in \cref{ch:data-stores}.
+\Cref{ch:empirical-study} combines the proposed data models and reference queries in order to perform and discuss an empirical study on the data stores selected in \cref{ch:data-stores}.
 
-\Cref{ch:opportunities} will conclude and reflect upon the opportunities and inadequacies encountered in the research, providing an entrypoint for future studies.
+\Cref{ch:opportunities} will conclude and reflect upon the opportunities and inadequacies encountered in this paper, providing an entrypoint for future research.
 
 Finally, \cref{ch:conclusion} will present a general conclusion and summarize the research, formulating answers on all of the research questions.
