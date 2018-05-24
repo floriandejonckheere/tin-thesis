@@ -203,8 +203,14 @@ Mongoid is officially supported by Mongo, Inc.
 \subsubsection{CouchDB implementation}
 \label{subsubsec:couchdb-implementation}
 
-% TODO: reference
-The physical data model for CouchDB is implemented using the Couchrest Model library, which provides Ruby and Ruby on Rails bindings to the data store.
+An attempt was made to provide a physical implementation of the proposed document data model using the CouchRest Model library \autocite{Couchrest2011}.
+CouchRest Model provides Ruby on Rails integrations and is built on the CouchRest Ruby library.
+
+During the development of the data models in question, many roadblocks were encountered that impeded development or even made it impossible to continue.
+The library does not support object inheritance, and relationship polymorphism for instance.
+
+The degree in which CouchDB is compatible with Ruby on Rails was deemed not satisfactory, and as such CouchDB was dropped for the physical implementation of the queries.
+The Ruby on Rails models for CouchDB are available in \TODO{appendix whatever}.
 
 \subsection{Graph-oriented data model}
 \label{subsec:graph-data-model}
@@ -357,10 +363,6 @@ MongoDB::Event
   .each(&:to_s)
 \end{minted}
 
-\subsubsection*{CouchDB}
-
-% TODO
-
 \subsubsection*{Neo4j}
 
 \begin{minted}{ruby}
@@ -422,10 +424,6 @@ MongoDB::Event
   .each(&:to_s)
 \end{minted}
 
-\subsubsection*{CouchDB}
-
-% TODO
-
 \subsubsection*{Neo4j}
 
 \begin{minted}{ruby}
@@ -484,10 +482,6 @@ MongoDB::Event
   .limit(count)
   .each(&:to_s)
 \end{minted}
-
-\subsubsection*{CouchDB}
-
-% TODO
 
 \subsubsection*{Neo4j}
 
@@ -558,10 +552,6 @@ MongoDB::Event.create! :subject => subject_id,
                        :item => item_id,
                        :predicate => :updated
 \end{minted}
-
-\subsubsection*{CouchDB}
-
-% TODO
 
 \subsubsection*{Neo4j}
 
