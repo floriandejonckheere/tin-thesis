@@ -28,7 +28,7 @@ H\"arder and Reuter discussed recovery in transaction-oriented databases, and in
 \section{NoSQL data stores}
 \label{sec:nosql-data-stores}
 
-By 2009, a totally different concept of data storage was popularized \autocite{Leavitt2018}.
+By 2009, a totally different concept of data storage was popularized \autocite{Leavitt2010}.
 NoSQL data stores provide a system of storage that is ``non SQL'' or ``non relational'' \autocite{NoSQL2018}.
 Furthermore, properties of NoSQL data stores included horizontal scalability, inherently distributed and open source.
 More recently, the NoSQL denomination has also been explained as ``not only SQL'', pointing on the fact that most NoSQL data stores provide a different interface besides SQL.
@@ -59,9 +59,9 @@ The following sections describe these five categories, and present three additio
 
 Key-value data stores are simple in design, yet powerful and efficient when used in the right circumstances.
 A key-value data store allows the user to store schemaless data using an opaque, unique key, creating a \textit{key} and \textit{value} pair.
-The values are stored in a manner similar to hash tables or dictionaries commonly found in programming languages and standard libraries
+The values are stored in a manner similar to hash tables or dictionaries commonly found in programming languages and standard libraries.
 Queries are processed by looking up the value for the provided key, which is used as an index in the database.
-Modern key-value data stores prefer high scalability over consistency, resulting in the fact that more advanced ad-hoc querying and analytical operations on the data such as joins are not available.
+Modern key-value data stores prefer high scalability over consistency, resulting in the fact that more advanced ad-hoc querying and analytical operations on the data such as joins are not supported.
 
 \subsection{Document}
 \label{subsec:document}
@@ -69,9 +69,9 @@ Modern key-value data stores prefer high scalability over consistency, resulting
 Document databases store their data in \textit{documents}, indexed by a unique key.
 Documents are usually structured in a hierarchical manner and represented in the JSON format.
 Document stores are technically a subclass of key-value stores, however the difference lies in the interpretation of the data itself.
-Since documents are schemaless, each document may have a similar structure, or a completely different one.
 In contrast with key-value data stores, the value (document) is not opaque to the database management system, but is parsed and interpreted, and subsequently used for query optimization.
 Some document data stores may provide advanced query capabilities on the contents of documents.
+Since documents are schemaless, each document may have a similar structure, or a completely different one.
 
 \subsection{Column-oriented}
 \label{subsec:column-oriented}
@@ -88,10 +88,10 @@ Column-oriented data stores are commonly used for queries where only a subset of
 Graph data stores keep their data persisted in the form of a graph.
 The graph is made up of \textit{nodes} and \textit{edges} as the graph-theoretical model describes \autocite{West2001}.
 The former are the database entities that contain the data itself, similar to tables and their respective columns in the relational model.
-The latter are the relations between these entities, and can also contain attributes.
+The latter are the relations between these entities.
 Graph data stores use a technique called \textit{index-free adjacency}, where every node contains a logical pointer to the adjacent node \autocite{Weinberger2016}.
 This makes graph traversal a very fast operation.
-Some graph databases like Neo4j are ACID compliant \autocite{miller2013}.
+Some graph databases like Neo4j are ACID compliant \autocite{Miller2013}.
 
 \subsection{Object-oriented}
 \label{subsec:object-oriented}
@@ -123,7 +123,8 @@ NewSQL data stores are ACID compliant.
 A triple store is a type of data store similar to key-value and graph data stores.
 Triple stores process data using semantic queries on data triples.
 A triple consists of a \textit{subject}, an \textit{predicate} and an \textit{object} \autocite{Rohloff2007}.
-\\
+
+\clearpage{}
 
 Most NoSQL data stores are built around the concept of \textit{eventual consistency} \autocite{Brewer2000}.
 This is a consistency model that dictates that all accesses to a particular piece of data will eventually return the last updated value.
@@ -140,7 +141,7 @@ This conjecture, later formally proven \autocite{GilbertLynch2002}, asserts that
   \item \textbf{Partition tolerance}: The system continues to work despite failure to communicate between nodes
 \end{enumerate}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=.6\textwidth]{img/cap-theorem.png}
   \caption{CAP Theorem}
