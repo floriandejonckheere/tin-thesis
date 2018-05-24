@@ -102,6 +102,10 @@ In summary, there are three variables that can be modified in the performance te
 Small-scale, informal tests determined that the Neo4j implementation is many times slower than the MongoDB implementation.
 Hence, the the benchmarks are ran independently for MongoDB and Neo4j, using an iteration count that is magnitudes smaller for Neo4j, yet yielding roughly the same execution times.
 
+The execution times represent the real wall-clock time elapsed for every query.
+It is measured from the moment the query gets dispatched to the ORM, and hence includes the time to traverse the entire software stack, including instantiation of the database objects in Ruby.
+This overhead is intended to be included in the measurements, since the total time a user has to wait for a database query is influenced both by the software stack and the database management system.
+
 \subsection{Dataset size}
 \label{subsec:dataset-size}
 
@@ -116,10 +120,15 @@ All queries use a fixed query size of 100.
 \subsection{Query size}
 \label{subsec:query-size}
 
-Subsequently, the query size was varied throughout the performance tests.
+The amount of events retrieved from the database is another aspect that could possibly influence the query performance heavily.
+In this section different values for the query size are compared, in order to find any trends
 
 MongoDB repeats the following 10 000 times, while Neo4j only uses an iteration count of 10.
 All queries operate on a dataset with multiplication factor of 5000, yielding 72 500 events in the database.
+
+Queries 1, 2 and 3 in \cref{subsubsec:query-1} were used as queries in this test.
+Query 4 is very similar to query 3 in structure of the queried data itself, so it was omitted.
+Query 5 is a query that tests insertion of data, and it was omitted as well due to the fact that query size is not relevant for insertion queries.
 
 \begin{figure}
   \centering
@@ -128,12 +137,27 @@ All queries operate on a dataset with multiplication factor of 5000, yielding 72
   \label{fig:mongodb-query-size}
 \end{figure}
 
+The horizontal axis in figure \ref{fig:mongodb-query-size} represents query size in the logarithmic scale.
+The vertical axis represents the execution time of 10 000 iterations of the query in seconds.
+
+All measured execution times fall roughly within 7 and 9 seconds, which means that the query execution time is constant for a varying query size in MongoDB
+
 \begin{figure}
   \centering
   \includegraphics[width=.8\textwidth]{img/neo4j-query-size.png}
   \caption{Neo4j query size}
   \label{fig:neo4j-query-size}
 \end{figure}
+
+Neo4j however, renders a completely different result.
+Figure \ref{fig:neo4j-query-size} plots out the execution time for the different queries running on the Neo4j graph database management system.
+The first difference with MongoDB is already very apparent in iteration size: MongoDB can handle roughly 1000 times as many requests in the same execution time.
+This is due to the fact that for every entity retrieved from the database, MongoDB only has to execute one request and retrieve one document, while Neo4j's inherent linked structure means that at least three entities have to be retrieved (event, subject and item).
+
+Query 2 and query 3 remain constant, similar to their MongoDB equivalents.
+Query 1 however, rises exponentially with query size.
+This is not an expected result since a database index exists for the \texttt{created\_at} field on which the query orders.
+However, for small, realistic values of query size this should not pose a problem.
 
 \subsection{Iteration count}
 \label{subsec:iteration-size}
