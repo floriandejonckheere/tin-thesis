@@ -29,7 +29,7 @@ Processing complex queries that consist of the NoSQL equivalent of relational jo
 Implementing the proposed data model and queries is a more ambitious task that is not aligned with the scope and goals of the research.
 
 Column-oriented data stores are a category of NoSQL data stores that is questionably useful in this case study.
-These data stores are commonly seen as inverse relational database systems, where the storage of attributes per entity is more flexible regarding nullable values and unstructured information \autocite{abadi2009}.
+These data stores are commonly seen as inverse relational database systems, where the storage of attributes per entity is more flexible regarding nullable values and unstructured information \autocite{Abadi2009}.
 Column-oriented data stores are very efficient when retrieving a subset of columns for a certain record.
 Since the data store will be deployed as additional data store next to the authoritative relational database, it will not contain any superfluous information that will not be used when querying the database.
 This workflow cancels out the efficiency and usefulness of column-oriented data stores, and subsequently this NoSQL category will not be considered as a viable candidate.
@@ -305,3 +305,7 @@ Both MongoDB and Neo4j integrate with various cloud providers such as Amazon EC2
 %% Conclusion
 \section{Conclusion}
 \label{sec:data-stores-conclusion}
+
+In this chapter the possible NoSQL data storage solutions were discussed using a list of properties applicable to the Open Webslides use case studied in this research.
+Two document stores and one graph store were selected as interesting candidates in order to implement the Ruby framework in the next chapter.
+The three data stores -- MongoDB, CouchDB and Neo4j -- were compared on their most important functional and non-functional properties.
