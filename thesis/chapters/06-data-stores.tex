@@ -47,6 +47,7 @@ However, Couchbase is a conceptual merge between CouchDB and Membase, and adds i
 Couchbase will not be investigated upon in a practical capacity, however it is considered as an option to increase multi-host scalability.
 This leads to MongoDB and CouchDB being the contestants in the document database system category.
 
+\clearpage{}
 Finally, as sole graph database the Neo4j system \autocite{Neo4j2007} stands out over competitors in the ranking.
 This database system will be analyzed as graph database candidate in this research.
 
@@ -108,7 +109,7 @@ The specific use case described in this thesis does not focus on security, since
 Security measures include but are not limited to authentication, authorization, encryption and auditing.
 None of these are features that are required or useful for the comparison.
 Authentication and authorization is functionality that is present in all databases.
-It introduces the concept of multiple clients or roles connecting to a database, and assigning permissions to these clients in order to enforce permissions-based access.
+It introduces the concept of multiple clients or roles connecting to a database, and assigning permissions to these clients in order to enforce permission-based access.
 However since there will only be one client connecting to the database - the platform itself - deeper integration with LDAP, ActiveDirectory or similar is superfluous and omitted from the comparison.
 
 Encryption refers to the mechanism where data is encrypted and unreadable for unauthorized third parties.
@@ -133,7 +134,7 @@ Full-text search and geospatial functions are provided by certain data stores, h
   \input{tables/01-querying-language}
 \end{landscape}
 
-One of the most important factors when deciding on a NoSQL data store is the capability to communicate with the data store, since NoSQL does not have a unified interface like SQL signifies for relational databases.
+One of the most important factors when deciding on a NoSQL data store is the capability to communicate with the data store, since NoSQL does not have a unified interface like SQL for relational databases.
 Choosing a certain data store may allow the developer to integrate data storage easier into the application.
 Every NoSQL data store has its own standard for composing queries, related but not depending on the protocol used for communication with the server.
 MongoDB allows querying using a JavaScript API, natively over MongoDB's binary protocol or over HTTP (REST) using a third party plugin.

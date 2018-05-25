@@ -653,12 +653,14 @@ The query creates a single event in the data store.
   \label{lst:neo4j-query-5-cypher}
 \end{listing}
 
+\clearpage{}
+
 \section{Conclusion}
 \label{sec:data-model-conclusion}
 
 In this chapter we presented an introduction to the domain, and provided some examples of events in the Recent Activity feed.
-Futhermore, we analyzed this domain description, and derived a logical data model for both document- and graph-oriented data stores.
-Next, we proposed an implementation of this logical data model for two document-oriented, and one graph-oriented data store in the Ruby language bindings available for the respective database management systems.
+Furthermore, we analyzed this domain description, and derived a logical data model for both document- and graph-oriented data stores.
+Next, we proposed an implementation of this logical data model for one document-oriented, and one graph-oriented data store in the Ruby language bindings available for the respective database management systems.
 Finally, we presented five reference queries for the three data stores, and included both a language binding-specific DSL and a physical query implementation for each.
 
-% TODO: Conclusion about ORMs
+The CouchDB implementation was dropped due to the most popular Ruby language binding available not being up to date and lacking many essential features.
