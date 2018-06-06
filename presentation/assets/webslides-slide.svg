@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="860px"
+	 height="400px" viewBox="0 0 860 400" enable-background="new 0 0 860 400" xml:space="preserve">
+<g id="Slide">
+	<g>
+		<g>
+			<g>
+				<rect x="283.67" y="94.68" fill="#FFFFFF" width="312.43" height="196.02"/>
+				<path fill="#6F6F6E" d="M595.1,95.68V289.7H284.67V95.68H595.1 M597.1,93.68h-2H284.67h-2v2V289.7v2h2H595.1h2v-2V95.68V93.68
+					L597.1,93.68z"/>
+			</g>
+			<rect x="343.38" y="114.55" fill="#FFD200" width="251.72" height="16.77"/>
+			<rect x="284.67" y="114.55" fill="#1E64C8" width="29.88" height="16.77"/>
+			<g>
+				<rect x="320.15" y="129.79" fill="#1E64C8" width="19.1" height="0.81"/>
+				<rect x="320.15" y="120.47" fill="#1E64C8" width="19.1" height="0.73"/>
+				<rect x="316.61" y="132.56" fill="#1E64C8" width="26.24" height="1.3"/>
+				<rect x="324.57" y="135.76" fill="#1E64C8" width="10.32" height="1.22"/>
+				<polygon fill="#1E64C8" points="329.73,116.42 321.14,119.78 338.27,119.78"/>
+				<rect x="322.38" y="122.07" fill="#1E64C8" width="1.18" height="7.03"/>
+				<rect x="325.07" y="122.07" fill="#1E64C8" width="1.18" height="7.03"/>
+				<rect x="327.77" y="122.07" fill="#1E64C8" width="1.18" height="7.03"/>
+				<rect x="330.46" y="122.07" fill="#1E64C8" width="1.18" height="7.03"/>
+				<rect x="333.16" y="122.07" fill="#1E64C8" width="1.18" height="7.03"/>
+				<rect x="335.85" y="122.07" fill="#1E64C8" width="1.18" height="7.03"/>
+			</g>
+		</g>
+		<rect x="309.61" y="215.76" fill="#1D70B7" width="48.91" height="14.47"/>
+		<rect x="309.61" y="151.05" fill="#D9D9D9" width="263.75" height="13.95"/>
+		<rect x="366.62" y="216.03" fill="#D9D9D9" width="40.8" height="13.95"/>
+		<rect x="309.61" y="186.52" fill="#D9D9D9" width="97.81" height="13.95"/>
+		<rect x="309.61" y="250.2" fill="#D9D9D9" width="97.81" height="13.95"/>
+		<rect x="309.61" y="233.76" fill="#1D70B7" stroke="#1D70B7" stroke-miterlimit="10" width="48.91" height="2.11"/>
+		<g>
+			<rect x="422.65" y="181.82" width="150.71" height="82.33"/>
+			<path fill="#BD1622" d="M521.58,227.57c0,6.25-4.58,11.31-10.22,11.31h-26.71c-5.64,0-10.22-5.06-10.22-11.31v-10.28
+				c0-6.25,4.58-11.31,10.22-11.31h26.71c5.64,0,10.22,5.06,10.22,11.31V227.57z"/>
+			<polygon fill="#FFFFFF" points="493.35,215.76 503.64,221.71 493.35,227.65 			"/>
+		</g>
+		<text transform="matrix(1 0 0 1 339.252 80.7988)"  style="font: 40px Arial; font-weight: bold; font-style: italic; letter-spacing: 1px;">webslides</text>
+		<text transform="matrix(1 0 0 1 574.001 128.3286)" style="font: 14px Arial;">24</text>
+	</g>
+</g>
+</svg>
+

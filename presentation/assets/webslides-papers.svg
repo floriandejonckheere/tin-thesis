@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="860px"
+	 height="400px" viewBox="0 0 860 400" enable-background="new 0 0 860 400" xml:space="preserve">
+
+<style>
+.paper {
+  transform-origin: right bottom;
+}
+@supports (-webkit-appearance:none) {
+  #paper1 {
+    animation: rotate 1.5s ease-in-out infinite alternate;
+  }
+  #paper2 {
+    animation: rotate 2.7s linear infinite alternate-reverse;
+  }
+}
+@keyframes rotate {
+  from { transform: rotate(-2deg); }
+  to   { transform: rotate( 2deg); }
+}
+</style>
+
+<defs>
+  <symbol id="paper">
+    <rect x="35.29" y="30.77" fill="#FFFFFF" stroke="#6F6F6E" stroke-width="2" stroke-miterlimit="10" width="96.61" height="128.44"/>
+		<rect x="44.9" y="46.33" fill="#868686" width="77.1" height="9.4"/>
+		<rect x="44.9" y="68.05" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="74.72" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="81.72" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="88.39" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="94.99" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="101.65" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="108.65" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="115.32" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="121.82" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="128.49" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="135.49" fill="#D9D9D9" width="77.1" height="4.11"/>
+		<rect x="44.9" y="142.15" fill="#D9D9D9" width="77.1" height="4.11"/>
+  </symbol>
+</defs>
+
+<text transform="matrix(1 0 0 1 35.2886 186.8223)" fill="#575756" style="font: 24px Arial; font-style: italic;">papers</text>
+<use xlink:href="#paper" id="paper1" class="paper" />
+<use xlink:href="#paper" id="paper2" class="paper" x="60" y="-20" />
+</svg>
+

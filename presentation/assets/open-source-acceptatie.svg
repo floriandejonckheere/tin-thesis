@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="860" height="400">
+	<g id="slide">
+		<g>
+			<rect x="414.46" y="248.62" fill="#FFFFFF" width="169.27" height="106.16"/>
+			<path fill="#1D1D1B" d="M583.23,249.12v105.16H414.96V249.12H583.23 M584.23,248.12h-1H414.96h-1v1v105.16v1h1h168.27h1v-1
+				V249.12V248.12L584.23,248.12z"/>
+		</g>
+		<rect x="446.79" y="259.35" fill="#FFD200" width="136.44" height="9.09"/>
+		<rect x="414.96" y="259.35" fill="#1E64C8" width="16.2" height="9.09"/>
+		<g>
+			<rect x="434.2" y="267.61" fill="#1E64C8" width="10.35" height="0.44"/>
+			<rect x="434.2" y="262.55" fill="#1E64C8" width="10.35" height="0.39"/>
+			<rect x="432.28" y="269.11" fill="#1E64C8" width="14.22" height="0.7"/>
+			<rect x="436.59" y="270.85" fill="#1E64C8" width="5.59" height="0.66"/>
+			<polygon fill="#1E64C8" points="439.39,260.36 434.73,262.19 444.02,262.19 			"/>
+			<rect x="435.4" y="263.42" fill="#1E64C8" width="0.64" height="3.81"/>
+			<rect x="436.87" y="263.42" fill="#1E64C8" width="0.64" height="3.81"/>
+			<rect x="438.33" y="263.42" fill="#1E64C8" width="0.64" height="3.81"/>
+			<rect x="439.79" y="263.42" fill="#1E64C8" width="0.64" height="3.81"/>
+			<rect x="441.25" y="263.42" fill="#1E64C8" width="0.64" height="3.81"/>
+			<rect x="442.71" y="263.42" fill="#1E64C8" width="0.64" height="3.81"/>
+		</g>
+    <rect x="423.61" y="296.93" fill="#ECECEC" width="23.72" height="7.01"/>
+    <rect x="453.35" y="296.93" fill="#ECECEC" width="49.41" height="7.01"/>
+    <rect x="423.92" y="310.12" fill="#E5007E" width="16.41" height="7.01"/>
+    <rect x="448.54" y="310.12" fill="#E5007E" width="16.41" height="7.01"/>
+    <rect x="473.87" y="310.12" fill="#E5007E" width="22.59" height="7.01"/>
+    <rect x="423.92" y="279.69" fill="#E5007E" width="18.56" height="7.92"/>
+    <rect x="451.75" y="279.69" fill="#E5007E" width="22.12" height="7.92"/>
+    <rect x="480.39" y="279.69" fill="#E5007E" width="96.75" height="7.92"/>
+    <rect x="423.61" y="322.46" fill="#ECECEC" width="23.72" height="7.01"/>
+    <rect x="453.35" y="322.46" fill="#ECECEC" width="49.41" height="7.01"/>
+    <rect x="466.14" y="335.65" fill="#ECECEC" width="39.79" height="7.01"/>
+    <rect x="423.92" y="335.65" fill="#ECECEC" width="32.83" height="7.01"/>
+    <g>
+      <rect x="513.09" y="300.62" stroke="#E5007E" stroke-width="4" stroke-miterlimit="10" width="62.13" height="33.94"/>
+      <path fill="#BD1622" d="M553.88,319.48c0,2.58-1.89,4.66-4.21,4.66h-11.01c-2.33,0-4.21-2.09-4.21-4.66v-4.24
+        c0-2.58,1.89-4.66,4.21-4.66h11.01c2.33,0,4.21,2.09,4.21,4.66V319.48z"/>
+      <polygon fill="#FFFFFF" points="542.24,314.62 546.48,317.07 542.24,319.52 		"/>
+    </g>
+	</g>
+	<text transform="matrix(1 0 0 1 433.1973 389.666)" style="font-family: Arial; font-size: 24px; font-weight: bold">acceptatie?</text>
+</svg>
