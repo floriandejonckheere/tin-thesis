@@ -331,6 +331,7 @@
     <h2>Comparative study</h2>
 
     <ul>
+      <li><strike>Key-value</strike>, document, <strike>column</strike> and graph data stores</li>
       <li>
         Selection of most popular NoSQL data stores
         <ul>
@@ -342,17 +343,28 @@
     </ul>
   </section>
 
-  <section class="slide" id="comparative-study-2">
+  <section class="slide" id="comparative-study-features">
     <h2>Comparative study</h2>
 
     <ul>
-      <li>
-        Feature-based comparison
-        <ul>
-          <li>Querying language, consistency model, replication, license...</li>
-          <li><strike>Security, compression, encryption, cloud hosting</strike></li>
-        </ul>
-      </li>
+      <li>Querying language</li>
+      <li>Language bindings</li>
+      <li>Integrity model</li>
+      <li>Partitioning</li>
+      <li>Concurrency</li>
+      <li>Replication and clustering</li>
+      <li>License</li>
+    </ul>
+  </section>
+
+  <section class="slide" id="comparative-study-features-omitted">
+    <h2>Comparative study</h2>
+
+    <ul>
+      <li><strike>Encryption</strike></li>
+      <li><strike>Compression</strike></li>
+      <li><strike>Geospatial functionality</strike></li>
+      <li><strike>Cloud hosting</strike></li>
     </ul>
   </section>
 
@@ -360,7 +372,7 @@
     <h2>Comparative study: conclusion</h2>
 
     <ul>
-      <li>All data stores are <strong>eventual consistent</strong></li>
+      <li>All data stores are <strong>eventual consistent</strong>, only MongoDB also supports <strong>strong consistency</strong></li>
       <li>Only Neo4j is <strong>ACID</strong> compliant</li>
       <li>CouchDB supports <strong>multi-master</strong> replication</li>
     </ul>
@@ -382,8 +394,36 @@
 
     <p>Design and implement data models for</p>
     <ul>
-      <li>Document data stores (MongoDB and CouchDB)</li>
-      <li>Graph data stores (Neo4j)</li>
+      <li>
+        Document data stores (MongoDB and CouchDB)
+        <ul>
+          <li><strong>Mongoid</strong> Ruby ORM</li>
+          <li><strong>CouchRest Model</strong> Ruby ORM</li>
+        </ul>
+      </li>
+      <li>
+        Graph data stores (Neo4j)
+        <ul>
+          <li><strong>Neo4j.rb</strong> Ruby ORM</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section class="slide" id="data-models-2">
+    <h2>Data models: graph data model</h2>
+
+    <p>
+      <img src="../thesis/img/graph-model.png" alt="" />
+    </p>
+  </section>
+
+  <section class="slide" id="data-models-conclusion">
+    <h2>Data models: conclusions</h2>
+
+    <ul>
+      <li>Document data model is <strong>embedded</strong></li>
+      <li>Graph data model is <strong>linked</strong></li>
     </ul>
 
     <p><strong>CouchDB not supported sufficiently</strong></p>
@@ -406,8 +446,8 @@
 
     <p>Performance tests with varying</p>
     <ul>
-      <li>Query count</li>
-      <li>Iteration count</li>
+      <li><strong>Query</strong> count</li>
+      <li><strong>Iteration</strong> count</li>
     </ul>
   </section>
 
@@ -419,6 +459,11 @@
       <li><strong>Iteration count</strong> makes the execution time rise linearly</li>
       <li>Neo4j is <strong>magnitudes slower</strong> than MongoDB</li>
     </ul>
+
+    <p>
+      <img src="../thesis/img/neo4j-iteration-count.png" alt="" style="width: 400px;" />
+      <img src="../thesis/img/neo4j-query-size.png" alt="" style="width: 400px;" />
+    </p>
   </section>
 
   <section class="slide" id="conclusion">
@@ -438,7 +483,7 @@
 
   <div class="progress"></div>
   <footer class="badge">
-    <a href="https://github.com/OpenWebslides/cocos-madrid">Fork me on GitHub</a>
+    <a href="https://github.com/floriandejonckheere/tin-thesis" target="_blank">Fork me on GitHub</a>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shower-core/2.1.0/shower.min.js"></script>
