@@ -53,12 +53,13 @@
 \pagestyle{fancy} % All pages have headers and footers
 \fancyhead{} % Blank out the default header
 \fancyfoot{} % Blank out the default footer
-\fancyhead[C]{Running title $\bullet$ May 2016 $\bullet$ Vol. XXI, No. 1} % Custom header text
+\fancyhead[C]{} % Custom header text
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \usepackage{titling} % Customizing the title section
 
 \usepackage{hyperref} % For hyperlinks in the PDF
+\usepackage{graphicx}
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -111,6 +112,59 @@ Natuurlijk gaat het hier niet over foto's en evenementen, maar wel over wie iets
 Zo kan je in \'{e}\'{e}n oogopslag zien wanneer de leerkracht een hoofdstuk heeft toegevoegd, of dat een van je medestudenten een vraag heeft gesteld bij een onduidelijke zin.
 
 
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\textwidth]{recent-activity.png}
+  \caption{Recent activiteits-feed}
+  \label{fig:graph-model}
+\end{figure}
+
+Maar hoe slaan we deze gegevens precies op?
+Bij elk item hoort een cursus, een auteur en de actie die uitgevoerd werd.
+En natuurlijk ook het tijdstip van de actie, waarop we ook moeten sorteren vooraleer de lijst naar de gebruiker te sturen.
+
+\section*{Databanken}
+
+Er kan gekozen worden uit de vele, al bestaande databanktoepassingen.
+Maar eerst moeten we kiezen welk type databank het best past: een \textit{relationele}, een \textit{document}- of een \textit{graafdatabank}.
+Bij een relationele databank worden de gegevens opgeslaan in tabellen: elke tabel heeft kolommen, en elk item heeft een waarde voor deze kolommen.
+Dit is de traditionele manier van gegevens opslaan.
+Het laat ons toe om gemakkelijk te zoeken in alle gegevens, en deze te sorteren.
+Dat komt goed van pas als we alle items willen sorteren op tijdstip.
+Het combineren van gegevens in verschillende tabellen -- bijvoorbeeld een tabel voor auteur, en een andere tabel voor cursussen -- gaat zeer snel in een relationele databank.
+
+Een document-databank daarentegen, slaat alle gegevens op als een document: een ondoorzichtig stuk data waar er niet in gezocht kan worden.
+Om dit te omzeilen, steken we alle gegevens die nodig zijn in eenzelfde document.
+In ons geval wil dit dus zeggen dat de auteur, cursus en acties in hetzelfde document zitten.
+Document-databanken zijn typisch zeer goed in het afhandelen van massieve datastromen. 
+Dat kan in ons voordeel spelen als we een systeem overwegen met duizenden gebruikers.
+
+Ten laatste kunnen we ook kiezen voor een graafdatabank.
+Een graaf is een verzameling van punten of objecten, en die verbonden zijn door lijnen.
+Het doorkruisen van lijnen van object tot object is een zeer snelle actie.
+Dat komt goed uit voor de gelinkte datastructuur van Open Webslides.
+
+%% Results
+
+
+Aangezien relationele databanken niet de focus zijn van het onderzoek, moet er uiteindelijk gekozen worden tussen een document- en een graafdatabank.
+Hiervoor gaan we een schema opstellen, en dat in elke databank invoegen.
+We doornemen ook een aantal realistische scenarios om deze databank te gebruiken.
+Aan de hand van deze twee elementen kunnen we testen welke databank het beste ophoudt aan de (gesimuleerde) stress van duizenden gebruikers.
+Het verdict: de graafdatabank is 10 tot in bepaalde gevallen zelfs 40 keer trager dan de document-databank.
+Een duidelijke overwinning dus!
+
 %% Conclusion
+
+\section*{Conlusie}
+
+Het is dus duidelijk voor het Open Webslides project: document-databanken bieden dus de meest effici\"{e}nte oplossing.
+
+We hebben nu een kijkje genomen achter de schermen in de wereld van data-opslag op grote schaal.
+We zagen hoe bedrijven zoals Facebook en Twitter de massieve vloed aan data opslaan.
+Het verschil tussen de databanktoepassingen is nu ook duidelijk: relationele, document- en graafdatabanken.
+
+Mensen staan zelden stil bij de technologie die achter social media websites zitten, en welke hordes de ontwikkelaar heeft moeten nemen om deze technologie\"{e}n naar een groot publiek te brengen.
+Denk daar maar eens over na, bij de volgende gedachteloze scroll van je Facebook feed!
 
 \end{document}
